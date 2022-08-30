@@ -19,6 +19,11 @@ public class StateIdle : IState
     {
     }
 
+    public void OnFixedUpdate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void OnUpdate()
     {
         if (GameManager.instance.GetDistanceToPlayer(_myEnemy.transform).magnitude < _myEnemy.viewRange && _myEnemy.CanSeePlayer())

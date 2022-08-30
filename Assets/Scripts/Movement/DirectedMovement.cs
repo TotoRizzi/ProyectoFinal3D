@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class DirectedMovement : IMovement
 {
+    Rigidbody _myRb;
     Transform _myTarget;
     Transform _myTransform;
     float _mySpeed;
 
-    public DirectedMovement(Transform transform, float speed, Transform target)
+    public DirectedMovement(Transform transform, Rigidbody rigidbody, float speed, Transform target)
     {
+        _myRb = rigidbody;
         _myTarget = target;
         _myTransform = transform;
         _mySpeed = speed;
@@ -19,6 +21,6 @@ public class DirectedMovement : IMovement
     {
         Vector3 dir = _myTarget.transform.position - _myTransform.position;
 
-        _myTransform.position += dir.normalized * _mySpeed * Time.deltaTime;
+        _myRb.MovePosition(_myTransform.position + dir.normalized * _mySpeed * Time.fixedDeltaTime);
     }
 }

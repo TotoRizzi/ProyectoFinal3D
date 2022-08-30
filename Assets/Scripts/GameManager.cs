@@ -5,10 +5,17 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private Player _player;
-    public Player Player { get { return _player; } }
 
-    public LayerMask wallLayer { get { return wallLayer; } }
+    private Player _player;
+
+    [SerializeField] LayerMask _wallLayer, _groundLayer;
+    #region Getters
+
+    public Player Player { get { return _player; } }
+    public LayerMask WallLayer { get { return _wallLayer; } }
+    public LayerMask GroundLayer { get { return _groundLayer; } }
+
+    #endregion
 
     private void Awake()
     {
@@ -18,7 +25,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
-        Debug.Log(_player);
     }
 
     public Vector3 GetDistanceToPlayer(Transform transform)

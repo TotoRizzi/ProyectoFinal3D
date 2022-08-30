@@ -19,9 +19,13 @@ public class StateChase : IState
     {
     }
 
-    public void OnUpdate()
+    public void OnFixedUpdate()
     {
         _myEnemy.myMovement.Move();
+    }
+
+    public void OnUpdate()
+    {
         _myEnemy.LookAtPlayer();
         
         if (GameManager.instance.GetDistanceToPlayer(_myEnemy.transform).magnitude > _myEnemy.viewRange || _myEnemy.CanSeePlayer() == false)
