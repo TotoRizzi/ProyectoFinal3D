@@ -4,12 +4,11 @@ using UnityEngine;
 public enum StateName
 {
     Idle,
-    Jump,
-    Chase,
-    Attack
+    BlindWalk,
+    Chase
 }
 
-public class StateMachine : MonoBehaviour
+public class StateMachine
 {
     private IState currentState;
     private Dictionary<StateName, IState> allStates = new Dictionary<StateName, IState>();
