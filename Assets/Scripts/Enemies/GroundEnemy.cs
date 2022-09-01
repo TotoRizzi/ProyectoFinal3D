@@ -10,7 +10,7 @@ public class GroundEnemy : Enemy
         base.Start();
         _wallAndGroundCheckPosition = GameObject.Find("WallAndGroundCheckPosition").transform;
         myMovement = new RightMovement(this.transform, myRb, speed);
-        fsm.AddState(StateName.BlindWalk, new StateBlindWalk(this, fsm, _wallAndGroundCheckPosition));
+        fsm.AddState(StateName.BlindWalk, new State_BlindWalk(this, fsm, _wallAndGroundCheckPosition));
         fsm.ChangeState(StateName.BlindWalk);
     }
 }

@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public StateMachine fsm;
     protected Rigidbody myRb;
+    protected Animator myAnim;
 
     //Health
     [SerializeField] private float maxHp;
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         fsm = new StateMachine();
         myRb = GetComponent<Rigidbody>();
+        myAnim = GetComponentInChildren<Animator>();
     }
     public virtual void Start()
     {
@@ -43,7 +45,9 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     public void LookAtPlayer()
     {
-        transform.right = GameManager.instance.GetDistanceToPlayer(this.transform).normalized;
+        var dir = GameManager.instance.GetDistanceToPlayer(this.transform);
+        dir.z = 0;
+        transform.right = dir.normalized;
     }
     public bool CanSeePlayer()
     {

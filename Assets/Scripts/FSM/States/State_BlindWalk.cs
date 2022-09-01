@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateBlindWalk : IState
+public class State_BlindWalk : IState
 {
     StateMachine _fsm;
     Enemy _myEnemy;
     Transform _wallAndGroundCheckPosition;
-    public StateBlindWalk(Enemy enemy, StateMachine fsm, Transform wallAndGroundCheckPosition)
+    public State_BlindWalk(Enemy enemy, StateMachine fsm, Transform wallAndGroundCheckPosition)
     {
         _myEnemy = enemy;
         _fsm = fsm;

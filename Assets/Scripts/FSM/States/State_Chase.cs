@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateChase : IState
+public class State_Chase : IState
 {
     StateMachine _fsm;
     Enemy _myEnemy;
-    public StateChase(Enemy enemy, StateMachine fsm)
+    public State_Chase(Enemy enemy, StateMachine fsm)
     {
         _myEnemy = enemy;
         _fsm = fsm;
@@ -28,7 +28,9 @@ public class StateChase : IState
     {
         _myEnemy.LookAtPlayer();
         
-        if (GameManager.instance.GetDistanceToPlayer(_myEnemy.transform).magnitude > _myEnemy.viewRange || _myEnemy.CanSeePlayer() == false)
+        if(GameManager.instance.GetDistanceToPlayer(_myEnemy.transform).magnitude < _myEnemy.attackRange)
+            _fsm.ChangeState(StateName.Attack);
+        else if (GameManager.instance.GetDistanceToPlayer(_myEnemy.transform).magnitude > _myEnemy.viewRange || _myEnemy.CanSeePlayer() == false)
             _fsm.ChangeState(StateName.Idle);
     }
 }
