@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody2D _rb;
+    Rigidbody _rb;
 
     [Header("Movement Variables")]
     [SerializeField] float _movementSpeed = 9;
@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
 
     [Header("Jump Variables")]
     [SerializeField] float _jumpForce = 12;
-    [SerializeField] float _doubleJumpForce = 13;
     [SerializeField] float _jumpCutMultiplier = .08f;
     [SerializeField] float _jumpCoyotaTime = .1f;
     [SerializeField] float _jumpBufferLength = .1f;
@@ -34,9 +33,9 @@ public class Player : MonoBehaviour
     IController _myController;
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody>();
         PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundLayer, _frictionAmount, _movementSpeed, _acceleration, _decceleration, _velPower,
-            _jumpCutMultiplier, _jumpForce, _doubleJumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier);
+            _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier);
         _myController = new PlayerController(_playerModel, this);
     }
     void Update()
