@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 public class PlayerModel
 {
-    Vector3 _movementInput;
+    float _xAxis;
     bool _isJumping;
     bool _canDoubleJump;
     bool _dashing;
@@ -56,7 +57,7 @@ public class PlayerModel
     }
     public void OnUpdate(float xAxis)
     {
-        _movementInput = new Vector3(0, 0, xAxis);
+        _xAxis = xAxis;
 
         _bufferTimer -= Time.deltaTime;
 
@@ -89,15 +90,15 @@ public class PlayerModel
         //_lookAt = _mousePos - _transform.position;
 
         //Flipeo el sprite del player teniendo en cuenta la posicion del mouse
-        if (_movementInput.z != 0)
-            _transform.rotation = _movementInput.z <= 0 ? Quaternion.Euler(0, -90, 0) : Quaternion.Euler(0, 90, 0);
+        if (_xAxis != 0)
+            _transform.rotation = _xAxis <= 0 ? Quaternion.Euler(0, -90, 0) : Quaternion.Euler(0, 90, 0);
 
         Friction();
         Run();
     }
     void Friction()
     {
-        if (Mathf.Abs(_movementInput.z) < 0.01f)
+        if (Mathf.Abs(_xAxis) < 0.01f)
         {
             float amount = Mathf.Min(Mathf.Abs(_rb.velocity.x), Mathf.Abs(_frictionAmount));
 
@@ -105,12 +106,12 @@ public class PlayerModel
             _rb.AddForce(Vector3.right * -amount, ForceMode.Impulse);
         }
     }
-    void Run()
+    public void Run()
     {
         if (_dashing) return;
 
         //float targetSpeed = _reverse ? _movementInput.z * _movementSpeed * .5f : _movementInput.z * _movementSpeed;
-        float targetSpeed = _movementInput.z * _movementSpeed;
+        float targetSpeed = _xAxis * _movementSpeed;
 
         float speedDif = targetSpeed - _rb.velocity.x;
 

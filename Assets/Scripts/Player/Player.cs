@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class Player : MonoBehaviour
 {
-    Rigidbody _rb;
-
     [Header("Movement Variables")]
     [SerializeField] float _movementSpeed = 9;
     [SerializeField] float _acceleration = 9;
@@ -33,9 +28,9 @@ public class Player : MonoBehaviour
     IController _myController;
     void Start()
     {
-        _rb = GetComponent<Rigidbody>();
-        PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundLayer, _frictionAmount, _movementSpeed, _acceleration, _decceleration, _velPower,
+        PlayerModel _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundLayer, _frictionAmount, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier);
+
         _myController = new PlayerController(_playerModel, this);
     }
     void Update()
