@@ -6,12 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private Player _player;
+    private PlayerPlaceHolder _player;
 
     [SerializeField] LayerMask _wallLayer, _groundLayer;
     #region Getters
 
-    public Player Player { get { return _player; } }
+    public PlayerPlaceHolder Player { get { return _player; } }
     public LayerMask WallLayer { get { return _wallLayer; } }
     public LayerMask GroundLayer { get { return _groundLayer; } }
 
@@ -21,10 +21,11 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         else Destroy(gameObject);
+       
+        _player = GameObject.Find("Player").GetComponent<PlayerPlaceHolder>();
     }
     private void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     public Vector3 GetDistanceToPlayer(Transform transform)

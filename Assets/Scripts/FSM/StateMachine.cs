@@ -1,12 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum StateName
-{
-    Idle,
-    BlindWalk,
-    Chase
-}
+
+public enum StateName{Idle, BlindWalk, Chase, Attack}
 
 public class StateMachine
 {
