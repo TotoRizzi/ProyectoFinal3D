@@ -25,6 +25,8 @@ public class PlayerController : IController
             _playerModel.OnJumpUp();
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) _player.StartCoroutine(_playerModel.Dash(xAxis, yAxis));
+
+        if (Input.GetMouseButtonDown(1)) _playerModel.Pogo(xAxis, yAxis);
     }
     public void OnFixedUpdate()
     {

@@ -8,8 +8,10 @@ public class PlayerModel
     bool _canDoubleJump;
     bool _dashing;
     bool _canDash = true;
+    bool _poging;
     float _coyotaTimer;
     float _bufferTimer;
+    float _maxJumps;
 
     //Variables Constructor
     Transform _transform;
@@ -29,13 +31,14 @@ public class PlayerModel
     float _jumpCoyotaTime;
     float _gravityScale;
     float _fallGravityMultiplier;
+    float _pogoForce;
 
     //bool _reverse => _movementInput.z != 0 && Mathf.Sign(_movementInput.z) != Mathf.Sign(_lookAt.x) && _inGrounded;
     bool _inGrounded => Physics.CheckSphere(_transform.position, 0.1f, _groundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
     public PlayerModel(Transform transform, Rigidbody rb, LayerMask groundLayer, float frictionAmount, float movementSpeed, float acceleration, float decceleration,
         float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown, float jumpBufferLength,
-        float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier)
+        float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce)
     {
         _transform = transform;
         _rb = rb;
@@ -54,6 +57,7 @@ public class PlayerModel
         _jumpCoyotaTime = jumpCoyotaTime;
         _gravityScale = gravityScale;
         _fallGravityMultiplier = fallGravityMultiplier;
+        _pogoForce = pogoForce;
     }
     public void OnUpdate(float xAxis)
     {
@@ -67,10 +71,13 @@ public class PlayerModel
             _bufferTimer = 0;
         }
 
-        if (_inGrounded || _canDoubleJump)
+        if (_inGrounded)
             _coyotaTimer = _jumpCoyotaTime;
         else
             _coyotaTimer -= Time.deltaTime;
+
+        if (_inGrounded)
+            _poging = false;
 
         #region JumpChecks
         if (_isJumping && _rb.velocity.y < 0)
@@ -108,7 +115,7 @@ public class PlayerModel
     }
     public void Run()
     {
-        if (_dashing) return;
+        if (_dashing || _poging) return;
 
         //float targetSpeed = _reverse ? _movementInput.z * _movementSpeed * .5f : _movementInput.z * _movementSpeed;
         float targetSpeed = _xAxis * _movementSpeed;
@@ -123,10 +130,10 @@ public class PlayerModel
     }
     void Jump()
     {
-        _canDoubleJump = _inGrounded;
         _rb.AddForce(Vector3.up * (_jumpForce - _rb.velocity.y), ForceMode.Impulse);
 
         _isJumping = true;
+        _poging = false;
     }
     public void OnJumpUp()
     {
@@ -136,6 +143,14 @@ public class PlayerModel
     public void OnJumpDown()
     {
         _bufferTimer = _jumpBufferLength;
+
+        if (!_canDoubleJump && _coyotaTimer > 0)
+            _canDoubleJump = true;
+        else if (_canDoubleJump && _coyotaTimer < 0)
+        {
+            _coyotaTimer = _jumpCoyotaTime;
+            _canDoubleJump = false;
+        }
     }
     public IEnumerator Dash(float xAxis, float yAxis)
     {
@@ -152,5 +167,16 @@ public class PlayerModel
             yield return new WaitForSeconds(_dashCoolDown);
             _canDash = true;
         }
+    }
+
+    public void Pogo(float xAxis, float yAxis)
+    {
+        Vector3 pogoDirection = new Vector3(xAxis * _pogoForce + _rb.velocity.x / 2, yAxis * _pogoForce + _rb.velocity.y, 0);
+
+        if (!_inGrounded && yAxis < 0)
+            _rb.AddForce(-pogoDirection, ForceMode.Impulse);
+
+        _poging = true;
+        _isJumping = false;
     }
 }
