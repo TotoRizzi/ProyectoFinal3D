@@ -11,7 +11,6 @@ public class PlayerModel
     bool _poging;
     float _coyotaTimer;
     float _bufferTimer;
-    float _maxJumps;
 
     //Variables Constructor
     Transform _transform;
@@ -36,6 +35,11 @@ public class PlayerModel
     //bool _reverse => _movementInput.z != 0 && Mathf.Sign(_movementInput.z) != Mathf.Sign(_lookAt.x) && _inGrounded;
     bool _inGrounded => Physics.CheckSphere(_transform.position, 0.1f, _groundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
+
+    public Action<float> runAction;
+    public Action jumpAction;
+    public Action<bool> fallingAction;
+    public Action dashAction;
     public PlayerModel(Transform transform, Rigidbody rb, LayerMask groundLayer, float frictionAmount, float movementSpeed, float acceleration, float decceleration,
         float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown, float jumpBufferLength,
         float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce)
@@ -84,24 +88,23 @@ public class PlayerModel
             _isJumping = false;
         #endregion
 
-        #region JumpGravity
-        if (_rb.velocity.y < 0)
-            _rb.AddForce(Vector3.down * (_gravityScale * _fallGravityMultiplier));
-        else
-            _rb.AddForce(Vector3.down * _gravityScale);
-        #endregion
+
+        fallingAction(!_inGrounded && _rb.velocity.y < 0);
     }
     public void OnFixedUpdate()
     {
-        //_mousePos = _mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -_mainCamera.transform.position.z));
-        //_lookAt = _mousePos - _transform.position;
-
         //Flipeo el sprite del player teniendo en cuenta la posicion del mouse
         if (_xAxis != 0)
             _transform.rotation = _xAxis <= 0 ? Quaternion.Euler(0, -90, 0) : Quaternion.Euler(0, 90, 0);
 
         Friction();
         Run();
+
+        if (!_canDash && _rb.velocity.magnitude > _dashForce)
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _dashForce);
+
+        if (_poging && _rb.velocity.magnitude > _pogoForce)
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _pogoForce);
     }
     void Friction()
     {
@@ -117,12 +120,13 @@ public class PlayerModel
     {
         if (_dashing || _poging) return;
 
-        //float targetSpeed = _reverse ? _movementInput.z * _movementSpeed * .5f : _movementInput.z * _movementSpeed;
+        runAction(_xAxis);
+
         float targetSpeed = _xAxis * _movementSpeed;
 
         float speedDif = targetSpeed - _rb.velocity.x;
 
-        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _acceleration : _decceleration;
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.5f) ? _acceleration : _decceleration;
 
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, _velPower) * Mathf.Sign(speedDif);
 
@@ -130,9 +134,11 @@ public class PlayerModel
     }
     void Jump()
     {
-        _rb.AddForce(Vector3.up * (_jumpForce - _rb.velocity.y), ForceMode.Impulse);
-
+        if (_dashing || _poging) return;
         _isJumping = true;
+
+        _rb.AddForce(Vector3.up * (_jumpForce - _rb.velocity.y), ForceMode.Impulse);
+        jumpAction();
         _poging = false;
     }
     public void OnJumpUp()
@@ -154,21 +160,21 @@ public class PlayerModel
     }
     public IEnumerator Dash(float xAxis, float yAxis)
     {
-        if (_canDash)
+        if (_canDash && xAxis != 0)
         {
-            _dashing = true;
+            dashAction();
             _canDash = false;
+            _dashing = true;
+            _poging = false;
             _rb.useGravity = false;
             _rb.AddForce(new Vector3(xAxis, yAxis, 0).normalized * _dashForce, ForceMode.Impulse);
             yield return new WaitForSeconds(_dashTime);
             _dashing = false;
             _rb.useGravity = true;
-            OnJumpUp();
             yield return new WaitForSeconds(_dashCoolDown);
             _canDash = true;
         }
     }
-
     public void Pogo(float xAxis, float yAxis)
     {
         Vector3 pogoDirection = new Vector3(xAxis * _pogoForce + _rb.velocity.x / 2, yAxis * _pogoForce + _rb.velocity.y, 0);
@@ -178,5 +184,12 @@ public class PlayerModel
 
         _poging = true;
         _isJumping = false;
+    }
+    public void Falling(bool falling)
+    {
+        if (falling)
+            _rb.AddForce(Vector3.down * (_gravityScale * _fallGravityMultiplier));
+        else
+            _rb.AddForce(Vector3.down * _gravityScale);
     }
 }

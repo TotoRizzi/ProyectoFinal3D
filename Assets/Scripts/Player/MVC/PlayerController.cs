@@ -4,8 +4,8 @@ public class PlayerController : IController
     PlayerModel _playerModel;
     Player _player;
 
-    float xAxis;
-    float yAxis;
+    float _xAxis;
+    float _yAxis;
     public PlayerController(PlayerModel playerModel, Player player)
     {
         _playerModel = playerModel;
@@ -13,10 +13,10 @@ public class PlayerController : IController
     }
     public void OnUpdate()
     {
-        xAxis = Input.GetAxisRaw("Horizontal");
-        yAxis = Input.GetAxisRaw("Vertical");
+        _xAxis = Input.GetAxis("Horizontal");
+        _yAxis = Input.GetAxis("Vertical");
 
-        _playerModel.OnUpdate(xAxis);
+        _playerModel.OnUpdate(_xAxis);
 
         if (Input.GetKeyDown(KeyCode.Space))
             _playerModel.OnJumpDown();
@@ -24,9 +24,9 @@ public class PlayerController : IController
         if (Input.GetKeyUp(KeyCode.Space))
             _playerModel.OnJumpUp();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)) _player.StartCoroutine(_playerModel.Dash(xAxis, yAxis));
+        if (Input.GetKeyDown(KeyCode.LeftShift)) _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
 
-        if (Input.GetMouseButtonDown(1)) _playerModel.Pogo(xAxis, yAxis);
+        if (Input.GetMouseButtonDown(1)) _playerModel.Pogo(_xAxis, _yAxis);
     }
     public void OnFixedUpdate()
     {

@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _fallGravityMultiplier = 1.9f;
 
     [Header("Pogo Variables")]
-    [SerializeField] float _pogoForce;
+    [SerializeField] float _pogoForce = 12;
 
     [SerializeField] LayerMask _groundLayer;
 
@@ -33,8 +33,17 @@ public class Player : MonoBehaviour
     {
         PlayerModel _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundLayer, _frictionAmount, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce);
-
+        PlayerView _playerView = new PlayerView(GetComponent<Animator>());
         _myController = new PlayerController(_playerModel, this);
+
+        _playerModel.runAction += _playerView.RunAnimation;
+
+        _playerModel.jumpAction += _playerView.JumpAnimation;
+
+        _playerModel.fallingAction += _playerModel.Falling;
+        _playerModel.fallingAction += _playerView.FallingAnimation;
+
+        _playerModel.dashAction += _playerView.DashAnimation;
     }
     void Update()
     {
