@@ -1,10 +1,13 @@
+using System.Collections;
 using UnityEngine;
 public class PlayerView
 {
     Animator _anim;
-    public PlayerView(Animator anim)
+    Material _playerMaterial;
+    public PlayerView(Animator anim, Material playerMaterial)
     {
         _anim = anim;
+        _playerMaterial = playerMaterial;
     }
     public void RunAnimation(float xAxis)
     {
@@ -25,5 +28,14 @@ public class PlayerView
     public void AttackAnimation()
     {
         _anim.SetTrigger("Attack");
+    }
+    public IEnumerator TakeDamageFeedback()
+    {
+        Color initialColor = _playerMaterial.color;
+
+        _playerMaterial.color = Color.red;
+        yield return new WaitForSeconds(.1f);
+        _playerMaterial.color = initialColor;
+        yield return null;
     }
 }

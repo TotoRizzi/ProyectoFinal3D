@@ -1,5 +1,5 @@
 using UnityEngine;
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     [Header("Movement Variables")]
     [SerializeField] float _movementSpeed = 9;
@@ -26,14 +26,19 @@ public class Player : MonoBehaviour
     [Header("Pogo Variables")]
     [SerializeField] float _pogoForce = 12;
 
+    [Header("Attack Variables")]
+    [SerializeField] float _timeToAttack = 1f;
+
     [SerializeField] LayerMask _groundLayer;
 
     IController _myController;
-    void Start()
+    PlayerView _playerView;
+    override protected void Start()
     {
+        base.Start();
         PlayerModel _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundLayer, _frictionAmount, _movementSpeed, _acceleration, _decceleration, _velPower,
-            _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce);
-        PlayerView _playerView = new PlayerView(GetComponentInChildren<Animator>());
+            _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce, _timeToAttack);
+        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material);
         _myController = new PlayerController(_playerModel, this);
 
         _playerModel.runAction += _playerView.RunAnimation;
@@ -54,5 +59,10 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         _myController.OnFixedUpdate();
+    }
+    public override void TakeDamage(float dmg)
+    {
+        base.TakeDamage(dmg);
+        StartCoroutine(_playerView.TakeDamageFeedback());
     }
 }

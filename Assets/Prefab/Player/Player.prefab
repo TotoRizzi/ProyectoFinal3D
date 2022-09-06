@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7c25dc22ec65d4db02c36be3a08815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxLife: 5
+  _currentLife: 0
   _movementSpeed: 9
   _acceleration: 12
   _decceleration: 15
@@ -112,6 +114,8 @@ MonoBehaviour:
   _gravityScale: 1.5
   _fallGravityMultiplier: 1.9
   _pogoForce: 12
+  _timeToAttack: 1
+  _attackRate: 0.8
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -26,7 +26,7 @@ public class PlayerController : IController
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
 
-        if (Input.GetMouseButtonDown(0)) _playerModel.attackAction();
+        if (Input.GetMouseButtonDown(0)) _player.StartCoroutine(_playerModel.Attack());
 
         if (Input.GetMouseButtonDown(1)) _playerModel.Pogo(_xAxis, _yAxis);
     }

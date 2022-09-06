@@ -9,6 +9,7 @@ public class PlayerModel
     bool _dashing;
     bool _canDash = true;
     bool _poging;
+    bool _attacking;
     float _coyotaTimer;
     float _bufferTimer;
 
@@ -31,6 +32,7 @@ public class PlayerModel
     float _gravityScale;
     float _fallGravityMultiplier;
     float _pogoForce;
+    float _attackCooldown;
 
     //bool _reverse => _movementInput.z != 0 && Mathf.Sign(_movementInput.z) != Mathf.Sign(_lookAt.x) && _inGrounded;
     bool _inGrounded => Physics.CheckSphere(_transform.position, 0.1f, _groundLayer);
@@ -43,7 +45,7 @@ public class PlayerModel
     public Action attackAction;
     public PlayerModel(Transform transform, Rigidbody rb, LayerMask groundLayer, float frictionAmount, float movementSpeed, float acceleration, float decceleration,
         float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown, float jumpBufferLength,
-        float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce)
+        float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown)
     {
         _transform = transform;
         _rb = rb;
@@ -63,6 +65,7 @@ public class PlayerModel
         _gravityScale = gravityScale;
         _fallGravityMultiplier = fallGravityMultiplier;
         _pogoForce = pogoForce;
+        _attackCooldown = attackCooldown;
     }
     public void OnUpdate(float xAxis)
     {
@@ -95,7 +98,7 @@ public class PlayerModel
     public void OnFixedUpdate()
     {
         //Flipeo el sprite del player teniendo en cuenta la posicion del mouse
-        if (_xAxis != 0)
+        if (_xAxis != 0 && !_attacking)
             _transform.rotation = _xAxis <= 0 ? Quaternion.Euler(0, -90, 0) : Quaternion.Euler(0, 90, 0);
 
         Friction();
@@ -116,7 +119,7 @@ public class PlayerModel
     }
     public void Run()
     {
-        if (_dashing || _poging) return;
+        if (_dashing || _poging || _attacking) return;
 
         runAction(_xAxis);
 
@@ -132,7 +135,7 @@ public class PlayerModel
     }
     void Jump()
     {
-        if (_dashing || _poging) return;
+        if (_dashing || _poging || _attacking) return;
         _isJumping = true;
 
         _rb.AddForce(Vector3.up * (_jumpForce - _rb.velocity.y), ForceMode.Impulse);
@@ -158,7 +161,7 @@ public class PlayerModel
     }
     public IEnumerator Dash(float xAxis, float yAxis)
     {
-        if (_canDash && xAxis != 0 && yAxis > 0)
+        if (_canDash && xAxis != 0 && yAxis > 0 && !_attacking)
         {
             dashAction();
             _canDash = false;
@@ -175,6 +178,7 @@ public class PlayerModel
     }
     public void Pogo(float xAxis, float yAxis)
     {
+        if (_attacking) return;
         Vector3 pogoDirection = new Vector3(xAxis * _pogoForce + _rb.velocity.x / 2, yAxis * _pogoForce + _rb.velocity.y, 0);
 
         if (!_inGrounded && yAxis < 0)
@@ -189,5 +193,16 @@ public class PlayerModel
             _rb.AddForce(Vector3.down * (_gravityScale * _fallGravityMultiplier));
         else
             _rb.AddForce(Vector3.down * _gravityScale);
+    }
+
+    public IEnumerator Attack()
+    {
+        if (!_attacking)
+        {
+            _attacking = true;
+            attackAction();
+            yield return new WaitForSeconds(_attackCooldown);
+            _attacking = false;
+        }
     }
 }

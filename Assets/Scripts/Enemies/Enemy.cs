@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     //Health
     [SerializeField] private float maxHp;
-    private float currentHp;
+    [SerializeField] private float currentHp;
 
     private void Awake()
     {
@@ -51,8 +51,8 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     public bool CanSeePlayer()
     {
-        return !Physics.Raycast(transform.position, 
-                                  GameManager.instance.GetDistanceToPlayer(this.transform).normalized, 
+        return !Physics.Raycast(transform.position,
+                                  GameManager.instance.GetDistanceToPlayer(this.transform).normalized,
                                  (GameManager.instance.GetDistanceToPlayer(this.transform) - transform.position).magnitude,
                                   GameManager.instance.WallLayer);
     }
