@@ -40,6 +40,7 @@ public class PlayerModel
     public Action jumpAction;
     public Action<bool> fallingAction;
     public Action dashAction;
+    public Action attackAction;
     public PlayerModel(Transform transform, Rigidbody rb, LayerMask groundLayer, float frictionAmount, float movementSpeed, float acceleration, float decceleration,
         float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown, float jumpBufferLength,
         float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce)
@@ -102,9 +103,6 @@ public class PlayerModel
 
         if (!_canDash && _rb.velocity.magnitude > _dashForce)
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _dashForce);
-
-        if (_poging && _rb.velocity.magnitude > _pogoForce)
-            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _pogoForce);
     }
     void Friction()
     {
@@ -160,7 +158,7 @@ public class PlayerModel
     }
     public IEnumerator Dash(float xAxis, float yAxis)
     {
-        if (_canDash && xAxis != 0)
+        if (_canDash && xAxis != 0 && yAxis > 0)
         {
             dashAction();
             _canDash = false;
