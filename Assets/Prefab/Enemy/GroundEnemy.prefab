@@ -184,7 +184,8 @@ MonoBehaviour:
   speed: 2
   knockBackTime: 0.3
   canMove: 1
-  maxHp: 3
+  maxHp: 5
+  currentHp: 5
 --- !u!65 &7711503829190914367
 BoxCollider:
   m_ObjectHideFlags: 0

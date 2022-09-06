@@ -7,7 +7,7 @@ public class Spear : MonoBehaviour
         var player = other.GetComponent<IDamageable>();
         var damageable = other.GetComponent<IDamageable>();
 
-        if (damageable != player)
+        if (damageable != null)
             damageable.TakeDamage(damage);
     }
 }
