@@ -32,9 +32,8 @@ public class PlayerModel
     float _gravityScale;
     float _fallGravityMultiplier;
     float _pogoForce;
-    float _attackCooldown;
-
-    //bool _reverse => _movementInput.z != 0 && Mathf.Sign(_movementInput.z) != Mathf.Sign(_lookAt.x) && _inGrounded;
+    float _timeToAttack;
+    float _timeToPogo;
     bool _inGrounded => Physics.CheckSphere(_transform.position, 0.1f, _groundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
 
@@ -43,9 +42,10 @@ public class PlayerModel
     public Action<bool> fallingAction;
     public Action dashAction;
     public Action attackAction;
+    public Action<bool> inGrounded;
     public PlayerModel(Transform transform, Rigidbody rb, LayerMask groundLayer, float frictionAmount, float movementSpeed, float acceleration, float decceleration,
         float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown, float jumpBufferLength,
-        float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown)
+        float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown, float timeToPogo)
     {
         _transform = transform;
         _rb = rb;
@@ -65,7 +65,8 @@ public class PlayerModel
         _gravityScale = gravityScale;
         _fallGravityMultiplier = fallGravityMultiplier;
         _pogoForce = pogoForce;
-        _attackCooldown = attackCooldown;
+        _timeToAttack = attackCooldown;
+        _timeToPogo = timeToPogo;
     }
     public void OnUpdate(float xAxis)
     {
@@ -80,20 +81,21 @@ public class PlayerModel
         }
 
         if (_inGrounded)
+        {
             _coyotaTimer = _jumpCoyotaTime;
+            _poging = false;
+        }
         else
             _coyotaTimer -= Time.deltaTime;
-
-        if (_inGrounded)
-            _poging = false;
 
         #region JumpChecks
         if (_isJumping && _rb.velocity.y < 0)
             _isJumping = false;
         #endregion
 
+        Falling(!_inGrounded && _rb.velocity.y < 0);
 
-        fallingAction(!_inGrounded && _rb.velocity.y < 0);
+        inGrounded(_inGrounded);
     }
     public void OnFixedUpdate()
     {
@@ -121,7 +123,8 @@ public class PlayerModel
     {
         if (_dashing || _poging || _attacking) return;
 
-        runAction(_xAxis);
+        if (_inGrounded)
+            runAction(_xAxis);
 
         float targetSpeed = _xAxis * _movementSpeed;
 
@@ -161,7 +164,7 @@ public class PlayerModel
     }
     public IEnumerator Dash(float xAxis, float yAxis)
     {
-        if (_canDash && xAxis != 0 && yAxis > 0 && !_attacking)
+        if (_canDash && xAxis != 0 && !_attacking)
         {
             dashAction();
             _canDash = false;
@@ -176,19 +179,22 @@ public class PlayerModel
             _canDash = true;
         }
     }
-    public void Pogo(float xAxis, float yAxis)
+    public IEnumerator Pogo(float xAxis, float yAxis)
     {
-        if (_attacking) return;
         Vector3 pogoDirection = new Vector3(xAxis * _pogoForce + _rb.velocity.x / 2, yAxis * _pogoForce + _rb.velocity.y, 0);
 
-        if (!_inGrounded && yAxis < 0)
+        if (!_inGrounded && !_poging && yAxis < 0)
+        {
+            _poging = true;
             _rb.AddForce(-pogoDirection, ForceMode.Impulse);
-
-        _poging = true;
+            yield return new WaitForSeconds(_timeToPogo);
+            _poging = false;
+        }
         _isJumping = false;
     }
     public void Falling(bool falling)
     {
+        fallingAction(falling);
         if (falling)
             _rb.AddForce(Vector3.down * (_gravityScale * _fallGravityMultiplier));
         else
@@ -201,7 +207,7 @@ public class PlayerModel
         {
             _attacking = true;
             attackAction();
-            yield return new WaitForSeconds(_attackCooldown);
+            yield return new WaitForSeconds(_timeToAttack);
             _attacking = false;
         }
     }

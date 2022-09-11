@@ -9,6 +9,10 @@ public class PlayerView
         _anim = anim;
         _playerMaterial = playerMaterial;
     }
+    public void InGrounded(bool inGrounded)
+    {
+        _anim.SetBool("inGrounded", inGrounded);
+    }
     public void RunAnimation(float xAxis)
     {
         _anim.SetFloat("xAxis", Mathf.Abs(xAxis));

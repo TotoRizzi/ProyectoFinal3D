@@ -28,7 +28,7 @@ public class PlayerController : IController
 
         if (Input.GetMouseButtonDown(0)) _player.StartCoroutine(_playerModel.Attack());
 
-        if (Input.GetMouseButtonDown(1)) _playerModel.Pogo(_xAxis, _yAxis);
+        if (Input.GetMouseButtonDown(1)) _player.StartCoroutine(_playerModel.Pogo(_xAxis, _yAxis));
     }
     public void OnFixedUpdate()
     {
