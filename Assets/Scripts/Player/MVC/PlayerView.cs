@@ -33,6 +33,10 @@ public class PlayerView
     {
         _anim.SetTrigger("Attack");
     }
+    public void PogoAnimation(bool pogoBool)
+    {
+        _anim.SetBool("Poging", pogoBool);
+    }
     public IEnumerator TakeDamageFeedback()
     {
         Color initialColor = _playerMaterial.color;

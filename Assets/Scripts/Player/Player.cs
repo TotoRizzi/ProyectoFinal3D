@@ -5,9 +5,8 @@ public class Player : Entity
     [SerializeField] float _movementSpeed = 9;
     [SerializeField] float _acceleration = 12;
     [SerializeField] float _decceleration = 15;
-    [SerializeField] float _velPower = 1.2f;
     [SerializeField] float _frictionAmount = .1f;
-    [SerializeField] float _maxFoce = .1f;
+    [SerializeField] float _velPower = 1.2f;
 
     [Header("Jump Variables")]
     [SerializeField] float _jumpForce = 12;
@@ -26,7 +25,6 @@ public class Player : Entity
 
     [Header("Pogo Variables")]
     [SerializeField] float _pogoForce = 12;
-    [SerializeField] float _timeToPogo;
 
     [Header("Attack Variables")]
     [SerializeField] float _timeToAttack = 1f;
@@ -35,18 +33,18 @@ public class Player : Entity
 
     IController _myController;
     PlayerView _playerView;
+    PlayerModel _playerModel;
     override protected void Start()
     {
         base.Start();
-        PlayerModel _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundLayer, _frictionAmount, _movementSpeed, _acceleration, _decceleration, _velPower,
-            _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce, _timeToAttack,
-            _timeToPogo);
+        _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundLayer, _frictionAmount, _movementSpeed, _acceleration, _decceleration, _velPower,
+            _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce, _timeToAttack);
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material);
         _myController = new PlayerController(_playerModel, this);
 
         _playerModel.runAction += _playerView.RunAnimation;
 
-        _playerModel.inGrounded += _playerView.InGrounded;
+        _playerModel.inGroundedAction += _playerView.InGrounded;
 
         _playerModel.jumpAction += _playerView.JumpAnimation;
 
@@ -55,6 +53,8 @@ public class Player : Entity
         _playerModel.dashAction += _playerView.DashAnimation;
 
         _playerModel.attackAction += _playerView.AttackAnimation;
+
+        _playerModel.pogoAnimation += _playerView.PogoAnimation;
     }
     void Update()
     {

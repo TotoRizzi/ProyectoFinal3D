@@ -33,8 +33,7 @@ public class PlayerModel
     float _fallGravityMultiplier;
     float _pogoForce;
     float _timeToAttack;
-    float _timeToPogo;
-    bool _inGrounded => Physics.CheckSphere(_transform.position, 0.1f, _groundLayer);
+    public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, _groundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
 
     public Action<float> runAction;
@@ -42,10 +41,11 @@ public class PlayerModel
     public Action<bool> fallingAction;
     public Action dashAction;
     public Action attackAction;
-    public Action<bool> inGrounded;
-    public PlayerModel(Transform transform, Rigidbody rb, LayerMask groundLayer, float frictionAmount, float movementSpeed, float acceleration, float decceleration,
-        float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown, float jumpBufferLength,
-        float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown, float timeToPogo)
+    public Action<bool> inGroundedAction;
+    public Action<bool> pogoAnimation;
+    public static Action pogoAction;
+    public PlayerModel(Transform transform, Rigidbody rb, LayerMask groundLayer, float frictionAmount, float movementSpeed, float acceleration, float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
+        float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown)
     {
         _transform = transform;
         _rb = rb;
@@ -66,12 +66,10 @@ public class PlayerModel
         _fallGravityMultiplier = fallGravityMultiplier;
         _pogoForce = pogoForce;
         _timeToAttack = attackCooldown;
-        _timeToPogo = timeToPogo;
     }
     public void OnUpdate(float xAxis)
     {
         _xAxis = xAxis;
-
         _bufferTimer -= Time.deltaTime;
 
         if (_canJump)
@@ -80,22 +78,14 @@ public class PlayerModel
             _bufferTimer = 0;
         }
 
-        if (_inGrounded)
-        {
+        if (inGrounded)
             _coyotaTimer = _jumpCoyotaTime;
-            _poging = false;
-        }
         else
             _coyotaTimer -= Time.deltaTime;
 
-        #region JumpChecks
-        if (_isJumping && _rb.velocity.y < 0)
-            _isJumping = false;
-        #endregion
+        Falling(!inGrounded && _rb.velocity.y < 0);
 
-        Falling(!_inGrounded && _rb.velocity.y < 0);
-
-        inGrounded(_inGrounded);
+        inGroundedAction(inGrounded);
     }
     public void OnFixedUpdate()
     {
@@ -106,7 +96,15 @@ public class PlayerModel
         Friction();
         Run();
 
+        #region JumpChecks
+        if (_isJumping && _rb.velocity.y < 0)
+            _isJumping = false;
+        #endregion
+
         if (!_canDash && _rb.velocity.magnitude > _dashForce)
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _dashForce);
+
+        if (!_poging && _rb.velocity.magnitude > _dashForce)
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _dashForce);
     }
     void Friction()
@@ -123,14 +121,14 @@ public class PlayerModel
     {
         if (_dashing || _poging || _attacking) return;
 
-        if (_inGrounded)
+        if (inGrounded)
             runAction(_xAxis);
 
         float targetSpeed = _xAxis * _movementSpeed;
 
         float speedDif = targetSpeed - _rb.velocity.x;
 
-        float accelRate = (Mathf.Abs(targetSpeed) > 0.5f) ? _acceleration : _decceleration;
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _acceleration : _decceleration;
 
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, _velPower) * Mathf.Sign(speedDif);
 
@@ -182,15 +180,12 @@ public class PlayerModel
     public IEnumerator Pogo(float xAxis, float yAxis)
     {
         Vector3 pogoDirection = new Vector3(xAxis * _pogoForce + _rb.velocity.x / 2, yAxis * _pogoForce + _rb.velocity.y, 0);
-
-        if (!_inGrounded && !_poging && yAxis < 0)
-        {
-            _poging = true;
-            _rb.AddForce(-pogoDirection, ForceMode.Impulse);
-            yield return new WaitForSeconds(_timeToPogo);
-            _poging = false;
-        }
+        _rb.AddForce(-pogoDirection, ForceMode.Impulse);
+        _poging = true;
         _isJumping = false;
+        yield return new WaitUntil(() => _rb.velocity.y > 0);
+        yield return new WaitUntil(() => _rb.velocity.y < 0);
+        _poging = false;
     }
     public void Falling(bool falling)
     {

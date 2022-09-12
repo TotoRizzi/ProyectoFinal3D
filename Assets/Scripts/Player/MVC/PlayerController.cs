@@ -10,11 +10,13 @@ public class PlayerController : IController
     {
         _playerModel = playerModel;
         _player = player;
+
+        PlayerModel.pogoAction += StartPogo;
     }
     public void OnUpdate()
     {
-        _xAxis = Input.GetAxis("Horizontal");
-        _yAxis = Input.GetAxis("Vertical");
+        _xAxis = Input.GetAxisRaw("Horizontal");
+        _yAxis = Input.GetAxisRaw("Vertical");
 
         _playerModel.OnUpdate(_xAxis);
 
@@ -28,10 +30,14 @@ public class PlayerController : IController
 
         if (Input.GetMouseButtonDown(0)) _player.StartCoroutine(_playerModel.Attack());
 
-        if (Input.GetMouseButtonDown(1)) _player.StartCoroutine(_playerModel.Pogo(_xAxis, _yAxis));
+        _playerModel.pogoAnimation(Input.GetMouseButton(1) && !_playerModel.inGrounded && _yAxis < 0);
     }
     public void OnFixedUpdate()
     {
         _playerModel.OnFixedUpdate();
+    }
+    void StartPogo()
+    {
+        _player.StartCoroutine(_playerModel.Pogo(_xAxis, _yAxis));
     }
 }
