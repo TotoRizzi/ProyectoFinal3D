@@ -15,6 +15,8 @@ public class PlayerController : IController
     }
     public void OnUpdate()
     {
+        if (PausedMenu._gameIsPaused) return;
+
         _xAxis = Input.GetAxisRaw("Horizontal");
         _yAxis = Input.GetAxisRaw("Vertical");
 
@@ -30,7 +32,7 @@ public class PlayerController : IController
 
         if (Input.GetMouseButtonDown(0)) _player.StartCoroutine(_playerModel.Attack());
 
-        _playerModel.pogoAnimation(Input.GetMouseButton(1) && !_playerModel.inGrounded && _yAxis < 0);
+        _playerModel.pogoAnimation(Input.GetMouseButton(1) && !_playerModel.inGrounded && _yAxis < 0, _xAxis);
     }
     public void OnFixedUpdate()
     {

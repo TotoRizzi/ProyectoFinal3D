@@ -10,14 +10,14 @@ public class PlayerModel
     bool _canDash = true;
     bool _poging;
     bool _attacking;
+    bool _jumpFalling;
     float _coyotaTimer;
     float _bufferTimer;
 
     //Variables Constructor
     Transform _transform;
     Rigidbody _rb;
-    LayerMask _groundLayer;
-    float _frictionAmount;
+    float _groundFriction;
     float _movementSpeed;
     float _acceleration;
     float _decceleration;
@@ -33,7 +33,7 @@ public class PlayerModel
     float _fallGravityMultiplier;
     float _pogoForce;
     float _timeToAttack;
-    public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, _groundLayer);
+    public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, GameManager.instance.GroundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
 
     public Action<float> runAction;
@@ -42,15 +42,15 @@ public class PlayerModel
     public Action dashAction;
     public Action attackAction;
     public Action<bool> inGroundedAction;
-    public Action<bool> pogoAnimation;
+    public Action<bool, float> pogoAnimation;
     public static Action pogoAction;
-    public PlayerModel(Transform transform, Rigidbody rb, LayerMask groundLayer, float frictionAmount, float movementSpeed, float acceleration, float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
+    public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
+        float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
         float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown)
     {
         _transform = transform;
         _rb = rb;
-        _groundLayer = groundLayer;
-        _frictionAmount = frictionAmount;
+        _groundFriction = groundFriction;
         _movementSpeed = movementSpeed;
         _acceleration = acceleration;
         _decceleration = decceleration;
@@ -79,7 +79,11 @@ public class PlayerModel
         }
 
         if (inGrounded)
+        {
             _coyotaTimer = _jumpCoyotaTime;
+            _jumpFalling = true;
+            _poging = false;
+        }
         else
             _coyotaTimer -= Time.deltaTime;
 
@@ -93,7 +97,7 @@ public class PlayerModel
         if (_xAxis != 0 && !_attacking)
             _transform.rotation = _xAxis <= 0 ? Quaternion.Euler(0, -90, 0) : Quaternion.Euler(0, 90, 0);
 
-        Friction();
+        GroundFriction();
         Run();
 
         #region JumpChecks
@@ -104,22 +108,21 @@ public class PlayerModel
         if (!_canDash && _rb.velocity.magnitude > _dashForce)
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _dashForce);
 
-        if (!_poging && _rb.velocity.magnitude > _dashForce)
-            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _dashForce);
+        if (_poging && _rb.velocity.magnitude > _pogoForce)
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _pogoForce);
     }
-    void Friction()
+    void GroundFriction()
     {
         if (Mathf.Abs(_xAxis) < 0.01f)
         {
-            float amount = Mathf.Min(Mathf.Abs(_rb.velocity.x), Mathf.Abs(_frictionAmount));
-
+            float amount = Mathf.Min(Mathf.Abs(_rb.velocity.x), Mathf.Abs(_groundFriction));
             amount *= Mathf.Sign(_rb.velocity.x);
             _rb.AddForce(Vector3.right * -amount, ForceMode.Impulse);
         }
     }
     public void Run()
     {
-        if (_dashing || _poging || _attacking) return;
+        if (_poging || _dashing || _attacking) return;
 
         if (inGrounded)
             runAction(_xAxis);
@@ -128,11 +131,13 @@ public class PlayerModel
 
         float speedDif = targetSpeed - _rb.velocity.x;
 
-        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _acceleration : _decceleration;
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.5f) ? _acceleration : _decceleration;
 
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, _velPower) * Mathf.Sign(speedDif);
 
-        _rb.AddForce(movement * Vector3.right);
+        float finalMovement = inGrounded ? movement : movement * 0.75f;
+
+        _rb.AddForce(finalMovement * Vector3.right);
     }
     void Jump()
     {
@@ -145,19 +150,33 @@ public class PlayerModel
     }
     public void OnJumpUp()
     {
-        if (_rb.velocity.y > 0 && _isJumping)
+        if (_rb.velocity.y > 0 && _isJumping || _rb.velocity.y > 0 && _poging || _rb.velocity.y > 0 && _dashing)
             _rb.AddForce(Vector3.down * _rb.velocity.y * (1 - _jumpCutMultiplier), ForceMode.Impulse);
     }
     public void OnJumpDown()
     {
         _bufferTimer = _jumpBufferLength;
 
-        if (!_canDoubleJump && _coyotaTimer > 0)
-            _canDoubleJump = true;
-        else if (_canDoubleJump && _coyotaTimer < 0)
+        if (!_canDoubleJump)
+        {
+            if (inGrounded)                     //Primer salto desde el suelo
+            {
+                _canDoubleJump = true;
+                _jumpFalling = false;
+            }
+            else if (_coyotaTimer > 0)          //Primer salto con coyota time
+                _canDoubleJump = true;
+            else if (_jumpFalling)              //Salto sin estar en el suelo
+            {
+                _coyotaTimer = _jumpCoyotaTime;
+                _jumpFalling = false;
+            }
+        }
+        else                                    //Doble salto
         {
             _coyotaTimer = _jumpCoyotaTime;
             _canDoubleJump = false;
+            _jumpFalling = false;
         }
     }
     public IEnumerator Dash(float xAxis, float yAxis)
@@ -180,6 +199,7 @@ public class PlayerModel
     public IEnumerator Pogo(float xAxis, float yAxis)
     {
         Vector3 pogoDirection = new Vector3(xAxis * _pogoForce + _rb.velocity.x / 2, yAxis * _pogoForce + _rb.velocity.y, 0);
+
         _rb.AddForce(-pogoDirection, ForceMode.Impulse);
         _poging = true;
         _isJumping = false;
@@ -202,6 +222,7 @@ public class PlayerModel
         {
             _attacking = true;
             attackAction();
+            _rb.velocity = Vector3.zero;
             yield return new WaitForSeconds(_timeToAttack);
             _attacking = false;
         }

@@ -198,23 +198,20 @@ MonoBehaviour:
   _currentLife: 0
   _movementSpeed: 9
   _acceleration: 12
-  _decceleration: 15
-  _frictionAmount: 0.1
+  _decceleration: 12
+  _groundFriction: 0.1
   _velPower: 1.05
   _jumpForce: 15
   _jumpCutMultiplier: 0.08
   _jumpCoyotaTime: 0.1
   _jumpBufferLength: 0.1
-  _dashForce: 20
+  _dashForce: 25
   _dashTime: 0.15
   _dashCooldown: 1
   _gravityScale: 1.5
   _fallGravityMultiplier: 1.9
-  _pogoForce: 12
-  _timeToAttack: 1
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  _pogoForce: 15
+  _timeToAttack: 0.6
 --- !u!1 &1479121475470204236
 GameObject:
   m_ObjectHideFlags: 0

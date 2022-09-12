@@ -33,9 +33,10 @@ public class PlayerView
     {
         _anim.SetTrigger("Attack");
     }
-    public void PogoAnimation(bool pogoBool)
+    public void PogoAnimation(bool pogoBool, float xAxis)
     {
         _anim.SetBool("Poging", pogoBool);
+        _anim.SetFloat("xPog", Mathf.Abs(xAxis));
     }
     public IEnumerator TakeDamageFeedback()
     {
