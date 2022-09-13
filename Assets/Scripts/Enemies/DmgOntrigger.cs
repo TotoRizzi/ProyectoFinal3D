@@ -5,11 +5,10 @@ using UnityEngine;
 public class DmgOntrigger : MonoBehaviour
 {
     [SerializeField] float dmg;
-    [SerializeField] bool reloadScene;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Player") return;
-        if (reloadScene) SceneManagerScript.instance.ReloadScene();
-        else other.GetComponent<IDamageable>().TakeDamage(dmg);
+
+        other.GetComponent<IDamageable>().TakeDamage(dmg);
     }
 }
