@@ -30,11 +30,13 @@ public class State_BlindWalk : IState
     {
         if (Physics.Raycast(_wallAndGroundCheckPosition.position, _myEnemy.transform.right, 0.1f, GameManager.instance.WallLayer)
             ||
-            !Physics.Raycast(_wallAndGroundCheckPosition.position, -_myEnemy.transform.up, 1, GameManager.instance.GroundLayer)
+            !Physics.Raycast(_myEnemy.transform.position, -_myEnemy.transform.up, 2.0f, GameManager.instance.GroundLayer)
             ||
-            Physics.Raycast(_wallAndGroundCheckPosition.position, _myEnemy.transform.right, 0.1f, GameManager.instance.GroundLayer))          
+            Physics.Raycast(_wallAndGroundCheckPosition.position, _myEnemy.transform.right, 0.1f, GameManager.instance.GroundLayer))       
         {
+            Debug.Log("Flip");
             _myEnemy.Flip();
         }
     }
+
 }
