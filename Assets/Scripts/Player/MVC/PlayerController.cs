@@ -6,6 +6,7 @@ public class PlayerController : IController
 
     float _xAxis;
     float _yAxis;
+
     public PlayerController(PlayerModel playerModel, Player player)
     {
         _playerModel = playerModel;

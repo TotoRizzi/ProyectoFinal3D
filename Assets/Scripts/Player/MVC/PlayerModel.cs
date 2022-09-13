@@ -9,6 +9,7 @@ public class PlayerModel
     bool _dashing;
     bool _canDash = true;
     bool _poging;
+    bool _canPog;
     bool _attacking;
     bool _jumpFalling;
     float _coyotaTimer;
@@ -37,13 +38,14 @@ public class PlayerModel
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
 
     public Action<float> runAction;
-    public Action jumpAction;
+    public Action<bool> jumpAction;
     public Action<bool> fallingAction;
     public Action dashAction;
     public Action attackAction;
     public Action<bool> inGroundedAction;
     public Action<bool, float> pogoAnimation;
     public static Action pogoAction;
+    public Action pogoFeedback;
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
         float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown)
@@ -66,6 +68,8 @@ public class PlayerModel
         _fallGravityMultiplier = fallGravityMultiplier;
         _pogoForce = pogoForce;
         _timeToAttack = attackCooldown;
+
+        pogoAnimation += CanPog;
     }
     public void OnUpdate(float xAxis)
     {
@@ -82,6 +86,7 @@ public class PlayerModel
         {
             _coyotaTimer = _jumpCoyotaTime;
             _jumpFalling = true;
+            _canDoubleJump = false;
             _poging = false;
         }
         else
@@ -90,6 +95,8 @@ public class PlayerModel
         Falling(!inGrounded && _rb.velocity.y < 0);
 
         inGroundedAction(inGrounded);
+
+        Debug.Log(_canPog);
     }
     public void OnFixedUpdate()
     {
@@ -143,9 +150,8 @@ public class PlayerModel
     {
         if (_dashing || _poging || _attacking) return;
         _isJumping = true;
-
+        jumpAction(_canDoubleJump || _jumpFalling);
         _rb.AddForce(Vector3.up * (_jumpForce - _rb.velocity.y), ForceMode.Impulse);
-        jumpAction();
         _poging = false;
     }
     public void OnJumpUp()
@@ -156,7 +162,6 @@ public class PlayerModel
     public void OnJumpDown()
     {
         _bufferTimer = _jumpBufferLength;
-
         if (!_canDoubleJump)
         {
             if (inGrounded)                     //Primer salto desde el suelo
@@ -196,16 +201,26 @@ public class PlayerModel
             _canDash = true;
         }
     }
+    public void CanPog(bool pogoBool, float x)
+    {
+        if (pogoBool)
+            _canPog = true;
+        else
+            _canPog = false;
+    }
     public IEnumerator Pogo(float xAxis, float yAxis)
     {
         Vector3 pogoDirection = new Vector3(xAxis * _pogoForce + _rb.velocity.x / 2, yAxis * _pogoForce + _rb.velocity.y, 0);
-
-        _rb.AddForce(-pogoDirection, ForceMode.Impulse);
-        _poging = true;
-        _isJumping = false;
-        yield return new WaitUntil(() => _rb.velocity.y > 0);
-        yield return new WaitUntil(() => _rb.velocity.y < 0);
-        _poging = false;
+        if (_canPog)
+        {
+            _rb.AddForce(-pogoDirection, ForceMode.Impulse);
+            pogoFeedback();
+            _poging = true;
+            _isJumping = false;
+            yield return new WaitUntil(() => _rb.velocity.y > 0);
+            yield return new WaitUntil(() => _rb.velocity.y < 0);
+            _poging = false;
+        }
     }
     public void Falling(bool falling)
     {

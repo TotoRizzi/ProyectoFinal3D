@@ -29,6 +29,9 @@ public class Player : Entity
     [Header("Attack Variables")]
     [SerializeField] float _timeToAttack = 0.6f;
 
+    [SerializeField] ParticleSystem _doubleJumpPS;
+    [SerializeField] ParticleSystem _pogoPS;
+
     IController _myController;
     PlayerView _playerView;
     override protected void Start()
@@ -36,7 +39,7 @@ public class Player : Entity
         base.Start();
         PlayerModel _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce, _timeToAttack);
-        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material);
+        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS);
         _myController = new PlayerController(_playerModel, this);
 
         _playerModel.runAction += _playerView.RunAnimation;
@@ -52,6 +55,8 @@ public class Player : Entity
         _playerModel.attackAction += _playerView.AttackAnimation;
 
         _playerModel.pogoAnimation += _playerView.PogoAnimation;
+
+        _playerModel.pogoFeedback += _playerView.PogoFeedback;
     }
     void Update()
     {

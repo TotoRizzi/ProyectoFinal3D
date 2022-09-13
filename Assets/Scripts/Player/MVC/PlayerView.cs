@@ -4,10 +4,14 @@ public class PlayerView
 {
     Animator _anim;
     Material _playerMaterial;
-    public PlayerView(Animator anim, Material playerMaterial)
+    ParticleSystem _doubleJumpPS, _pogoPS;
+    Transform _transform;
+    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS)
     {
         _anim = anim;
         _playerMaterial = playerMaterial;
+        _doubleJumpPS = doubleJumpPS;
+        _pogoPS = pogoPS;
     }
     public void InGrounded(bool inGrounded)
     {
@@ -17,9 +21,11 @@ public class PlayerView
     {
         _anim.SetFloat("xAxis", Mathf.Abs(xAxis));
     }
-    public void JumpAnimation()
+    public void JumpAnimation(bool doubleJump)
     {
         _anim.SetTrigger("Jumping");
+        if (!doubleJump)
+            _doubleJumpPS.Play();
     }
     public void FallingAnimation(bool falling)
     {
@@ -37,6 +43,10 @@ public class PlayerView
     {
         _anim.SetBool("Poging", pogoBool);
         _anim.SetFloat("xPog", Mathf.Abs(xAxis));
+    }
+    public void PogoFeedback()
+    {
+        _pogoPS.Play();
     }
     public IEnumerator TakeDamageFeedback()
     {
