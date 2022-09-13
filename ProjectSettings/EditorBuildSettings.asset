@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Santi.unity
     guid: 1f38ca7adf1769a47b97cec1c72d538e
-  - enabled: 1
-    path: Assets/Scenes/PJ Scene.unity
-    guid: ed1eafce3a10a5343a2952c1c86027c6
   m_configObjects: {}
