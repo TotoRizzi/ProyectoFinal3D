@@ -10,7 +10,7 @@ public class Player : Entity
 
     [Header("Jump Variables")]
     [SerializeField] float _jumpForce = 12;
-    [SerializeField] float _jumpCutMultiplier = .08f;
+    [SerializeField] float _jumpCutMultiplier = .1f;
     [SerializeField] float _jumpCoyotaTime = .1f;
     [SerializeField] float _jumpBufferLength = .1f;
 
@@ -27,18 +27,25 @@ public class Player : Entity
     [SerializeField] float _pogoForce = 15;
 
     [Header("Attack Variables")]
-    [SerializeField] float _timeToAttack = 0.6f;
+    [SerializeField] float _timeToAttack = .28f;
+    [SerializeField] float _timeToThrow = .22f;
 
+    [Header("Inspector Variables")]
     [SerializeField] ParticleSystem _doubleJumpPS;
     [SerializeField] ParticleSystem _pogoPS;
+    [SerializeField] Spear _spearPrefab;
+    [SerializeField] Transform _spawnSpear;
 
     IController _myController;
     PlayerView _playerView;
+    Spear _playerSpear;
     override protected void Start()
     {
         base.Start();
+        _playerSpear = GetComponentInChildren<Spear>();
         PlayerModel _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
-            _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce, _timeToAttack);
+            _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
+            _timeToAttack, _timeToThrow, _playerSpear);
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS);
         _myController = new PlayerController(_playerModel, this);
 
@@ -54,9 +61,13 @@ public class Player : Entity
 
         _playerModel.attackAction += _playerView.AttackAnimation;
 
-        _playerModel.pogoAnimation += _playerView.PogoAnimation;
+        _playerModel.throwAnimation += _playerView.ThrowAnimation;
 
-        _playerModel.pogoFeedback += _playerView.PogoFeedback;
+        _playerModel.throwAction += InstantiateSpear;
+
+        //_playerModel.pogoAnimation += _playerView.PogoAnimation;
+
+        //_playerModel.pogoFeedback += _playerView.PogoFeedback;
     }
     void Update()
     {
@@ -70,5 +81,14 @@ public class Player : Entity
     {
         base.TakeDamage(dmg);
         StartCoroutine(_playerView.TakeDamageFeedback());
+    }
+    public void InstantiateSpear(float xAxis)
+    {
+        _playerSpear.gameObject.SetActive(false);
+        Instantiate(_spearPrefab).OnThrow()
+                                 .SetPosition(_spawnSpear.transform)
+                                 .SetSpeed(20)
+                                 .SetDirection(transform.forward)
+                                 .SetCollider();
     }
 }

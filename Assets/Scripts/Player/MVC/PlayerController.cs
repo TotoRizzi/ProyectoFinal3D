@@ -12,7 +12,7 @@ public class PlayerController : IController
         _playerModel = playerModel;
         _player = player;
 
-        PlayerModel.pogoAction += StartPogo;
+        //PlayerModel.pogoAction += StartPogo;
     }
     public void OnUpdate()
     {
@@ -23,17 +23,19 @@ public class PlayerController : IController
 
         _playerModel.OnUpdate(_xAxis);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Z))
             _playerModel.OnJumpDown();
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Z))
             _playerModel.OnJumpUp();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)) _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
+        if (Input.GetKeyDown(KeyCode.C)) _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
 
-        if (Input.GetMouseButtonDown(0)) _player.StartCoroutine(_playerModel.Attack());
+        if (Input.GetKeyDown(KeyCode.X)) _player.StartCoroutine(_playerModel.Attack());
 
-        _playerModel.pogoAnimation(Input.GetMouseButton(1) && !_playerModel.inGrounded && _yAxis < 0, _xAxis);
+        if (Input.GetKeyDown(KeyCode.A)) _player.StartCoroutine(_playerModel.Throw());
+
+        //_playerModel.pogoAnimation(Input.GetMouseButton(1) && !_playerModel.inGrounded && _yAxis < 0, _xAxis);
     }
     public void OnFixedUpdate()
     {

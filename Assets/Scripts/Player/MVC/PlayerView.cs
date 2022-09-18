@@ -5,7 +5,6 @@ public class PlayerView
     Animator _anim;
     Material _playerMaterial;
     ParticleSystem _doubleJumpPS, _pogoPS;
-    Transform _transform;
     public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS)
     {
         _anim = anim;
@@ -43,6 +42,10 @@ public class PlayerView
     {
         _anim.SetBool("Poging", pogoBool);
         _anim.SetFloat("xPog", Mathf.Abs(xAxis));
+    }
+    public void ThrowAnimation()
+    {
+        _anim.SetTrigger("Throw");
     }
     public void PogoFeedback()
     {

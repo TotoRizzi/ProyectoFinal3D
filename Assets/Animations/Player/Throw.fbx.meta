@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 870ff4e4542477c46a7fcaeeb78d788c
+guid: 82db03de8ddce7a40a38288095f1e1d3
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Attack
+    second: Throw
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Attack
+      name: Throw
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 70
+      lastFrame: 115
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -48,20 +48,20 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
       maskType: 3
-      maskSource: {fileID: 31900000, guid: 6a5e9d933e4b2b040ab4ed7bd16367b3, type: 2}
+      maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
