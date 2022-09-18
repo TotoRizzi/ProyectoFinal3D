@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 public class Spear : MonoBehaviour
 {
     [SerializeField] float _damage;
+    [SerializeField] float _speed;
+    [SerializeField] ParticleSystem _hitSpearPS;
+    public Vector3 hitPoint { get; private set; }
 
-    float _speed;
-    bool _throwing;
     Vector3 _dir;
+
+    public event Action collisionWithEnemy;
     private void Update()
     {
         transform.position += _dir * _speed * Time.deltaTime;
@@ -22,26 +26,29 @@ public class Spear : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (_throwing && collision != null)
+        if (collision.gameObject.GetComponent<Enemy>() != null)
         {
-            Debug.Log("me rompo");
-            Destroy(gameObject);
+            ContactPoint point = collision.contacts[0];
+            hitPoint = point.point;
+            collisionWithEnemy();
         }
+
+        PlayHitPS();
+        Destroy(gameObject);
     }
-    #region BUILDER
-    public Spear OnThrow()
+
+    void PlayHitPS()
     {
-        _throwing = true;
-        return this;
+        var hitPS = Instantiate(_hitSpearPS);
+        hitPS.transform.SetPositionAndRotation(hitPoint, Quaternion.identity);
+        hitPS.Play();
+        Destroy(hitPS.gameObject, hitPS.main.duration);
     }
+
+    #region BUILDER
     public Spear SetPosition(Transform t)
     {
         transform.position = t.position;
-        return this;
-    }
-    public Spear SetSpeed(float speed)
-    {
-        _speed = speed;
         return this;
     }
     public Spear SetDirection(Vector3 dir)
@@ -50,7 +57,7 @@ public class Spear : MonoBehaviour
         transform.forward = dir;
         return this;
     }
-    public Spear SetCollider()
+    public Spear SetColliderAndRigidbody()
     {
         Rigidbody rb = gameObject.AddComponent<Rigidbody>();
         rb.useGravity = false;

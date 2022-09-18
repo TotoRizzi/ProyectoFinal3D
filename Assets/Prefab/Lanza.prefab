@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 2
+  _speed: 25
+  _hitSpearPS: {fileID: 7236006687394329034, guid: 2dc7484421cd0c34d88ca395c9a31f5b, type: 3}
 --- !u!1001 &1091635972446770293
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -38,14 +38,14 @@ public class Player : Entity
 
     IController _myController;
     PlayerView _playerView;
-    Spear _playerSpear;
+    Spear _playerSpear, _throwedSpear;
     override protected void Start()
     {
         base.Start();
         _playerSpear = GetComponentInChildren<Spear>();
         PlayerModel _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
-            _timeToAttack, _timeToThrow, _playerSpear);
+            _timeToAttack, _timeToThrow, _playerSpear, GetComponentInChildren<TrailRenderer>());
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS);
         _myController = new PlayerController(_playerModel, this);
 
@@ -85,10 +85,16 @@ public class Player : Entity
     public void InstantiateSpear(float xAxis)
     {
         _playerSpear.gameObject.SetActive(false);
-        Instantiate(_spearPrefab).OnThrow()
-                                 .SetPosition(_spawnSpear.transform)
-                                 .SetSpeed(20)
+        _throwedSpear = Instantiate(_spearPrefab).SetPosition(_spawnSpear.transform)
                                  .SetDirection(transform.forward)
-                                 .SetCollider();
+                                 .SetColliderAndRigidbody();
+
+        _throwedSpear.collisionWithEnemy += MoveToSpearCollision;
+    }
+    void MoveToSpearCollision()
+    {
+        Vector3 distance = transform.position - _throwedSpear.hitPoint;
+        distance.z = 0;
+        transform.position = new Vector3(_throwedSpear.hitPoint.x, _throwedSpear.hitPoint.y, 0) + (distance * .15f) - Vector3.up;
     }
 }

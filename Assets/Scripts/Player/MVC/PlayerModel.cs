@@ -37,6 +37,7 @@ public class PlayerModel
     float _timeToAttack;
     float _timeToThrow;
     Spear _playerSpear;
+    TrailRenderer _tr;
     public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, GameManager.instance.GroundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
 
@@ -54,7 +55,7 @@ public class PlayerModel
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
         float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown, float timeToThrow,
-        Spear playerSpear)
+        Spear playerSpear, TrailRenderer tr)
     {
         _transform = transform;
         _rb = rb;
@@ -76,6 +77,7 @@ public class PlayerModel
         _timeToAttack = attackCooldown;
         _timeToThrow = timeToThrow;
         _playerSpear = playerSpear;
+        _tr = tr;
 
         //pogoAnimation += CanPog;
     }
@@ -94,8 +96,8 @@ public class PlayerModel
         else
             _coyotaTimer -= Time.deltaTime;
 
-        Falling(!inGrounded && _rb.velocity.y < 0);
-
+        Falling(!inGrounded);
+        fallingAction(_rb.velocity.y < 0 && !inGrounded);
         inGroundedAction(inGrounded);
     }
     public void OnFixedUpdate()
@@ -200,9 +202,11 @@ public class PlayerModel
             _poging = false;
             _rb.useGravity = false;
             _rb.AddForce(new Vector3(xAxis, yAxis, 0).normalized * _dashForce, ForceMode.Impulse);
+            _tr.emitting = true;
             yield return new WaitForSeconds(_dashTime);
             _dashing = false;
             _rb.useGravity = true;
+            _tr.emitting = false;
             yield return new WaitForSeconds(_dashCoolDown);
             _canDash = true;
         }
@@ -230,7 +234,6 @@ public class PlayerModel
     }
     public void Falling(bool falling)
     {
-        fallingAction(falling);
         if (falling)
             _rb.AddForce(Vector3.down * (_gravityScale * _fallGravityMultiplier));
         else
