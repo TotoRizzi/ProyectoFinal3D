@@ -86,6 +86,8 @@ public class PlayerModel
         _xAxis = xAxis;
         _bufferTimer -= Time.deltaTime;
 
+        //setWeightAnimationLayer(Mathf.Abs(_rb.velocity.x) != 0 || !inGrounded || _rb.velocity.x != 0 && !inGrounded);
+
         if (inGrounded)
         {
             _coyotaTimer = _jumpCoyotaTime;
@@ -103,7 +105,7 @@ public class PlayerModel
     public void OnFixedUpdate()
     {
         //Flipeo el sprite del player teniendo en cuenta la posicion del mouse
-        if (_xAxis != 0 && !_attacking)
+        if (_xAxis != 0)
             _transform.eulerAngles = Vector3.Lerp(Quaternion.Euler(0, 90, 0).eulerAngles, Quaternion.Euler(0, -90, 0).eulerAngles, 0) * _xAxis;
 
         GroundFriction();
@@ -131,7 +133,7 @@ public class PlayerModel
     }
     public void Run()
     {
-        if (_poging || _dashing || _attacking || _throwing) return;
+        if (_poging || _dashing) return;
 
         if (inGrounded)
             runAction(_xAxis);
@@ -196,17 +198,17 @@ public class PlayerModel
     {
         if (_canDash && xAxis != 0 && !_attacking)
         {
+            _dashing = true;
             dashAction();
             _canDash = false;
-            _dashing = true;
             _poging = false;
             _rb.useGravity = false;
-            _rb.AddForce(new Vector3(xAxis, yAxis, 0).normalized * _dashForce, ForceMode.Impulse);
             _tr.emitting = true;
+            _rb.AddForce(new Vector3(xAxis, yAxis, 0).normalized * _dashForce, ForceMode.Impulse);
             yield return new WaitForSeconds(_dashTime);
             _dashing = false;
-            _rb.useGravity = true;
             _tr.emitting = false;
+            _rb.useGravity = true;
             yield return new WaitForSeconds(_dashCoolDown);
             _canDash = true;
         }
@@ -246,7 +248,6 @@ public class PlayerModel
         {
             _attacking = true;
             attackAction();
-            _rb.velocity = Vector3.zero;
             yield return new WaitForSeconds(_timeToAttack);
             _attacking = false;
         }
@@ -257,7 +258,6 @@ public class PlayerModel
         {
             _throwing = true;
             throwAnimation();
-            _rb.velocity = Vector3.zero;
             yield return new WaitForSeconds(_timeToThrow);
             _playerSpear.gameObject.SetActive(true);
             _throwing = false;

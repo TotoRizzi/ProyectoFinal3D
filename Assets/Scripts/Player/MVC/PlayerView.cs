@@ -12,6 +12,15 @@ public class PlayerView
         _doubleJumpPS = doubleJumpPS;
         _pogoPS = pogoPS;
     }
+    public void SetWeight(bool xRb)
+    {
+        int lowerBodyLayer = _anim.GetLayerIndex("LowerBody");
+
+        if (xRb)
+            _anim.SetLayerWeight(lowerBodyLayer, 0);
+        else
+            _anim.SetLayerWeight(lowerBodyLayer, 1);
+    }
     public void InGrounded(bool inGrounded)
     {
         _anim.SetBool("inGrounded", inGrounded);

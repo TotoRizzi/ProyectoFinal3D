@@ -9,7 +9,7 @@ public class Player : Entity
     [SerializeField] float _velPower = 1.05f;
 
     [Header("Jump Variables")]
-    [SerializeField] float _jumpForce = 12;
+    [SerializeField] float _jumpForce = 15;
     [SerializeField] float _jumpCutMultiplier = .1f;
     [SerializeField] float _jumpCoyotaTime = .1f;
     [SerializeField] float _jumpBufferLength = .1f;
@@ -20,7 +20,7 @@ public class Player : Entity
     [SerializeField] float _dashCooldown = 1;
 
     [Header("Gravity")]
-    [SerializeField] float _gravityScale = 1.5f;
+    [SerializeField] float _gravityScale = 1.4f;
     [SerializeField] float _fallGravityMultiplier = 1.9f;
 
     [Header("Pogo Variables")]
@@ -28,7 +28,7 @@ public class Player : Entity
 
     [Header("Attack Variables")]
     [SerializeField] float _timeToAttack = .28f;
-    [SerializeField] float _timeToThrow = .22f;
+    [SerializeField] float _timeToThrow = .45f;
 
     [Header("Inspector Variables")]
     [SerializeField] ParticleSystem _doubleJumpPS;
