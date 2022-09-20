@@ -2,20 +2,20 @@ using UnityEngine;
 public class Player : Entity
 {
     [Header("Movement Variables")]
-    [SerializeField] float _movementSpeed = 9;
+    [SerializeField] float _movementSpeed = 8;
     [SerializeField] float _acceleration = 12;
     [SerializeField] float _decceleration = 12;
     [SerializeField] float _groundFriction = .1f;
     [SerializeField] float _velPower = 1.05f;
 
     [Header("Jump Variables")]
-    [SerializeField] float _jumpForce = 15;
+    [SerializeField] float _jumpForce = 12;
     [SerializeField] float _jumpCutMultiplier = .1f;
     [SerializeField] float _jumpCoyotaTime = .1f;
     [SerializeField] float _jumpBufferLength = .1f;
 
     [Header("Dash Variables")]
-    [SerializeField] float _dashForce = 25;
+    [SerializeField] float _dashForce = 20;
     [SerializeField] float _dashTime = .15f;
     [SerializeField] float _dashCooldown = 1;
 
@@ -24,10 +24,10 @@ public class Player : Entity
     [SerializeField] float _fallGravityMultiplier = 1.9f;
 
     [Header("Pogo Variables")]
-    [SerializeField] float _pogoForce = 15;
+    [SerializeField] float _pogoForce = 12;
 
     [Header("Attack Variables")]
-    [SerializeField] float _timeToAttack = .28f;
+    [SerializeField] float _timeToAttack = .36f;
     [SerializeField] float _timeToThrow = .45f;
 
     [Header("Inspector Variables")]
@@ -45,7 +45,7 @@ public class Player : Entity
         _playerSpear = GetComponentInChildren<Spear>();
         PlayerModel _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
-            _timeToAttack, _timeToThrow, _playerSpear, GetComponentInChildren<TrailRenderer>());
+            _timeToAttack, _timeToThrow, _playerSpear, GetComponentInChildren<TrailRenderer>(), GetComponentInChildren<Spear>().GetComponent<SphereCollider>());
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS);
         _myController = new PlayerController(_playerModel, this);
 
@@ -67,7 +67,7 @@ public class Player : Entity
 
         //_playerModel.pogoAnimation += _playerView.PogoAnimation;
 
-        //_playerModel.pogoFeedback += _playerView.PogoFeedback;
+        _playerModel.pogoFeedback += _playerView.PogoFeedback;
     }
     void Update()
     {
@@ -87,7 +87,8 @@ public class Player : Entity
         _playerSpear.gameObject.SetActive(false);
         _throwedSpear = Instantiate(_spearPrefab).SetPosition(_spawnSpear.transform)
                                  .SetDirection(transform.forward)
-                                 .SetColliderAndRigidbody();
+                                 .SetColliderAndRigidbody()
+                                 .SetDestroy();
 
         _throwedSpear.collisionWithEnemy += MoveToSpearCollision;
     }

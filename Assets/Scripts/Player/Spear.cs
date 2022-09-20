@@ -2,8 +2,10 @@ using System;
 using UnityEngine;
 public class Spear : MonoBehaviour
 {
-    [SerializeField] float _damage;
+    [SerializeField] float _meleeDamage;
+    [SerializeField] float _throwDamage;
     [SerializeField] float _speed;
+    [SerializeField] float _timeToDestroy;
     [SerializeField] ParticleSystem _hitSpearPS;
     public Vector3 hitPoint { get; private set; }
 
@@ -19,18 +21,22 @@ public class Spear : MonoBehaviour
         var damageable = other.GetComponent<IDamageable>();
 
         if (damageable != null)
-            damageable.TakeDamage(_damage);
-
-        //PlayerModel.pogoAction();
+        {
+            PlayerModel.pogoAction();
+            damageable.TakeDamage(_meleeDamage);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<Enemy>() != null)
+        var damageable = collision.gameObject.GetComponent<Enemy>();
+
+        if (damageable != null)
         {
             ContactPoint point = collision.contacts[0];
             hitPoint = point.point;
             collisionWithEnemy();
+            damageable.TakeDamage(_throwDamage);
         }
 
         PlayHitPS();
@@ -65,5 +71,11 @@ public class Spear : MonoBehaviour
         collider.center = new Vector3(0, 0, 2.25f);
         return this;
     }
+    public Spear SetDestroy()
+    {
+        Destroy(gameObject, _timeToDestroy);
+        return this;
+    }
+
     #endregion
 }

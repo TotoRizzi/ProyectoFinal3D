@@ -576,7 +576,7 @@ MonoBehaviour:
     m_ConstrainedAxes:
       x: 1
       y: 1
-      z: 1
+      z: 0
   m_SourceObjectsGUIToggle: 1
   m_SettingsGUIToggle: 1
 --- !u!114 &1250461848273787533
@@ -714,7 +714,7 @@ GameObject:
   - component: {fileID: 1250461846751280249}
   - component: {fileID: 1250461846751280248}
   m_Layer: 0
-  m_Name: PlayerPrueba
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -821,7 +821,7 @@ MonoBehaviour:
   _dashCooldown: 1
   _gravityScale: 1.4
   _fallGravityMultiplier: 1.9
-  _pogoForce: 15
+  _pogoForce: 12
   _timeToAttack: 0.36
   _timeToThrow: 0.45
   _doubleJumpPS: {fileID: 8801326314313559065}

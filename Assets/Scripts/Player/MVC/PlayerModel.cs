@@ -4,12 +4,12 @@ using UnityEngine;
 public class PlayerModel
 {
     float _xAxis;
+    float _yAxis;
     bool _isJumping;
     bool _canDoubleJump;
     bool _dashing;
     bool _canDash = true;
     bool _poging;
-    bool _canPog;
     bool _attacking;
     bool _jumpFalling;
     bool _throwing;
@@ -38,6 +38,7 @@ public class PlayerModel
     float _timeToThrow;
     Spear _playerSpear;
     TrailRenderer _tr;
+    SphereCollider _sphereCollider;
     public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, GameManager.instance.GroundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
 
@@ -45,17 +46,18 @@ public class PlayerModel
     public Action<bool> jumpAction;
     public Action<bool> fallingAction;
     public Action dashAction;
-    public Action attackAction;
     public Action<bool> inGroundedAction;
     //public Action<bool, float> pogoAnimation;
-    //public static Action pogoAction;
-    //public Action pogoFeedback;
+    public Action pogoFeedback;
+    public static Action pogoAction;
     public Action throwAnimation;
     public Action<float> throwAction;
+
+    public Action<int> attackAction;
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
         float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown, float timeToThrow,
-        Spear playerSpear, TrailRenderer tr)
+        Spear playerSpear, TrailRenderer tr, SphereCollider sphereCollider)
     {
         _transform = transform;
         _rb = rb;
@@ -78,12 +80,13 @@ public class PlayerModel
         _timeToThrow = timeToThrow;
         _playerSpear = playerSpear;
         _tr = tr;
-
+        _sphereCollider = sphereCollider;
         //pogoAnimation += CanPog;
     }
-    public void OnUpdate(float xAxis)
+    public void OnUpdate(float xAxis, float yAxis)
     {
         _xAxis = xAxis;
+        _yAxis = yAxis;
         _bufferTimer -= Time.deltaTime;
 
         //setWeightAnimationLayer(Mathf.Abs(_rb.velocity.x) != 0 || !inGrounded || _rb.velocity.x != 0 && !inGrounded);
@@ -152,7 +155,7 @@ public class PlayerModel
     }
     void Jump()
     {
-        if (_dashing || _poging || _attacking) return;
+        if (_dashing || _attacking) return;
         _rb.AddForce(Vector3.up * (_jumpForce - _rb.velocity.y), ForceMode.Impulse);
         jumpAction(_canDoubleJump || _jumpFalling);
         _isJumping = true;
@@ -213,26 +216,13 @@ public class PlayerModel
             _canDash = true;
         }
     }
-    public void CanPog(bool pogoBool, float x)
+    public void Pogo(float yAxis)
     {
-        if (pogoBool)
-            _canPog = true;
-        else
-            _canPog = false;
-    }
-    public IEnumerator Pogo(float xAxis, float yAxis)
-    {
-        Vector3 pogoDirection = new Vector3(xAxis * _pogoForce + _rb.velocity.x / 2, yAxis * _pogoForce + _rb.velocity.y, 0);
-        if (_canPog)
-        {
-            _rb.AddForce(-pogoDirection, ForceMode.Impulse);
-            //pogoFeedback();
-            _poging = true;
-            _isJumping = false;
-            yield return new WaitUntil(() => _rb.velocity.y > 0);
-            yield return new WaitUntil(() => _rb.velocity.y < 0);
-            _poging = false;
-        }
+        Vector3 pogoDirection = new Vector3(0, yAxis * _pogoForce + _rb.velocity.y, 0);
+
+        _rb.AddForce(-pogoDirection, ForceMode.Impulse);
+         pogoFeedback();
+        _isJumping = false;
     }
     public void Falling(bool falling)
     {
@@ -247,8 +237,10 @@ public class PlayerModel
         if (!_attacking)
         {
             _attacking = true;
-            attackAction();
+            if (_yAxis < 0) _sphereCollider.enabled = true;
+            attackAction((int)_yAxis);
             yield return new WaitForSeconds(_timeToAttack);
+            _sphereCollider.enabled = false;
             _attacking = false;
         }
     }

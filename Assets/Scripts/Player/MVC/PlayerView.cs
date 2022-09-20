@@ -43,8 +43,9 @@ public class PlayerView
     {
         _anim.SetTrigger("Dash");
     }
-    public void AttackAnimation()
+    public void AttackAnimation(int yAxis)
     {
+        _anim.SetInteger("yAxis", yAxis);
         _anim.SetTrigger("Attack");
     }
     public void PogoAnimation(bool pogoBool, float xAxis)
