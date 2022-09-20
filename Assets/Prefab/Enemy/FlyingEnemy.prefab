@@ -235,7 +235,7 @@ MonoBehaviour:
   knockBackTime: 0.3
   canMove: 1
   maxHp: 0
-  target: {fileID: 0}
+  currentHp: 0
 --- !u!65 &3339141139785187533
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3339141139785187505}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
@@ -263,5 +263,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 120
   m_CollisionDetection: 0

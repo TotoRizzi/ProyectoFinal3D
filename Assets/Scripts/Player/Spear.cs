@@ -29,7 +29,7 @@ public class Spear : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        var damageable = collision.gameObject.GetComponent<Enemy>();
+        var damageable = collision.gameObject.GetComponent<IDamageable>();
 
         if (damageable != null)
         {

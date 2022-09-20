@@ -218,11 +218,13 @@ public class PlayerModel
     }
     public void Pogo(float yAxis)
     {
-        Vector3 pogoDirection = new Vector3(0, yAxis * _pogoForce + _rb.velocity.y, 0);
+        if (_rb != null)
+        {
+            Vector3 pogoDirection = new Vector3(0, yAxis * _pogoForce + _rb.velocity.y, 0);
+            _rb.AddForce(-pogoDirection, ForceMode.Impulse);
+            pogoFeedback();
 
-        _rb.AddForce(-pogoDirection, ForceMode.Impulse);
-         pogoFeedback();
-        _isJumping = false;
+        }
     }
     public void Falling(bool falling)
     {
@@ -237,7 +239,7 @@ public class PlayerModel
         if (!_attacking)
         {
             _attacking = true;
-            if (_yAxis < 0) _sphereCollider.enabled = true;
+            if (_yAxis < 0 && !inGrounded) _sphereCollider.enabled = true;
             attackAction((int)_yAxis);
             yield return new WaitForSeconds(_timeToAttack);
             _sphereCollider.enabled = false;

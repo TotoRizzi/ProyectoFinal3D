@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 1250461846751280252}
   - component: {fileID: 1250461846751280249}
   - component: {fileID: 1250461846751280248}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,12 +754,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:LeftArm'\n\tTransform
-    'mixamorig:LeftForeArm'\n\tTransform 'mixamorig:Neck'\n\tTransform 'mixamorig:LeftHand'\n\tTransform
-    'mixamorig:Head'\n\tTransform 'mixamorig:LeftArm'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform
-    'mixamorig:Neck'\n\tTransform 'mixamorig:LeftHand'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -825,7 +820,7 @@ MonoBehaviour:
   _timeToAttack: 0.36
   _timeToThrow: 0.45
   _doubleJumpPS: {fileID: 8801326314313559065}
-  _pogoPS: {fileID: 0}
+  _pogoPS: {fileID: 4702541799557844466}
   _spearPrefab: {fileID: 2638319551018427182, guid: fad5062c385efa94098617ed5455cc75, type: 3}
   _spawnSpear: {fileID: 643773571041744287}
 --- !u!114 &1250461846751280249
@@ -2954,6 +2949,11 @@ PrefabInstance:
 --- !u!4 &1997431081946559384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 784405411111379013, guid: fad5062c385efa94098617ed5455cc75, type: 3}
+  m_PrefabInstance: {fileID: 1250461847066219485}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4702541799557844466 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5771434075984092719, guid: fad5062c385efa94098617ed5455cc75, type: 3}
   m_PrefabInstance: {fileID: 1250461847066219485}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1250461847962324933

@@ -42,8 +42,9 @@ public class Player : Entity
     override protected void Start()
     {
         base.Start();
+        Rigidbody _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<Spear>();
-        PlayerModel _playerModel = new PlayerModel(transform, GetComponent<Rigidbody>(), _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
+        PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
             _timeToAttack, _timeToThrow, _playerSpear, GetComponentInChildren<TrailRenderer>(), GetComponentInChildren<Spear>().GetComponent<SphereCollider>());
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS);
@@ -96,6 +97,6 @@ public class Player : Entity
     {
         Vector3 distance = transform.position - _throwedSpear.hitPoint;
         distance.z = 0;
-        transform.position = new Vector3(_throwedSpear.hitPoint.x, _throwedSpear.hitPoint.y, 0) + (distance * .15f) - Vector3.up;
+        transform.position = new Vector3(_throwedSpear.hitPoint.x, _throwedSpear.hitPoint.y, transform.position.z) + (distance * .15f) - Vector3.up;
     }
 }
