@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    public Vector3 GetDistanceToPlayer(Transform transform)
+    public Vector3 GetDirectionToPlayer(Transform transform)
     {
         return _player.transform.position - transform.position;
     }

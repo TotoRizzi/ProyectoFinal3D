@@ -25,7 +25,7 @@ public class State_Idle : IState
 
     public void OnUpdate()
     {
-        if (GameManager.instance.GetDistanceToPlayer(_myEnemy.transform).magnitude < _myEnemy.viewRange && _myEnemy.CanSeePlayer())
-            _fsm.ChangeState(StateName.Chase);
+        if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude < _myEnemy.viewRange && _myEnemy.CanSeePlayer())
+            _fsm.ChangeState(StateName.FlyingChase);
     }
 }

@@ -43,17 +43,33 @@ public class Enemy : MonoBehaviour, IDamageable
         if (canMove) fsm.FixedUpdate();
 
     }
-    public void LookAtPlayer()
+    public void LookAtPlayer(bool imFlying)
     {
-        var dir = GameManager.instance.GetDistanceToPlayer(this.transform);
-        dir.z = 0;
-        transform.right = dir.normalized;
+        if (imFlying)
+        {
+            var dir = GameManager.instance.GetDirectionToPlayer(this.transform);
+            dir.z = 0;
+            transform.right = dir.normalized;
+        }
+        else
+        {
+            if(GameManager.instance.Player.transform.position.x > transform.position.x)
+            {
+                isFacingRight = true;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                isFacingRight = false;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
     }
     public bool CanSeePlayer()
     {
         return !Physics.Raycast(transform.position,
-                                  GameManager.instance.GetDistanceToPlayer(this.transform).normalized,
-                                 (GameManager.instance.GetDistanceToPlayer(this.transform) - transform.position).magnitude,
+                                  GameManager.instance.GetDirectionToPlayer(this.transform).normalized,
+                                 (GameManager.instance.GetDirectionToPlayer(this.transform) - transform.position).magnitude,
                                   GameManager.instance.WallLayer);
     }
     public void Flip()

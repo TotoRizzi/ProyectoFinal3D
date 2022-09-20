@@ -34,7 +34,6 @@ public class State_BlindWalk : IState
             ||
             Physics.Raycast(_wallAndGroundCheckPosition.position, _myEnemy.transform.right, 0.1f, GameManager.instance.GroundLayer))       
         {
-            Debug.Log("Flip");
             _myEnemy.Flip();
         }
     }
