@@ -11,6 +11,7 @@ public class EnemyDamageOnTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<IDamageable>().TakeDamage(_myEnemy.attackDmg);
+        var dmg = other.GetComponent<IDamageable>();
+        if (dmg != null) dmg.TakeDamage(_myEnemy.attackDmg);
     }
 }
