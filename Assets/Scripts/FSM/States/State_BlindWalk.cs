@@ -23,7 +23,7 @@ public class State_BlindWalk : IState
 
     public void OnFixedUpdate()
     {
-        _myEnemy.myMovement.Move();
+        _myEnemy.walkingMovement.Move();
     }
 
     public void OnUpdate()

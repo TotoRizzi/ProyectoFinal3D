@@ -18,7 +18,7 @@ public class State_GroundChase : IState
 
     public void OnEnter()
     {
-
+        _myEnemy.myAnim.Play("Chasing");
     }
 
     public void OnExit()
@@ -28,21 +28,19 @@ public class State_GroundChase : IState
 
     public void OnFixedUpdate()
     {
-
+        //Si enfrente no tiene ninguna pared o piso, caminar
+        if(Physics.Raycast(_wallAndGroundCheckPosition.position, -_myEnemy.transform.up, 2.0f, GameManager.instance.GroundLayer)) 
+            _myEnemy.chasingMovement.Move();
     }
 
     public void OnUpdate()
     {
-        Debug.Log("CHASING PLAYER");
         _myEnemy.LookAtPlayer(false);
+        Debug.Log("Chasing");
 
-        //Si enfrente no tiene ninguna pared o piso, caminar
-        if(Physics.Raycast(_wallAndGroundCheckPosition.position, -_myEnemy.transform.up, 2.0f, GameManager.instance.GroundLayer)) 
-            _myEnemy.myMovement.Move();
-
-       /* if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude < _myEnemy.attackRange)
+        if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude < _myEnemy.attackRange)
             _fsm.ChangeState(StateName.GroundAttack);
         else if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude > _myEnemy.viewRange || _myEnemy.CanSeePlayer() == false)
-            _fsm.ChangeState(StateName.Idle);*/
+            _fsm.ChangeState(StateName.GroundWalk);
     }
 }

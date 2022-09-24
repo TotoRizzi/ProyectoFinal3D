@@ -4,23 +4,43 @@ using UnityEngine;
 
 public class State_GroundWalk : IState
 {
+    StateMachine _fsm;
+    Enemy _myEnemy;
+    Transform _wallAndGroundCheckPosition;
+    public State_GroundWalk(Enemy enemy, StateMachine fsm, Transform wallAndGroundCheckPosition)
+    {
+        _myEnemy = enemy;
+        _fsm = fsm;
+        _wallAndGroundCheckPosition = wallAndGroundCheckPosition;
+    }
+
     public void OnEnter()
     {
-        throw new System.NotImplementedException();
+        _myEnemy.myAnim.Play("Walking");
     }
 
     public void OnExit()
     {
-        throw new System.NotImplementedException();
     }
 
     public void OnFixedUpdate()
     {
-        throw new System.NotImplementedException();
+        _myEnemy.walkingMovement.Move();
     }
 
     public void OnUpdate()
     {
-        throw new System.NotImplementedException();
+        if (Physics.Raycast(_wallAndGroundCheckPosition.position, _myEnemy.transform.right, 0.1f, GameManager.instance.WallLayer)
+            ||
+            !Physics.Raycast(_myEnemy.transform.position, -_myEnemy.transform.up, 2.0f, GameManager.instance.GroundLayer)
+            ||
+            Physics.Raycast(_wallAndGroundCheckPosition.position, _myEnemy.transform.right, 0.1f, GameManager.instance.GroundLayer))
+        {
+            _myEnemy.Flip();
+        }
+        Debug.Log("Walking");
+
+        if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude < _myEnemy.viewRange && _myEnemy.CanSeePlayer())
+            _fsm.ChangeState(StateName.GroundChase);
     }
 }

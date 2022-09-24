@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    //Ranges
+    [Header("Health")]
+    [SerializeField] private float maxHp;
+    [SerializeField] private float currentHp;
+
+    public float attackDmg;
+
+    [Header("Ranges Movement")]
     public float viewRange;
     public float attackRange;
 
-    //Movement
-    [SerializeField] protected float speed = 1;
+    [Header("Movement")]
     [SerializeField] private float knockBackTime = .3f;
     public bool canMove = true;
     private bool isFacingRight = true;
 
-    public IMovement myMovement;
+    public IMovement walkingMovement;
+    public IMovement chasingMovement;
 
     public StateMachine fsm;
     protected Rigidbody myRb;
-    protected Animator myAnim;
-
-    //Health
-    [SerializeField] private float maxHp;
-    [SerializeField] private float currentHp;
+    [HideInInspector] public Animator myAnim;
 
     private void Awake()
     {

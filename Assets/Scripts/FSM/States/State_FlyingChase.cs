@@ -21,7 +21,7 @@ public class State_FlyingChase : IState
 
     public void OnFixedUpdate()
     {
-        _myEnemy.myMovement.Move();
+        _myEnemy.walkingMovement.Move();
     }
 
     public void OnUpdate()
