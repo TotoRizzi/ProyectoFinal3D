@@ -20,4 +20,12 @@ public class CastleGuardEnemy : Enemy
         fsm.AddState(StateName.GroundAttack, new State_GroundAttack(this, fsm));
         fsm.ChangeState(StateName.GroundChase);
     }
+    public override void Die()
+    {
+        canMove = false;
+        myRb.isKinematic = true;
+        myCollider.enabled = false;
+
+        myAnim.Play("Die");
+    }
 }

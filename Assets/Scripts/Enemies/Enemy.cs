@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public StateMachine fsm;
     protected Rigidbody myRb;
+    [SerializeField] protected BoxCollider myCollider;
     [HideInInspector] public Animator myAnim;
 
     private void Awake()
@@ -89,7 +90,7 @@ public class Enemy : MonoBehaviour, IDamageable
         else KnockBack();
     }
 
-    public void Die()
+    public virtual void Die()
     {
         Destroy(gameObject);
     }

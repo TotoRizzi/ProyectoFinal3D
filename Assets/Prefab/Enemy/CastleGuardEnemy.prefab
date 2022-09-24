@@ -276,6 +276,7 @@ MonoBehaviour:
   attackRange: 2
   knockBackTime: 0.3
   canMove: 1
+  myCollider: {fileID: 7711503829190914367}
   myAnim: {fileID: 0}
   _wallAndGroundCheckPosition: {fileID: 7711503829083777437}
   _walkingSpeed: 2
