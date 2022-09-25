@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
@@ -17,11 +18,13 @@ public class Enemy : MonoBehaviour, IDamageable
     [Header("Movement")]
     [SerializeField] private float knockBackTime = .3f;
     public bool canMove = true;
+    protected bool isAlive = true;
     private bool isFacingRight = true;
 
     public IMovement walkingMovement;
     public IMovement chasingMovement;
 
+    protected Action EnemyOnUpdate;
     public StateMachine fsm;
     protected Rigidbody myRb;
     [SerializeField] protected BoxCollider myCollider;
@@ -39,11 +42,11 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     public virtual void Update()
     {
-        if (canMove) fsm.Update();
+        if (canMove && isAlive) fsm.Update();
     }
     public virtual void FixedUpdate()
     {
-        if (canMove) fsm.FixedUpdate();
+        if (canMove && isAlive) fsm.FixedUpdate();
 
     }
     public void LookAtPlayer(bool imFlying)

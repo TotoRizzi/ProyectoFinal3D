@@ -22,7 +22,7 @@ public class CastleGuardEnemy : Enemy
     }
     public override void Die()
     {
-        canMove = false;
+        isAlive = false;
         myRb.isKinematic = true;
         myCollider.enabled = false;
 
