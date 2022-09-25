@@ -8,12 +8,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Player _player;
 
-    [SerializeField] LayerMask _wallLayer, _groundLayer;
+    [SerializeField] LayerMask _wallLayer, _groundLayer, _playerLayer;
     #region Getters
 
     public Player Player { get { return _player; } }
     public LayerMask WallLayer { get { return _wallLayer; } }
     public LayerMask GroundLayer { get { return _groundLayer; } }
+    public LayerMask PlayerLayer { get { return _playerLayer; } }
+
 
     #endregion
 
