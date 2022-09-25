@@ -13,7 +13,7 @@ public class State_GroundAttack : IState
     }
     public void OnEnter()
     {
-        _myEnemy.myAnim.Play("Attack");
+        _myEnemy.myAnim.Play("Attack " + Random.Range(1, 3).ToString());
     }
 
     public void OnExit()
