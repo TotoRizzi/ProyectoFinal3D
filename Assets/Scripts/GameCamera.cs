@@ -10,7 +10,7 @@ public class GameCamera : MonoBehaviour
 
     private void Start()
     {
-        _target = GameObject.Find("Player").transform;
+        _target = GameObject.Find("CameraLookAt").transform;
     }
     private void LateUpdate()
     {

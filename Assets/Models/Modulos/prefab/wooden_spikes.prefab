@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4449551195514548432}
   - component: {fileID: 3873517283445371614}
   - component: {fileID: 5664421738846753313}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: wooden_spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d57749062be43d45bcf50113cd06954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 0
+  dmg: 1
 --- !u!65 &5664421738846753313
 BoxCollider:
   m_ObjectHideFlags: 0
