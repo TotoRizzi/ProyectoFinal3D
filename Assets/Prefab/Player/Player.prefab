@@ -807,7 +807,7 @@ MonoBehaviour:
   _decceleration: 12
   _groundFriction: 0.1
   _velPower: 1.05
-  _jumpForce: 12
+  _jumpForce: 15
   _jumpCutMultiplier: 0.1
   _jumpCoyotaTime: 0.1
   _jumpBufferLength: 0.1

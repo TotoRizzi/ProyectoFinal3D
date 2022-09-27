@@ -39,16 +39,18 @@ public class Player : Entity
     IController _myController;
     PlayerView _playerView;
     Spear _playerSpear, _throwedSpear;
+    InputManager _inputManager;
     override protected void Start()
     {
         base.Start();
+        _inputManager = FindObjectOfType<InputManager>();
         Rigidbody _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<Spear>();
         PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
             _timeToAttack, _timeToThrow, _playerSpear, GetComponentInChildren<TrailRenderer>(), GetComponentInChildren<Spear>().GetComponent<SphereCollider>());
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS);
-        _myController = new PlayerController(_playerModel, this);
+        _myController = new PlayerController(_playerModel, this, _inputManager);
 
         _playerModel.runAction += _playerView.RunAnimation;
 

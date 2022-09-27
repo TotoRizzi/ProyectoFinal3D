@@ -4,6 +4,7 @@ public class PausedMenu : Menu
     public static bool _gameIsPaused;
 
     [SerializeField] GameObject _pauseGM;
+    [SerializeField] GameObject _controlsMenu;
     void Start()
     {
         _pauseGM.SetActive(false);
@@ -12,6 +13,7 @@ public class PausedMenu : Menu
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            _controlsMenu.SetActive(false);
             if (_gameIsPaused)
                 ResumeGame();
             else

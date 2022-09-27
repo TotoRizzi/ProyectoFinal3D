@@ -115,11 +115,11 @@ public class PlayerModel
         Run();
 
         #region JumpChecks
-        if (_rb.velocity.y < 0)
-        {
+        if (_isJumping && _rb.velocity.y < 0)
             _isJumping = false;
+
+        if (_poging && _rb.velocity.y < 0)
             _poging = false;
-        }
         #endregion
 
         if (!_canDash && _rb.velocity.magnitude > _dashForce)

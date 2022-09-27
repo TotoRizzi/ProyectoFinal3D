@@ -3,37 +3,44 @@ public class PlayerController : IController
 {
     PlayerModel _playerModel;
     Player _player;
+    InputManager _inputManager;
 
     float _xAxis;
     float _yAxis;
-
-    public PlayerController(PlayerModel playerModel, Player player)
+    float f;
+    public PlayerController(PlayerModel playerModel, Player player, InputManager inputManager)
     {
         _playerModel = playerModel;
         _player = player;
+        _inputManager = inputManager;
 
         PlayerModel.pogoAction += Pogo;
     }
     public void OnUpdate()
     {
         if (PausedMenu._gameIsPaused) return;
-
-        _xAxis = Input.GetAxisRaw("Horizontal");
-        _yAxis = Input.GetAxisRaw("Vertical");
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            f = Mathf.Clamp(f, -1, 1);
+        }
+        //_xAxis = Input.GetAxisRaw("Horizontal");
+        //_yAxis = Input.GetAxisRaw("Vertical");
+        _xAxis = _inputManager.GetAxisRaw("Horizontal");
+        _yAxis = _inputManager.GetAxisRaw("Vertical");
 
         _playerModel.OnUpdate(_xAxis, _yAxis);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_inputManager.GetButtonDown("Jump"))
             _playerModel.OnJumpDown();
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (_inputManager.GetButtonDown("Jump"))
             _playerModel.OnJumpUp();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)) _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
+        if (_inputManager.GetButtonDown("Dash")) _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
 
-        if (Input.GetKeyDown(KeyCode.J)) _player.StartCoroutine(_playerModel.Attack());
+        if (_inputManager.GetButtonDown("Attack")) _player.StartCoroutine(_playerModel.Attack());
 
-        if (Input.GetKeyDown(KeyCode.K)) _player.StartCoroutine(_playerModel.Throw());
+        if (_inputManager.GetButtonDown("Throw")) _player.StartCoroutine(_playerModel.Throw());
 
         //_playerModel.pogoAnimation(Input.GetMouseButton(1) && !_playerModel.inGrounded && _yAxis < 0, _xAxis);
     }
