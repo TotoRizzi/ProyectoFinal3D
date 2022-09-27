@@ -5,12 +5,14 @@ public class PlayerView
     Animator _anim;
     Material _playerMaterial;
     ParticleSystem _doubleJumpPS, _pogoPS;
+    Color _initialColor;
     public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS)
     {
         _anim = anim;
         _playerMaterial = playerMaterial;
         _doubleJumpPS = doubleJumpPS;
         _pogoPS = pogoPS;
+        _initialColor = _playerMaterial.color;
     }
     public void SetWeight(bool xRb)
     {
@@ -63,11 +65,9 @@ public class PlayerView
     }
     public IEnumerator TakeDamageFeedback()
     {
-        Color initialColor = _playerMaterial.color;
-
         _playerMaterial.color = Color.red;
         yield return new WaitForSeconds(.1f);
-        _playerMaterial.color = initialColor;
+        _playerMaterial.color = _initialColor;
         yield return null;
     }
 }

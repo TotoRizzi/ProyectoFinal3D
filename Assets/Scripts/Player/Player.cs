@@ -24,7 +24,7 @@ public class Player : Entity
     [SerializeField] float _fallGravityMultiplier = 1.9f;
 
     [Header("Pogo Variables")]
-    [SerializeField] float _pogoForce = 12;
+    [SerializeField] float _pogoForce = 15;
 
     [Header("Attack Variables")]
     [SerializeField] float _timeToAttack = .36f;

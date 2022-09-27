@@ -115,14 +115,17 @@ public class PlayerModel
         Run();
 
         #region JumpChecks
-        if (_isJumping && _rb.velocity.y < 0)
+        if (_rb.velocity.y < 0)
+        {
             _isJumping = false;
+            _poging = false;
+        }
         #endregion
 
         if (!_canDash && _rb.velocity.magnitude > _dashForce)
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _dashForce);
 
-        if (_poging && _rb.velocity.magnitude > _pogoForce)
+        if (_poging && _rb.velocity.y > _pogoForce)
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _pogoForce);
     }
     void GroundFriction()
@@ -136,7 +139,7 @@ public class PlayerModel
     }
     public void Run()
     {
-        if (_poging || _dashing) return;
+        if (_dashing) return;
 
         if (inGrounded)
             runAction(_xAxis);
@@ -220,10 +223,11 @@ public class PlayerModel
     {
         if (_rb != null)
         {
-            Vector3 pogoDirection = new Vector3(0, yAxis * _pogoForce + _rb.velocity.y, 0);
-            _rb.AddForce(-pogoDirection, ForceMode.Impulse);
+            _rb.velocity = Vector3.zero;
+            Vector3 pogoDirection = new Vector3(0, yAxis - Mathf.Abs(_rb.velocity.y), 0);
+            _rb.AddForce(-pogoDirection.normalized * _pogoForce, ForceMode.Impulse);
+            _poging = true;
             pogoFeedback();
-
         }
     }
     public void Falling(bool falling)
