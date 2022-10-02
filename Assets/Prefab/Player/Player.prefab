@@ -808,16 +808,16 @@ MonoBehaviour:
   _groundFriction: 0.1
   _velPower: 1.05
   _jumpForce: 15
-  _jumpCutMultiplier: 0.1
+  _jumpCutMultiplier: 0.08
   _jumpCoyotaTime: 0.1
   _jumpBufferLength: 0.1
   _dashForce: 20
   _dashTime: 0.15
   _dashCooldown: 1
-  _gravityScale: 1.4
+  _gravityScale: 3
   _fallGravityMultiplier: 1.9
   _pogoForce: 15
-  _timeToAttack: 0.36
+  _attackRate: 2.9
   _timeToThrow: 0.45
   _doubleJumpPS: {fileID: 8801326314313559065}
   _pogoPS: {fileID: 4702541799557844466}

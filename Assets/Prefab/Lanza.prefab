@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 784405411111379013}
   - component: {fileID: 1932483124217965598}
   - component: {fileID: 2638319551018427182}
-  - component: {fileID: 6007950219842974852}
+  - component: {fileID: 433831806851101704}
   m_Layer: 0
   m_Name: Lanza
   m_TagString: Untagged
@@ -65,7 +65,8 @@ MonoBehaviour:
   _speed: 25
   _timeToDestroy: 3
   _hitSpearPS: {fileID: 7236006687394329034, guid: 2dc7484421cd0c34d88ca395c9a31f5b, type: 3}
---- !u!135 &6007950219842974852
+  _hitSpear: {fileID: 8828204470269799929}
+--- !u!135 &433831806851101704
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,8 +77,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 2.4}
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 2.5}
 --- !u!1001 &1091635972446770293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,6 +155,11 @@ PrefabInstance:
 --- !u!4 &625151934978274206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e7a29e4319ab1954fa71ad051663163a, type: 3}
+  m_PrefabInstance: {fileID: 1091635972446770293}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8828204470269799929 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -746946545533306484, guid: e7a29e4319ab1954fa71ad051663163a, type: 3}
   m_PrefabInstance: {fileID: 1091635972446770293}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3779422821673906149

@@ -7,6 +7,7 @@ public class Spear : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] float _timeToDestroy;
     [SerializeField] ParticleSystem _hitSpearPS;
+    [SerializeField] Transform _hitSpear;
     public Vector3 hitPoint { get; private set; }
 
     Vector3 _dir;
@@ -43,6 +44,11 @@ public class Spear : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(_hitSpear.position, .2f);
+    }
     void PlayHitPS()
     {
         var hitPS = Instantiate(_hitSpearPS);
@@ -50,7 +56,6 @@ public class Spear : MonoBehaviour
         hitPS.Play();
         Destroy(hitPS.gameObject, hitPS.main.duration);
     }
-
     #region BUILDER
     public Spear SetPosition(Transform t)
     {

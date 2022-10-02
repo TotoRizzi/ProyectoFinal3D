@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
         _buttonKeys["Up"] = KeyCode.W;
         _buttonKeys["Down"] = KeyCode.S;
         _buttonKeys["Jump"] = KeyCode.Space;
-        _buttonKeys["Dash"] = KeyCode.LeftShift;
+        //_buttonKeys["Dash"] = KeyCode.LeftShift;
         _buttonKeys["Attack"] = KeyCode.J;
         _buttonKeys["Throw"] = KeyCode.K;
     }
@@ -23,6 +23,12 @@ public class InputManager : MonoBehaviour
         if (!_buttonKeys.ContainsKey(buttonName)) return false;
 
         return Input.GetKeyDown(_buttonKeys[buttonName]);
+    }
+    public bool GetButtonUp(string buttonName)
+    {
+        if (!_buttonKeys.ContainsKey(buttonName)) return false;
+
+        return Input.GetKeyUp(_buttonKeys[buttonName]);
     }
     public bool GetButton(string buttonName)
     {

@@ -50,11 +50,6 @@ public class PlayerView
         _anim.SetInteger("yAxis", yAxis);
         _anim.SetTrigger("Attack");
     }
-    public void PogoAnimation(bool pogoBool, float xAxis)
-    {
-        _anim.SetBool("Poging", pogoBool);
-        _anim.SetFloat("xPog", Mathf.Abs(xAxis));
-    }
     public void ThrowAnimation()
     {
         _anim.SetTrigger("Throw");

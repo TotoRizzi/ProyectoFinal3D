@@ -13,8 +13,10 @@ public class PlayerModel
     bool _attacking;
     bool _jumpFalling;
     bool _throwing;
+    public bool onJumpUp;
     float _coyotaTimer;
     float _bufferTimer;
+    float _timeToAttack;
 
     //Variables Constructor
     Transform _transform;
@@ -34,11 +36,10 @@ public class PlayerModel
     float _gravityScale;
     float _fallGravityMultiplier;
     float _pogoForce;
-    float _timeToAttack;
+    float _attackRate;
     float _timeToThrow;
     Spear _playerSpear;
     TrailRenderer _tr;
-    SphereCollider _sphereCollider;
     public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, GameManager.instance.GroundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
 
@@ -47,7 +48,6 @@ public class PlayerModel
     public Action<bool> fallingAction;
     public Action dashAction;
     public Action<bool> inGroundedAction;
-    //public Action<bool, float> pogoAnimation;
     public Action pogoFeedback;
     public static Action pogoAction;
     public Action throwAnimation;
@@ -56,8 +56,8 @@ public class PlayerModel
     public Action<int> attackAction;
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
-        float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackCooldown, float timeToThrow,
-        Spear playerSpear, TrailRenderer tr, SphereCollider sphereCollider)
+        float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackRate, float timeToThrow,
+        Spear playerSpear, TrailRenderer tr)
     {
         _transform = transform;
         _rb = rb;
@@ -76,20 +76,16 @@ public class PlayerModel
         _gravityScale = gravityScale;
         _fallGravityMultiplier = fallGravityMultiplier;
         _pogoForce = pogoForce;
-        _timeToAttack = attackCooldown;
+        _attackRate = attackRate;
         _timeToThrow = timeToThrow;
         _playerSpear = playerSpear;
         _tr = tr;
-        _sphereCollider = sphereCollider;
-        //pogoAnimation += CanPog;
     }
     public void OnUpdate(float xAxis, float yAxis)
     {
         _xAxis = xAxis;
         _yAxis = yAxis;
         _bufferTimer -= Time.deltaTime;
-
-        //setWeightAnimationLayer(Mathf.Abs(_rb.velocity.x) != 0 || !inGrounded || _rb.velocity.x != 0 && !inGrounded);
 
         if (inGrounded)
         {
@@ -101,19 +97,6 @@ public class PlayerModel
         else
             _coyotaTimer -= Time.deltaTime;
 
-        Falling(!inGrounded);
-        fallingAction(_rb.velocity.y < 0 && !inGrounded);
-        inGroundedAction(inGrounded);
-    }
-    public void OnFixedUpdate()
-    {
-        //Flipeo el sprite del player teniendo en cuenta la posicion del mouse
-        if (_xAxis != 0)
-            _transform.eulerAngles = Vector3.Lerp(Quaternion.Euler(0, 90, 0).eulerAngles, Quaternion.Euler(0, -90, 0).eulerAngles, 0) * _xAxis;
-
-        GroundFriction();
-        Run();
-
         #region JumpChecks
         if (_isJumping && _rb.velocity.y < 0)
             _isJumping = false;
@@ -122,11 +105,32 @@ public class PlayerModel
             _poging = false;
         #endregion
 
+        fallingAction(_rb.velocity.y < 0 && !inGrounded);
+        inGroundedAction(inGrounded);
+    }
+    public void OnFixedUpdate()
+    {
+        if (_xAxis != 0)
+            _transform.eulerAngles = Vector3.Lerp(Quaternion.Euler(0, 90, 0).eulerAngles, Quaternion.Euler(0, -90, 0).eulerAngles, 0) * _xAxis;
+
+        GroundFriction();
+        Run();
+        Falling(!inGrounded);
+
         if (!_canDash && _rb.velocity.magnitude > _dashForce)
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _dashForce);
 
         if (_poging && _rb.velocity.y > _pogoForce)
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _pogoForce);
+
+        if (_canJump)
+        {
+            Jump();
+            _bufferTimer = 0;
+        }
+
+        if (onJumpUp)
+            OnJumpUp();
     }
     void GroundFriction()
     {
@@ -166,39 +170,36 @@ public class PlayerModel
     }
     public void OnJumpUp()
     {
-        if (_rb.velocity.y < 0) return;
+        if (_rb.velocity.y < 0 || _poging) return;
         _rb.AddForce(Vector3.down * _rb.velocity.y * (1 - _jumpCutMultiplier), ForceMode.Impulse);
     }
     public void OnJumpDown()
     {
         _bufferTimer = _jumpBufferLength;
-        if (!_canDoubleJump)
-        {
-            if (inGrounded)                     //Primer salto desde el suelo
-            {
-                _canDoubleJump = true;
-                _jumpFalling = false;
-            }
-            else if (_coyotaTimer > 0)          //Primer salto con coyota time
-                _canDoubleJump = true;
-            else if (_jumpFalling)              //Salto sin estar en el suelo
-            {
-                _coyotaTimer = _jumpCoyotaTime;
-                _jumpFalling = false;
-            }
-        }
-        else                                    //Doble salto
-        {
-            _coyotaTimer = _jumpCoyotaTime;
-            _canDoubleJump = false;
-            _jumpFalling = false;
-        }
+        onJumpUp = false;
 
-        if (_canJump)
-        {
-            Jump();
-            _bufferTimer = 0;
-        }
+        //Para el doble salto
+        //if (!_canDoubleJump)
+        //{
+        //    if (inGrounded)                     //Primer salto desde el suelo
+        //    {
+        //        _canDoubleJump = true;
+        //        _jumpFalling = false;
+        //    }
+        //    else if (_coyotaTimer > 0)          //Primer salto con coyota time
+        //        _canDoubleJump = true;
+        //    else if (_jumpFalling)              //Salto sin estar en el suelo
+        //    {
+        //        _coyotaTimer = _jumpCoyotaTime;
+        //        _jumpFalling = false;
+        //    }
+        //}
+        //else                                    //Doble salto
+        //{
+        //    _coyotaTimer = _jumpCoyotaTime;
+        //    _canDoubleJump = false;
+        //    _jumpFalling = false;
+        //}
     }
     public IEnumerator Dash(float xAxis, float yAxis)
     {
@@ -221,11 +222,11 @@ public class PlayerModel
     }
     public void Pogo(float yAxis)
     {
+        Vector3 pogoDirection = new Vector3(0, _yAxis, 0);
         if (_rb != null)
         {
             _rb.velocity = Vector3.zero;
-            Vector3 pogoDirection = new Vector3(0, yAxis - Mathf.Abs(_rb.velocity.y), 0);
-            _rb.AddForce(-pogoDirection.normalized * _pogoForce, ForceMode.Impulse);
+            _rb.AddForce(-pogoDirection * (_pogoForce - _rb.velocity.y), ForceMode.Impulse);
             _poging = true;
             pogoFeedback();
         }
@@ -238,17 +239,15 @@ public class PlayerModel
             _rb.AddForce(Vector3.down * _gravityScale);
     }
 
-    public IEnumerator Attack()
+    public void Attack(float yAxis)
     {
-        if (!_attacking)
+        if (Time.time >= _timeToAttack)
         {
             _attacking = true;
-            if (_yAxis < 0 && !inGrounded) _sphereCollider.enabled = true;
-            attackAction((int)_yAxis);
-            yield return new WaitForSeconds(_timeToAttack);
-            _sphereCollider.enabled = false;
-            _attacking = false;
+            _timeToAttack = Time.time + 1 / _attackRate;
+            attackAction((int)yAxis);
         }
+        _attacking = false;
     }
     public IEnumerator Throw()
     {

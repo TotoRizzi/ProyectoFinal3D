@@ -38,7 +38,7 @@ public class State_GroundWalk : IState
         {
             _myEnemy.Flip();
         }
-        Debug.Log("Walking");
+        //Debug.Log("Walking");
 
         if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude < _myEnemy.viewRange && _myEnemy.CanSeePlayer())
             _fsm.ChangeState(StateName.GroundChase);

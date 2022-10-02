@@ -10223,6 +10223,9 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 512
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!4 &1161326565
 Transform:
   m_ObjectHideFlags: 0
@@ -16440,10 +16443,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1250461846751280252, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}
-      propertyPath: _jumpForce
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 1643867816806108604, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -16495,6 +16494,10 @@ PrefabInstance:
     - target: {fileID: 2133547051510437638, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625229550783109062, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}

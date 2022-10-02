@@ -27,7 +27,7 @@ public class State_GroundAttack : IState
     public void OnUpdate()
     {
         
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
         if (_myEnemy.myAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
             _fsm.ChangeState(StateName.GroundChase);
         

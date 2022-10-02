@@ -37,7 +37,7 @@ public class State_GroundChase : IState
     public void OnUpdate()
     {
         _myEnemy.LookAtPlayer(false);
-        Debug.Log("Chasing");
+        //Debug.Log("Chasing");
 
         if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude < _myEnemy.attackRange || Physics.SphereCast(_myEnemy.transform.position, _sphereCastRadius, Vector3.up, out RaycastHit hitIndo, _sphereCastLengh, GameManager.instance.PlayerLayer))
             _fsm.ChangeState(StateName.GroundAttack);

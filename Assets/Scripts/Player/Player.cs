@@ -27,7 +27,7 @@ public class Player : Entity
     [SerializeField] float _pogoForce = 15;
 
     [Header("Attack Variables")]
-    [SerializeField] float _timeToAttack = .36f;
+    [SerializeField] float _attackRate = .36f;
     [SerializeField] float _timeToThrow = .45f;
 
     [Header("Inspector Variables")]
@@ -48,7 +48,7 @@ public class Player : Entity
         _playerSpear = GetComponentInChildren<Spear>();
         PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
-            _timeToAttack, _timeToThrow, _playerSpear, GetComponentInChildren<TrailRenderer>(), GetComponentInChildren<Spear>().GetComponent<SphereCollider>());
+            _attackRate, _timeToThrow, _playerSpear, GetComponentInChildren<TrailRenderer>());
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS);
         _myController = new PlayerController(_playerModel, this, _inputManager);
 
@@ -67,8 +67,6 @@ public class Player : Entity
         _playerModel.throwAnimation += _playerView.ThrowAnimation;
 
         _playerModel.throwAction += InstantiateSpear;
-
-        //_playerModel.pogoAnimation += _playerView.PogoAnimation;
 
         _playerModel.pogoFeedback += _playerView.PogoFeedback;
     }

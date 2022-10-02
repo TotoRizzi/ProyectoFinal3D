@@ -8,6 +8,7 @@ public class PlayerController : IController
     float _xAxis;
     float _yAxis;
     float f;
+    bool _startDash;
     public PlayerController(PlayerModel playerModel, Player player, InputManager inputManager)
     {
         _playerModel = playerModel;
@@ -33,20 +34,22 @@ public class PlayerController : IController
         if (_inputManager.GetButtonDown("Jump"))
             _playerModel.OnJumpDown();
 
-        if (_inputManager.GetButtonDown("Jump"))
-            _playerModel.OnJumpUp();
+        if (_inputManager.GetButtonUp("Jump"))
+            _playerModel.onJumpUp = true;
 
-        if (_inputManager.GetButtonDown("Dash")) _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
+        //if (_inputManager.GetButtonDown("Dash")) _startDash = true;
+        //if (_inputManager.GetButtonUp("Dash")) _startDash = false;
 
-        if (_inputManager.GetButtonDown("Attack")) _player.StartCoroutine(_playerModel.Attack());
+        if (_inputManager.GetButtonDown("Attack")) _playerModel.Attack(_yAxis);
 
         if (_inputManager.GetButtonDown("Throw")) _player.StartCoroutine(_playerModel.Throw());
-
-        //_playerModel.pogoAnimation(Input.GetMouseButton(1) && !_playerModel.inGrounded && _yAxis < 0, _xAxis);
     }
     public void OnFixedUpdate()
     {
         _playerModel.OnFixedUpdate();
+
+        if(_startDash)
+            _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
     }
     void Pogo()
     {
