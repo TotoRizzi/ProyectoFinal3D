@@ -819,10 +819,17 @@ MonoBehaviour:
   _pogoForce: 15
   _attackRate: 2.9
   _timeToThrow: 0.45
+  _boomerangSpearDistance: 9.7
+  _maxStamina: 10
+  _meleeAttackStamina: 1
+  _throwSpearStamina: 2
+  _jumpStamina: 2
+  _timeToAddStamina: 2
   _doubleJumpPS: {fileID: 8801326314313559065}
   _pogoPS: {fileID: 4702541799557844466}
-  _spearPrefab: {fileID: 2638319551018427182, guid: fad5062c385efa94098617ed5455cc75, type: 3}
+  _boomerangSpearPrefab: {fileID: -1595099422555029602, guid: d4deb17f46db83549b8591c7eeb7195d, type: 3}
   _spawnSpear: {fileID: 643773571041744287}
+  _staminaFill: {fileID: 0}
 --- !u!114 &1250461846751280249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2942,7 +2949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9121115012571633693, guid: fad5062c385efa94098617ed5455cc75, type: 3}
       propertyPath: m_Name
-      value: Lanza
+      value: PlayerSpear
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fad5062c385efa94098617ed5455cc75, type: 3}

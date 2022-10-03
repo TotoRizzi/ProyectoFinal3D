@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine;
 public class PlayerModel
 {
-    float _xAxis;
-    float _yAxis;
+    float _currentStamina;
+    float _staminaTimer;
     bool _isJumping;
     bool _canDoubleJump;
     bool _dashing;
@@ -38,7 +38,12 @@ public class PlayerModel
     float _pogoForce;
     float _attackRate;
     float _timeToThrow;
-    Spear _playerSpear;
+    float _maxStamina;
+    float _attackStamina;
+    float _throwSpearStamina;
+    float _jumpStamina;
+    float _timeToAddStamina;
+    public PlayerSpear playerSpear;
     TrailRenderer _tr;
     public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, GameManager.instance.GroundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
@@ -49,15 +54,14 @@ public class PlayerModel
     public Action dashAction;
     public Action<bool> inGroundedAction;
     public Action pogoFeedback;
-    public static Action pogoAction;
     public Action throwAnimation;
     public Action<float> throwAction;
-
     public Action<int> attackAction;
+    public Action<float> updateStamina;
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
         float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackRate, float timeToThrow,
-        Spear playerSpear, TrailRenderer tr)
+        float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, PlayerSpear playerSpear, TrailRenderer tr)
     {
         _transform = transform;
         _rb = rb;
@@ -78,14 +82,20 @@ public class PlayerModel
         _pogoForce = pogoForce;
         _attackRate = attackRate;
         _timeToThrow = timeToThrow;
-        _playerSpear = playerSpear;
+        _maxStamina = maxStamina;
+        _attackStamina = attackStamina;
+        _throwSpearStamina = throwSpearStamina;
+        _jumpStamina = jumpStamina;
+        _timeToAddStamina = timeToAddStamina;
+        this.playerSpear = playerSpear;
         _tr = tr;
+
+        _currentStamina = _maxStamina;
     }
-    public void OnUpdate(float xAxis, float yAxis)
+    public void OnUpdate()
     {
-        _xAxis = xAxis;
-        _yAxis = yAxis;
         _bufferTimer -= Time.deltaTime;
+        _staminaTimer -= Time.deltaTime;
 
         if (inGrounded)
         {
@@ -107,14 +117,16 @@ public class PlayerModel
 
         fallingAction(_rb.velocity.y < 0 && !inGrounded);
         inGroundedAction(inGrounded);
-    }
-    public void OnFixedUpdate()
-    {
-        if (_xAxis != 0)
-            _transform.eulerAngles = Vector3.Lerp(Quaternion.Euler(0, 90, 0).eulerAngles, Quaternion.Euler(0, -90, 0).eulerAngles, 0) * _xAxis;
 
-        GroundFriction();
-        Run();
+        AddStamina();
+    }
+    public void OnFixedUpdate(float xAxis)
+    {
+        if (xAxis != 0)
+            _transform.eulerAngles = Vector3.Lerp(Quaternion.Euler(0, 90, 0).eulerAngles, Quaternion.Euler(0, -90, 0).eulerAngles, 0) * xAxis;
+
+        GroundFriction(xAxis);
+        Run(xAxis);
         Falling(!inGrounded);
 
         if (!_canDash && _rb.velocity.magnitude > _dashForce)
@@ -132,23 +144,23 @@ public class PlayerModel
         if (onJumpUp)
             OnJumpUp();
     }
-    void GroundFriction()
+    void GroundFriction(float xAxis)
     {
-        if (Mathf.Abs(_xAxis) < 0.01f)
+        if (Mathf.Abs(xAxis) < 0.01f)
         {
             float amount = Mathf.Min(Mathf.Abs(_rb.velocity.x), Mathf.Abs(_groundFriction));
             amount *= Mathf.Sign(_rb.velocity.x);
             _rb.AddForce(Vector3.right * -amount, ForceMode.Impulse);
         }
     }
-    public void Run()
+    public void Run(float xAxis)
     {
         if (_dashing) return;
 
         if (inGrounded)
-            runAction(_xAxis);
+            runAction(xAxis);
 
-        float targetSpeed = _xAxis * _movementSpeed;
+        float targetSpeed = xAxis * _movementSpeed;
 
         float speedDif = targetSpeed - _rb.velocity.x;
 
@@ -162,9 +174,10 @@ public class PlayerModel
     }
     void Jump()
     {
-        if (_dashing || _attacking) return;
+        if (_dashing || _currentStamina < _jumpStamina) return;
         _rb.AddForce(Vector3.up * (_jumpForce - _rb.velocity.y), ForceMode.Impulse);
         jumpAction(_canDoubleJump || _jumpFalling);
+        SubstactStamina(_jumpStamina);
         _isJumping = true;
         _poging = false;
     }
@@ -222,7 +235,7 @@ public class PlayerModel
     }
     public void Pogo(float yAxis)
     {
-        Vector3 pogoDirection = new Vector3(0, _yAxis, 0);
+        Vector3 pogoDirection = new Vector3(0, yAxis, 0);
         if (_rb != null)
         {
             _rb.velocity = Vector3.zero;
@@ -241,23 +254,47 @@ public class PlayerModel
 
     public void Attack(float yAxis)
     {
+        if (_currentStamina < _attackStamina) return;
+
         if (Time.time >= _timeToAttack)
         {
             _attacking = true;
             _timeToAttack = Time.time + 1 / _attackRate;
             attackAction((int)yAxis);
+            SubstactStamina(_attackStamina);
         }
         _attacking = false;
     }
     public IEnumerator Throw()
     {
+        if (_currentStamina < _throwSpearStamina) yield return null;
+
         if (!_throwing)
         {
             _throwing = true;
             throwAnimation();
+            SubstactStamina(_throwSpearStamina);
             yield return new WaitForSeconds(_timeToThrow);
-            _playerSpear.gameObject.SetActive(true);
+            playerSpear.gameObject.SetActive(true);
             _throwing = false;
         }
     }
+    #region Stamina
+    void AddStamina()
+    {
+        _staminaTimer -= Time.deltaTime;
+
+        if (_staminaTimer <= 0 && _currentStamina < _maxStamina)
+        {
+            _currentStamina += Time.deltaTime;
+            updateStamina(_currentStamina / _maxStamina);
+        }
+    }
+    void SubstactStamina(float amount)
+    {
+        _staminaTimer = _timeToAddStamina;
+        _currentStamina -= amount;
+        updateStamina(_currentStamina / _maxStamina);
+    }
+    #endregion
 }

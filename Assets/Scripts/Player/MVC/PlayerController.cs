@@ -15,7 +15,7 @@ public class PlayerController : IController
         _player = player;
         _inputManager = inputManager;
 
-        PlayerModel.pogoAction += Pogo;
+        _playerModel.playerSpear.pogoAction += () => _playerModel.Pogo(_yAxis);
     }
     public void OnUpdate()
     {
@@ -29,7 +29,7 @@ public class PlayerController : IController
         _xAxis = _inputManager.GetAxisRaw("Horizontal");
         _yAxis = _inputManager.GetAxisRaw("Vertical");
 
-        _playerModel.OnUpdate(_xAxis, _yAxis);
+        _playerModel.OnUpdate();
 
         if (_inputManager.GetButtonDown("Jump"))
             _playerModel.OnJumpDown();
@@ -46,13 +46,9 @@ public class PlayerController : IController
     }
     public void OnFixedUpdate()
     {
-        _playerModel.OnFixedUpdate();
+        _playerModel.OnFixedUpdate(_xAxis);
 
         if(_startDash)
             _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
-    }
-    void Pogo()
-    {
-        _playerModel.Pogo(_yAxis);
     }
 }

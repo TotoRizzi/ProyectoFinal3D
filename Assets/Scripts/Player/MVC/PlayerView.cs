@@ -1,28 +1,24 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 public class PlayerView
 {
     Animator _anim;
     Material _playerMaterial;
     ParticleSystem _doubleJumpPS, _pogoPS;
     Color _initialColor;
-    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS)
+    Image _staminaFill;
+    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS, Image staminaFill)
     {
         _anim = anim;
         _playerMaterial = playerMaterial;
         _doubleJumpPS = doubleJumpPS;
         _pogoPS = pogoPS;
         _initialColor = _playerMaterial.color;
+        _staminaFill = staminaFill;
     }
-    public void SetWeight(bool xRb)
-    {
-        int lowerBodyLayer = _anim.GetLayerIndex("LowerBody");
 
-        if (xRb)
-            _anim.SetLayerWeight(lowerBodyLayer, 0);
-        else
-            _anim.SetLayerWeight(lowerBodyLayer, 1);
-    }
+    #region Animations
     public void InGrounded(bool inGrounded)
     {
         _anim.SetBool("inGrounded", inGrounded);
@@ -58,11 +54,16 @@ public class PlayerView
     {
         _pogoPS.Play();
     }
+    #endregion
     public IEnumerator TakeDamageFeedback()
     {
         _playerMaterial.color = Color.red;
         yield return new WaitForSeconds(.1f);
         _playerMaterial.color = _initialColor;
         yield return null;
+    }
+    public void UpdateStaminaBar(float amount)
+    {
+        _staminaFill.fillAmount = amount;
     }
 }
