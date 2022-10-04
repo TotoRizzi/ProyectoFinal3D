@@ -11,7 +11,7 @@ public class PlayerSpear : Spear
     }
     protected override void OnTriggerEnter(Collider other)
     {
-        var damageable = other.GetComponent<Enemy>();
+        var damageable = other.GetComponent<IDamageable>();
 
         if (damageable != null)
         {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StateName{Idle, GroundWalk, BlindWalk, GroundChase, FlyingChase, FlyingAttack, GroundAttack}
+public enum StateName{Idle, GroundWalk, BlindWalk, GroundChase, FlyingChase, FlyingEvade, FlyingCharge, FlyingAttack, GroundAttack}
 
 public class StateMachine
 {
