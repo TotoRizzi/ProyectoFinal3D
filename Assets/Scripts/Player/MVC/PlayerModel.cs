@@ -272,7 +272,7 @@ public class PlayerModel
     {
         if (_currentStamina >= _maxStamina) return;
 
-        _staminaTimer -= Time.deltaTime;
+        _staminaTimer -= Time.deltaTime * 2;
 
         if (_staminaTimer <= 0 && _currentStamina < _maxStamina)
         {

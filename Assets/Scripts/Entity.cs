@@ -16,7 +16,7 @@ public abstract class Entity : MonoBehaviour, IDamageable
         if (_currentLife <= 0)
             Die();
     }
-    public void Die()
+    public virtual void Die()
     {
         Debug.Log(name + "ha muerto");
     }

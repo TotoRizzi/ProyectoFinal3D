@@ -8,7 +8,6 @@ public class Player : Entity
     [SerializeField] float _decceleration = 12;
     [SerializeField] float _groundFriction = .1f;
     [SerializeField] float _velPower = 1.05f;
-    [SerializeField] float _maxForce;
 
     [Header("Jump Variables")]
     [SerializeField] float _jumpForce = 12;
@@ -46,12 +45,15 @@ public class Player : Entity
     [SerializeField] BoomerangSpear _boomerangSpearPrefab;
     [SerializeField] Transform _spawnSpear;
     [SerializeField] Image _staminaFill;
+    [SerializeField] Image _hpFill;
 
     IController _myController;
     PlayerView _playerView;
     PlayerSpear _playerSpear;
     BoomerangSpear _throwedSpear;
     InputManager _inputManager;
+
+    System.Action<float> updateLifeBar;
     override protected void Start()
     {
         base.Start();
@@ -61,7 +63,8 @@ public class Player : Entity
         PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
             _attackRate, _timeToThrow, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _playerSpear);
-        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS, _staminaFill, GetComponentInChildren<TrailRenderer>());
+        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS, _staminaFill, _hpFill, 
+            GetComponentInChildren<TrailRenderer>());
         _myController = new PlayerController(_playerModel, this, _inputManager);
 
         _playerModel.runAction += _playerView.RunAnimation;
@@ -81,6 +84,8 @@ public class Player : Entity
         _playerModel.pogoFeedback += _playerView.PogoFeedback;
 
         _playerModel.updateStamina += _playerView.UpdateStaminaBar;
+
+        updateLifeBar += _playerView.UpdateLifeBar;
     }
     void Update()
     {
@@ -93,7 +98,12 @@ public class Player : Entity
     public override void TakeDamage(float dmg)
     {
         base.TakeDamage(dmg);
+        updateLifeBar(_currentLife / _maxLife);
         StartCoroutine(_playerView.TakeDamageFeedback());
+    }
+    public override void Die()
+    {
+        SceneManagerScript.instance.ReloadScene();
     }
     public void InstantiateSpear()
     {

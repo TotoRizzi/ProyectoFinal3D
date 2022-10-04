@@ -8,8 +8,9 @@ public class PlayerView
     ParticleSystem _doubleJumpPS, _pogoPS;
     Color _initialColor;
     Image _staminaFill;
+    Image _hpFill;
     TrailRenderer _tr;
-    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS, Image staminaFill, TrailRenderer tr)
+    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS, Image staminaFill, Image hpFill, TrailRenderer tr)
     {
         _anim = anim;
         _playerMaterial = playerMaterial;
@@ -17,6 +18,7 @@ public class PlayerView
         _pogoPS = pogoPS;
         _initialColor = _playerMaterial.color;
         _staminaFill = staminaFill;
+        _hpFill = hpFill;
         _tr = tr;
     }
 
@@ -73,5 +75,9 @@ public class PlayerView
     public void UpdateStaminaBar(float amount)
     {
         _staminaFill.fillAmount = amount;
+    }
+    public void UpdateLifeBar(float amount)
+    {
+        _hpFill.fillAmount = amount;
     }
 }

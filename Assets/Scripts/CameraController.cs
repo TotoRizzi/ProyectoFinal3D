@@ -2,20 +2,21 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] float _smooth;
-    [SerializeField] Vector3 _offset = new Vector3(0, 0, -50);
+    [SerializeField] float _zCameraMuiltiplier;
+    [SerializeField] Vector3 _offset;
 
     Transform _player;
-    Vector3 _initialPos;
+    float _offsetY;
     private void Start()
     {
         _player = FindObjectOfType<Player>().transform;
-        _initialPos = _player.transform.position;
+        _offsetY = _offset.y;
     }
     private void LateUpdate()
     {
-        float addZ = _player.transform.position.y - _initialPos.y;
-        Vector3 targetPos = _player.position + Vector3.up + _offset;
-        targetPos.z -= addZ / 2;
+        Vector3 targetPos = _player.position + _offset;
+        float addZ = targetPos.y - transform.position.y > 0 ? targetPos.y - transform.position.y : 0;
+        targetPos.z -= addZ * _zCameraMuiltiplier;
         transform.position = Vector3.Lerp(transform.position, targetPos, _smooth * Time.deltaTime);
     }
 }

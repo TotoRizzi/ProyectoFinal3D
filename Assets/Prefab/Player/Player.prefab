@@ -807,7 +807,6 @@ MonoBehaviour:
   _decceleration: 12
   _groundFriction: 0.1
   _velPower: 1.05
-  _maxForce: 0.1
   _jumpForce: 15
   _jumpCutMultiplier: 0.08
   _jumpCoyotaTime: 0.1
@@ -825,12 +824,13 @@ MonoBehaviour:
   _meleeAttackStamina: 1
   _throwSpearStamina: 2
   _jumpStamina: 2
-  _timeToAddStamina: 2
+  _timeToAddStamina: 3
   _doubleJumpPS: {fileID: 8801326314313559065}
   _pogoPS: {fileID: 4702541799557844466}
   _boomerangSpearPrefab: {fileID: -1595099422555029602, guid: d4deb17f46db83549b8591c7eeb7195d, type: 3}
   _spawnSpear: {fileID: 643773571041744287}
   _staminaFill: {fileID: 0}
+  _hpFill: {fileID: 0}
 --- !u!114 &1250461846751280249
 MonoBehaviour:
   m_ObjectHideFlags: 0
