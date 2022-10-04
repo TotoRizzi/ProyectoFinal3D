@@ -8,6 +8,7 @@ public class Player : Entity
     [SerializeField] float _decceleration = 12;
     [SerializeField] float _groundFriction = .1f;
     [SerializeField] float _velPower = 1.05f;
+    [SerializeField] float _maxForce;
 
     [Header("Jump Variables")]
     [SerializeField] float _jumpForce = 12;
@@ -59,8 +60,8 @@ public class Player : Entity
         _playerSpear = GetComponentInChildren<PlayerSpear>();
         PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
-            _attackRate, _timeToThrow, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _playerSpear, GetComponentInChildren<TrailRenderer>());
-        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS, _staminaFill);
+            _attackRate, _timeToThrow, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _playerSpear);
+        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS, _staminaFill, GetComponentInChildren<TrailRenderer>());
         _myController = new PlayerController(_playerModel, this, _inputManager);
 
         _playerModel.runAction += _playerView.RunAnimation;
@@ -77,8 +78,6 @@ public class Player : Entity
 
         _playerModel.throwAnimation += _playerView.ThrowAnimation;
 
-        _playerModel.throwAction += InstantiateSpear;
-
         _playerModel.pogoFeedback += _playerView.PogoFeedback;
 
         _playerModel.updateStamina += _playerView.UpdateStaminaBar;
@@ -86,11 +85,6 @@ public class Player : Entity
     void Update()
     {
         _myController.OnUpdate();
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + (transform.forward * _boomerangSpearDistance));
     }
     private void FixedUpdate()
     {
@@ -101,16 +95,19 @@ public class Player : Entity
         base.TakeDamage(dmg);
         StartCoroutine(_playerView.TakeDamageFeedback());
     }
-    public void InstantiateSpear(float xAxis)
+    public void InstantiateSpear()
     {
         _playerSpear.gameObject.SetActive(false);
-        _throwedSpear = Instantiate(_boomerangSpearPrefab).SetPosition(_spawnSpear.transform)
+        _throwedSpear = Instantiate(_boomerangSpearPrefab).SetPosition(_spawnSpear)
                                                           .SetDirection(_spawnSpear.position + transform.forward * _boomerangSpearDistance);
-
-        _throwedSpear.collisionWithEnemy += MoveToSpear;
+        _throwedSpear.playerSpear = _playerSpear;
     }
-    void MoveToSpear()
+    public void MoveToSpear()
     {
-        transform.position = new Vector3(_throwedSpear.transform.position.x, _throwedSpear.transform.position.y, transform.position.z) - Vector3.up;
+        if (_throwedSpear)
+        {
+            transform.position = new Vector3(_throwedSpear.transform.position.x, _throwedSpear.transform.position.y, transform.position.z) - Vector3.up;
+            _playerSpear.ActiveSpear(_throwedSpear);
+        }
     }
 }

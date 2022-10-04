@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 784405411111379013}
   - component: {fileID: 1932483124217965598}
   - component: {fileID: 433831806851101704}
-  - component: {fileID: 5752937343872086096}
+  - component: {fileID: 6878019480588096910}
   m_Layer: 0
   m_Name: PlayerSpear
   m_TagString: Untagged
@@ -61,7 +61,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 2.5}
---- !u!114 &5752937343872086096
+--- !u!114 &6878019480588096910
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

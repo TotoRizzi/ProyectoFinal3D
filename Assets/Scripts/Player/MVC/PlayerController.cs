@@ -20,12 +20,7 @@ public class PlayerController : IController
     public void OnUpdate()
     {
         if (PausedMenu._gameIsPaused) return;
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            f = Mathf.Clamp(f, -1, 1);
-        }
-        //_xAxis = Input.GetAxisRaw("Horizontal");
-        //_yAxis = Input.GetAxisRaw("Vertical");
+
         _xAxis = _inputManager.GetAxisRaw("Horizontal");
         _yAxis = _inputManager.GetAxisRaw("Vertical");
 
@@ -42,13 +37,19 @@ public class PlayerController : IController
 
         if (_inputManager.GetButtonDown("Attack")) _playerModel.Attack(_yAxis);
 
-        if (_inputManager.GetButtonDown("Throw")) _player.StartCoroutine(_playerModel.Throw());
+        if (_inputManager.GetButtonDown("Throw"))
+        {
+            if (_playerModel.playerSpear.canUseSpear)
+                _playerModel.Throw();
+            else
+                _player.MoveToSpear();
+        }
     }
     public void OnFixedUpdate()
     {
         _playerModel.OnFixedUpdate(_xAxis);
 
-        if(_startDash)
+        if (_startDash)
             _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));
     }
 }

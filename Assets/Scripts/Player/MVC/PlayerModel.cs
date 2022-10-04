@@ -12,7 +12,6 @@ public class PlayerModel
     bool _poging;
     bool _attacking;
     bool _jumpFalling;
-    bool _throwing;
     public bool onJumpUp;
     float _coyotaTimer;
     float _bufferTimer;
@@ -37,31 +36,29 @@ public class PlayerModel
     float _fallGravityMultiplier;
     float _pogoForce;
     float _attackRate;
-    float _timeToThrow;
+    float _boomerangSpearDistance;
     float _maxStamina;
     float _attackStamina;
     float _throwSpearStamina;
     float _jumpStamina;
     float _timeToAddStamina;
     public PlayerSpear playerSpear;
-    TrailRenderer _tr;
     public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, GameManager.instance.GroundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
 
     public Action<float> runAction;
     public Action<bool> jumpAction;
     public Action<bool> fallingAction;
-    public Action dashAction;
+    public Action<bool> dashAction;
     public Action<bool> inGroundedAction;
     public Action pogoFeedback;
     public Action throwAnimation;
-    public Action<float> throwAction;
     public Action<int> attackAction;
     public Action<float> updateStamina;
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
-        float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackRate, float timeToThrow,
-        float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, PlayerSpear playerSpear, TrailRenderer tr)
+        float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackRate, float boomerangSpearDistance,
+        float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, PlayerSpear playerSpear)
     {
         _transform = transform;
         _rb = rb;
@@ -81,14 +78,13 @@ public class PlayerModel
         _fallGravityMultiplier = fallGravityMultiplier;
         _pogoForce = pogoForce;
         _attackRate = attackRate;
-        _timeToThrow = timeToThrow;
+        _boomerangSpearDistance = boomerangSpearDistance;
         _maxStamina = maxStamina;
         _attackStamina = attackStamina;
         _throwSpearStamina = throwSpearStamina;
         _jumpStamina = jumpStamina;
         _timeToAddStamina = timeToAddStamina;
         this.playerSpear = playerSpear;
-        _tr = tr;
 
         _currentStamina = _maxStamina;
     }
@@ -170,7 +166,7 @@ public class PlayerModel
 
         float finalMovement = inGrounded ? movement : movement * 0.75f;
 
-        _rb.AddForce(finalMovement * Vector3.right);
+        _rb.AddForce(Vector3.right * finalMovement);
     }
     void Jump()
     {
@@ -218,16 +214,13 @@ public class PlayerModel
     {
         if (_canDash && xAxis != 0 && !_attacking)
         {
-            _dashing = true;
-            dashAction();
+            dashAction(_dashing = true);
             _canDash = false;
             _poging = false;
             _rb.useGravity = false;
-            _tr.emitting = true;
             _rb.AddForce(new Vector3(xAxis, yAxis, 0).normalized * _dashForce, ForceMode.Impulse);
             yield return new WaitForSeconds(_dashTime);
-            _dashing = false;
-            _tr.emitting = false;
+            dashAction(_dashing = false);
             _rb.useGravity = true;
             yield return new WaitForSeconds(_dashCoolDown);
             _canDash = true;
@@ -254,7 +247,7 @@ public class PlayerModel
 
     public void Attack(float yAxis)
     {
-        if (_currentStamina < _attackStamina) return;
+        if (_currentStamina < _attackStamina || !playerSpear.canUseSpear) return;
 
         if (Time.time >= _timeToAttack)
         {
@@ -265,23 +258,20 @@ public class PlayerModel
         }
         _attacking = false;
     }
-    public IEnumerator Throw()
+    public void Throw()
     {
-        if (_currentStamina < _throwSpearStamina) yield return null;
+        if (_currentStamina < _throwSpearStamina || !playerSpear.canUseSpear) return;
 
-        if (!_throwing)
-        {
-            _throwing = true;
-            throwAnimation();
-            SubstactStamina(_throwSpearStamina);
-            yield return new WaitForSeconds(_timeToThrow);
-            playerSpear.gameObject.SetActive(true);
-            _throwing = false;
-        }
+        playerSpear.canUseSpear = false;
+        throwAnimation();
+        SubstactStamina(_throwSpearStamina);
     }
+
     #region Stamina
     void AddStamina()
     {
+        if (_currentStamina >= _maxStamina) return;
+
         _staminaTimer -= Time.deltaTime;
 
         if (_staminaTimer <= 0 && _currentStamina < _maxStamina)
@@ -294,6 +284,7 @@ public class PlayerModel
     {
         _staminaTimer = _timeToAddStamina;
         _currentStamina -= amount;
+        if (_currentStamina <= 0) _currentStamina = 0;
         updateStamina(_currentStamina / _maxStamina);
     }
     #endregion

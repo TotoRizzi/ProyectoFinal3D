@@ -8,7 +8,8 @@ public class PlayerView
     ParticleSystem _doubleJumpPS, _pogoPS;
     Color _initialColor;
     Image _staminaFill;
-    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS, Image staminaFill)
+    TrailRenderer _tr;
+    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS, Image staminaFill, TrailRenderer tr)
     {
         _anim = anim;
         _playerMaterial = playerMaterial;
@@ -16,6 +17,7 @@ public class PlayerView
         _pogoPS = pogoPS;
         _initialColor = _playerMaterial.color;
         _staminaFill = staminaFill;
+        _tr = tr;
     }
 
     #region Animations
@@ -37,9 +39,15 @@ public class PlayerView
     {
         _anim.SetBool("Falling", falling);
     }
-    public void DashAnimation()
+    public void DashAnimation(bool dashing)
     {
-        _anim.SetTrigger("Dash");
+        if (dashing)
+        {
+            _anim.SetTrigger("Dash");
+            _tr.emitting = true;
+        }
+        else
+            _tr.emitting = false;
     }
     public void AttackAnimation(int yAxis)
     {

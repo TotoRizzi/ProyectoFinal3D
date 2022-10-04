@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0.5
+  m_Weight: 0.2
   m_Data:
     m_Root: {fileID: 5419798319790126661}
     m_Mid: {fileID: 4664783525733064511}
@@ -807,6 +807,7 @@ MonoBehaviour:
   _decceleration: 12
   _groundFriction: 0.1
   _velPower: 1.05
+  _maxForce: 0.1
   _jumpForce: 15
   _jumpCutMultiplier: 0.08
   _jumpCoyotaTime: 0.1
@@ -819,8 +820,8 @@ MonoBehaviour:
   _pogoForce: 15
   _attackRate: 2.9
   _timeToThrow: 0.45
-  _boomerangSpearDistance: 9.7
-  _maxStamina: 10
+  _boomerangSpearDistance: 9
+  _maxStamina: 30
   _meleeAttackStamina: 1
   _throwSpearStamina: 2
   _jumpStamina: 2
@@ -2946,6 +2947,10 @@ PrefabInstance:
     - target: {fileID: 4337422601847709547, guid: fad5062c385efa94098617ed5455cc75, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 56.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878019480588096910, guid: fad5062c385efa94098617ed5455cc75, type: 3}
+      propertyPath: _damage
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9121115012571633693, guid: fad5062c385efa94098617ed5455cc75, type: 3}
       propertyPath: m_Name
