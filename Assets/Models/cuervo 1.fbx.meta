@@ -1,14 +1,12 @@
 fileFormatVersion: 2
-guid: 5c6957206b9b54249a19e3049b524baf
+guid: 8e7bb4d4703e84f42be7192df0d1384d
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
-  externalObjects:
+  internalIDToNameTable:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Peasant_Girl
-    second: {fileID: -2070747463462823920, guid: 6531a9b299d7f6341af4379c22c65b1c, type: 3}
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -68,7 +66,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
