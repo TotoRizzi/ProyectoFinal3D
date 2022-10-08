@@ -31,6 +31,6 @@ public class GameManager : MonoBehaviour
 
     public Vector3 GetDirectionToPlayer(Transform transform)
     {
-        return _player.transform.position - transform.position;
+        return (_player.transform.position + transform.up) - transform.position;
     }
 }

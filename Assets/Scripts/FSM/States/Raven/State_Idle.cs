@@ -27,7 +27,7 @@ public class State_Idle : IState
 
     public void OnUpdate()
     {
-        if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude < _myEnemy.viewRange && _myEnemy.CanSeePlayer())
+        if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude < _myEnemy.viewRange)
             _fsm.ChangeState(_stateToGo);
     }
 }

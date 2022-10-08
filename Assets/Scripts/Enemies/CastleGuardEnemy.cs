@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CastleGuardEnemy : Enemy
 {
+    public float attackRange;
+
+    [Header("Mine")]
     [SerializeField] Transform _wallAndGroundCheckPosition;
     [SerializeField] float _walkingSpeed;
     [SerializeField] float _chasingSpeed;
@@ -12,8 +15,8 @@ public class CastleGuardEnemy : Enemy
     {
         base.Start();
 
-        walkingMovement = new RightMovement(this.transform, myRb, _walkingSpeed);
-        chasingMovement = new RightMovement(this.transform, myRb, _chasingSpeed);
+        slowMovement = new RightMovement(this.transform, myRb, _walkingSpeed);
+        fastMovement = new RightMovement(this.transform, myRb, _chasingSpeed);
 
         fsm.AddState(StateName.GroundWalk, new State_GroundWalk(this, fsm, _wallAndGroundCheckPosition));
         fsm.AddState(StateName.GroundChase, new State_GroundChase(this, fsm, _wallAndGroundCheckPosition));
