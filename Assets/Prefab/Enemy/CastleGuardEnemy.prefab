@@ -358,6 +358,8 @@ MonoBehaviour:
   attackRange: 2
   knockBackTime: 0.3
   canMove: 1
+  myRb: {fileID: 0}
+  _myModel: {fileID: 7339449773348152093}
   myCollider: {fileID: 7711503829190914367}
   myAnim: {fileID: 0}
   _wallAndGroundCheckPosition: {fileID: 7711503829083777437}

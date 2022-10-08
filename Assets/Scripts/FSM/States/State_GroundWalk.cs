@@ -25,7 +25,7 @@ public class State_GroundWalk : IState
 
     public void OnFixedUpdate()
     {
-        _myEnemy.walkingMovement.Move();
+        _myEnemy.slowMovement.Move();
     }
 
     public void OnUpdate()
