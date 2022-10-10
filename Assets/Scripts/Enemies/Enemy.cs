@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float knockBackTime = .3f;
     public bool canMove = true;
     protected bool isAlive = true;
-    protected bool isFacingRight = true;
+    [SerializeField] protected bool isFacingRight = true;
 
     public IMovement slowMovement;
     public IMovement fastMovement;
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour, IDamageable
     protected Action EnemyOnUpdate;
     public StateMachine fsm;
     public Rigidbody myRb;
-    [SerializeField] GameObject _myModel;
+    [SerializeField] protected GameObject _myModel;
     [SerializeField] protected Collider myCollider;
     [HideInInspector] public Animator myAnim;
 
