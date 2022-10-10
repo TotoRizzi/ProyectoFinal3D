@@ -13,6 +13,7 @@ public class RavenEnemy : Enemy
     public float chargeSpeed;
     public float maxMovingForce;
 
+    [SerializeField] Particle _deadParticle;
 
     public override void Start()
     {
@@ -37,6 +38,7 @@ public class RavenEnemy : Enemy
     }
     public override void Die()
     {
+        Instantiate(_deadParticle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
