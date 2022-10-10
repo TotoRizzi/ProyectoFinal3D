@@ -825,13 +825,15 @@ MonoBehaviour:
   _throwSpearStamina: 2
   _jumpStamina: 2
   _timeToAddStamina: 3
-  _hitPlayerForce: 5
+  _knockbackForce: 5
+  _invulnerabilityTime: 3
   _doubleJumpPS: {fileID: 8801326314313559065}
   _pogoPS: {fileID: 4702541799557844466}
   _boomerangSpearPrefab: {fileID: -1595099422555029602, guid: d4deb17f46db83549b8591c7eeb7195d, type: 3}
   _spawnSpear: {fileID: 643773571041744287}
   _staminaFill: {fileID: 0}
   _hpFill: {fileID: 0}
+  _invulneravilityImg: {fileID: 0}
 --- !u!114 &1250461846751280249
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -40,8 +40,9 @@ public class Player : Entity
     [SerializeField] float _jumpStamina;
     [SerializeField] float _timeToAddStamina;
 
-    [Header("Hit Variables")]
-    [SerializeField] float _hitPlayerForce;
+    [Header("Knockback Variables")]
+    [SerializeField] float _knockbackForce;
+    [SerializeField] float _invulnerabilityTime;
 
     [Header("Inspector Variables")]
     [SerializeField] ParticleSystem _doubleJumpPS;
@@ -50,6 +51,7 @@ public class Player : Entity
     [SerializeField] Transform _spawnSpear;
     [SerializeField] Image _staminaFill;
     [SerializeField] Image _hpFill;
+    [SerializeField] Image _invulneravilityImg;
 
     IController _myController;
     PlayerView _playerView;
@@ -58,7 +60,7 @@ public class Player : Entity
     InputManager _inputManager;
 
     System.Action<float> updateLifeBar;
-    System.Action getDamage;
+    public System.Action getDamage;
     override protected void Start()
     {
         base.Start();
@@ -67,9 +69,9 @@ public class Player : Entity
         _playerSpear = GetComponentInChildren<PlayerSpear>();
         PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
-            _attackRate, _timeToThrow, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _hitPlayerForce, _playerSpear);
+            _attackRate, _timeToThrow, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _knockbackForce, _playerSpear);
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS, _staminaFill, _hpFill,
-            GetComponentInChildren<TrailRenderer>());
+            _invulneravilityImg, _invulnerabilityTime, GetComponentInChildren<TrailRenderer>());
         _myController = new PlayerController(_playerModel, this, _inputManager);
 
         _playerModel.runAction += _playerView.RunAnimation;
@@ -98,10 +100,16 @@ public class Player : Entity
     void Update()
     {
         _myController.OnUpdate();
+        _playerView.OnUpdate();
     }
     private void FixedUpdate()
     {
         _myController.OnFixedUpdate();
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Vector3.down * 5);
     }
     public override void TakeDamage(float dmg)
     {

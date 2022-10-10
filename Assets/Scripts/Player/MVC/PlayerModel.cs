@@ -43,7 +43,7 @@ public class PlayerModel
     float _throwSpearStamina;
     float _jumpStamina;
     float _timeToAddStamina;
-    float _hitPlayerForce;
+    float _knockbackForce;
     public PlayerSpear playerSpear;
     public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, GameManager.instance.GroundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
@@ -60,7 +60,7 @@ public class PlayerModel
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
         float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackRate, float boomerangSpearDistance,
-        float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, float hitPlayerForce, PlayerSpear playerSpear)
+        float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, float knockbackForce, PlayerSpear playerSpear)
     {
         _transform = transform;
         _rb = rb;
@@ -86,7 +86,7 @@ public class PlayerModel
         _throwSpearStamina = throwSpearStamina;
         _jumpStamina = jumpStamina;
         _timeToAddStamina = timeToAddStamina;
-        _hitPlayerForce = hitPlayerForce;
+        _knockbackForce = knockbackForce;
         this.playerSpear = playerSpear;
 
         _currentStamina = _maxStamina;
@@ -275,7 +275,8 @@ public class PlayerModel
         _poging = false;
         _isJumping = false;
         _rb.velocity = Vector3.zero;
-        _rb.AddForce((-_transform.forward + Vector3.up) * _hitPlayerForce, ForceMode.Impulse);
+        yield return new WaitForSeconds(.1f);
+        _rb.AddForce((-_transform.forward + Vector3.up) * _knockbackForce, ForceMode.Impulse);
         yield return new WaitForSeconds(.5f);
         _gettingHit = false;
         _rb.velocity = Vector3.zero;

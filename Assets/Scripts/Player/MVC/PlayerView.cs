@@ -9,8 +9,13 @@ public class PlayerView
     Color _initialColor;
     Image _staminaFill;
     Image _hpFill;
+    Image _invulnerabily;
+    float _invulnerabilityTime;
     TrailRenderer _tr;
-    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS, Image staminaFill, Image hpFill, TrailRenderer tr)
+
+    float _invulnerabilityTimer;
+    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS, Image staminaFill, Image hpFill,
+        Image invulneravility, float invulnerabilityTime, TrailRenderer tr)
     {
         _anim = anim;
         _playerMaterial = playerMaterial;
@@ -19,7 +24,11 @@ public class PlayerView
         _initialColor = _playerMaterial.color;
         _staminaFill = staminaFill;
         _hpFill = hpFill;
+        _invulnerabily = invulneravility;
+        _invulnerabilityTime = invulnerabilityTime;
         _tr = tr;
+
+        _invulnerabily.gameObject.SetActive(false);
     }
 
     #region Animations
@@ -68,10 +77,25 @@ public class PlayerView
     public IEnumerator TakeDamageFeedback()
     {
         _anim.SetTrigger("GetHit");
+        _invulnerabilityTimer = _invulnerabilityTime;
+        _invulnerabily.gameObject.SetActive(true);
         _playerMaterial.color = Color.red;
         yield return new WaitForSeconds(.1f);
+        _playerMaterial.color = Color.grey;
+        Physics.IgnoreLayerCollision(9, 8, true);
+        Physics.IgnoreLayerCollision(9, 10, true);
+        Physics.IgnoreLayerCollision(9, 12, true);
+        yield return new WaitForSeconds(_invulnerabilityTime);
+        _invulnerabily.gameObject.SetActive(false);
+        Physics.IgnoreLayerCollision(9, 8, false);
+        Physics.IgnoreLayerCollision(9, 10, false);
+        Physics.IgnoreLayerCollision(9, 12, false);
         _playerMaterial.color = _initialColor;
-        yield return null;
+    }
+    public void OnUpdate()
+    {
+        _invulnerabilityTimer -= Time.deltaTime;
+        _invulnerabily.fillAmount = _invulnerabilityTimer / _invulnerabilityTime;
     }
     public void UpdateStaminaBar(float amount)
     {
