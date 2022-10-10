@@ -67,6 +67,7 @@ public class PlayerView
     #endregion
     public IEnumerator TakeDamageFeedback()
     {
+        _anim.SetTrigger("GetHit");
         _playerMaterial.color = Color.red;
         yield return new WaitForSeconds(.1f);
         _playerMaterial.color = _initialColor;

@@ -21,10 +21,11 @@ public class PlayerController : IController
     {
         if (PausedMenu._gameIsPaused) return;
 
+        _playerModel.OnUpdate();
+
         _xAxis = _inputManager.GetAxisRaw("Horizontal");
         _yAxis = _inputManager.GetAxisRaw("Vertical");
 
-        _playerModel.OnUpdate();
 
         if (_inputManager.GetButtonDown("Jump"))
             _playerModel.OnJumpDown();

@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7c25dc22ec65d4db02c36be3a08815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLife: 5
+  _maxLife: 10
   _currentLife: 0
   _movementSpeed: 8
   _acceleration: 12
@@ -825,6 +825,7 @@ MonoBehaviour:
   _throwSpearStamina: 2
   _jumpStamina: 2
   _timeToAddStamina: 3
+  _hitPlayerForce: 5
   _doubleJumpPS: {fileID: 8801326314313559065}
   _pogoPS: {fileID: 4702541799557844466}
   _boomerangSpearPrefab: {fileID: -1595099422555029602, guid: d4deb17f46db83549b8591c7eeb7195d, type: 3}

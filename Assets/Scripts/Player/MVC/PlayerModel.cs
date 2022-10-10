@@ -12,6 +12,7 @@ public class PlayerModel
     bool _poging;
     bool _attacking;
     bool _jumpFalling;
+    bool _gettingHit;
     public bool onJumpUp;
     float _coyotaTimer;
     float _bufferTimer;
@@ -42,6 +43,7 @@ public class PlayerModel
     float _throwSpearStamina;
     float _jumpStamina;
     float _timeToAddStamina;
+    float _hitPlayerForce;
     public PlayerSpear playerSpear;
     public bool inGrounded => Physics.CheckSphere(_transform.position, 0.1f, GameManager.instance.GroundLayer);
     bool _canJump => _bufferTimer > 0 && _coyotaTimer > 0 && !_isJumping;
@@ -58,7 +60,7 @@ public class PlayerModel
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
         float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackRate, float boomerangSpearDistance,
-        float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, PlayerSpear playerSpear)
+        float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, float hitPlayerForce, PlayerSpear playerSpear)
     {
         _transform = transform;
         _rb = rb;
@@ -84,6 +86,7 @@ public class PlayerModel
         _throwSpearStamina = throwSpearStamina;
         _jumpStamina = jumpStamina;
         _timeToAddStamina = timeToAddStamina;
+        _hitPlayerForce = hitPlayerForce;
         this.playerSpear = playerSpear;
 
         _currentStamina = _maxStamina;
@@ -118,6 +121,8 @@ public class PlayerModel
     }
     public void OnFixedUpdate(float xAxis)
     {
+        if (_dashing || _gettingHit) return;
+
         if (xAxis != 0)
             _transform.eulerAngles = Vector3.Lerp(Quaternion.Euler(0, 90, 0).eulerAngles, Quaternion.Euler(0, -90, 0).eulerAngles, 0) * xAxis;
 
@@ -151,8 +156,6 @@ public class PlayerModel
     }
     public void Run(float xAxis)
     {
-        if (_dashing) return;
-
         if (inGrounded)
             runAction(xAxis);
 
@@ -265,6 +268,17 @@ public class PlayerModel
         playerSpear.canUseSpear = false;
         throwAnimation();
         SubstactStamina(_throwSpearStamina);
+    }
+    public IEnumerator HitPlayer()
+    {
+        _gettingHit = true;
+        _poging = false;
+        _isJumping = false;
+        _rb.velocity = Vector3.zero;
+        _rb.AddForce((-_transform.forward + Vector3.up) * _hitPlayerForce, ForceMode.Impulse);
+        yield return new WaitForSeconds(.5f);
+        _gettingHit = false;
+        _rb.velocity = Vector3.zero;
     }
 
     #region Stamina

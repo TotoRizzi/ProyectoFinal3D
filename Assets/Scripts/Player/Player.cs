@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 public class Player : Entity
@@ -39,6 +40,9 @@ public class Player : Entity
     [SerializeField] float _jumpStamina;
     [SerializeField] float _timeToAddStamina;
 
+    [Header("Hit Variables")]
+    [SerializeField] float _hitPlayerForce;
+
     [Header("Inspector Variables")]
     [SerializeField] ParticleSystem _doubleJumpPS;
     [SerializeField] ParticleSystem _pogoPS;
@@ -54,6 +58,7 @@ public class Player : Entity
     InputManager _inputManager;
 
     System.Action<float> updateLifeBar;
+    System.Action getDamage;
     override protected void Start()
     {
         base.Start();
@@ -62,8 +67,8 @@ public class Player : Entity
         _playerSpear = GetComponentInChildren<PlayerSpear>();
         PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
-            _attackRate, _timeToThrow, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _playerSpear);
-        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS, _staminaFill, _hpFill, 
+            _attackRate, _timeToThrow, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _hitPlayerForce, _playerSpear);
+        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS, _staminaFill, _hpFill,
             GetComponentInChildren<TrailRenderer>());
         _myController = new PlayerController(_playerModel, this, _inputManager);
 
@@ -86,6 +91,9 @@ public class Player : Entity
         _playerModel.updateStamina += _playerView.UpdateStaminaBar;
 
         updateLifeBar += _playerView.UpdateLifeBar;
+
+        getDamage += () => StartCoroutine(_playerView.TakeDamageFeedback());
+        getDamage += () => StartCoroutine(_playerModel.HitPlayer());
     }
     void Update()
     {
@@ -99,11 +107,12 @@ public class Player : Entity
     {
         base.TakeDamage(dmg);
         updateLifeBar(_currentLife / _maxLife);
-        StartCoroutine(_playerView.TakeDamageFeedback());
+        getDamage();
     }
     public override void Die()
     {
-        SceneManagerScript.instance.ReloadScene();
+        Debug.Log("Player ha muerto");
+        //SceneManagerScript.instance.ReloadScene();
     }
     public void InstantiateSpear()
     {
