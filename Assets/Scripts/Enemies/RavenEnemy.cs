@@ -37,10 +37,6 @@ public class RavenEnemy : Enemy
     }
     public override void Die()
     {
-        isAlive = false;
-        myRb.isKinematic = true;
-        myCollider.enabled = false;
-
-        myAnim.Play("Die");
+        Destroy(gameObject);
     }
 }
