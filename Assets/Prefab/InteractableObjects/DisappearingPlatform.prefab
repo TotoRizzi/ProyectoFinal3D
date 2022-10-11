@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToDestroy: 1
-  _timeToAppear: 1
+  _timeToAppear: 2.5
   _myPlatform: {fileID: 2435470237295508335}
 --- !u!65 &2683244800589917546
 BoxCollider:

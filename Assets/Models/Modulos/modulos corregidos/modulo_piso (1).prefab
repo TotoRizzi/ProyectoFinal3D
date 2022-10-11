@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8407666361613105321}
   - component: {fileID: 3199673918785029398}
   - component: {fileID: 3946537489709590449}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube3_pCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866385261908102910}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.06, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6938801650546904973}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6308466559790273170}
   - component: {fileID: 7924640008305782201}
   - component: {fileID: 5722111830267358957}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087682547716456329}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.09, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6938801650546904973}
@@ -171,7 +171,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6938801650546904973}
-  m_Layer: 0
+  - component: {fileID: 5591644188519644908}
+  m_Layer: 6
   m_Name: modulo_piso (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,6 +196,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &5591644188519644908
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710237306854987063}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 13.334015, y: 2.7132015, z: 11.0130005}
+  m_Center: {x: 0.055984497, y: 0.82851124, z: -3.2633705}
 --- !u!1 &7933961234601119029
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +220,7 @@ GameObject:
   - component: {fileID: 3844529533047561931}
   - component: {fileID: 6181200258494735069}
   - component: {fileID: 5479804063450947847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
