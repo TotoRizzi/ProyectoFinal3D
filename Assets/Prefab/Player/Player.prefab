@@ -850,7 +850,7 @@ MonoBehaviour:
   _pogoForce: 15
   _attackRate: 2.9
   _boomerangSpearDistance: 3.5
-  _maxStamina: 30
+  _maxStamina: 20
   _meleeAttackStamina: 1
   _throwSpearStamina: 2
   _jumpStamina: 0

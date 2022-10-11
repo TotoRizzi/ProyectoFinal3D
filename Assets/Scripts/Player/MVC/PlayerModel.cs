@@ -171,10 +171,10 @@ public class PlayerModel
     }
     void Jump()
     {
-        if (_dashing || _currentStamina < _jumpStamina) return;
+        if (_dashing) return;
         _rb.AddForce(Vector3.up * (_jumpForce - _rb.velocity.y), ForceMode.Impulse);
         jumpAction(_canDoubleJump || _jumpFalling);
-        SubstactStamina(_jumpStamina);
+        //SubstactStamina(_jumpStamina);
         _isJumping = true;
         _poging = false;
     }
