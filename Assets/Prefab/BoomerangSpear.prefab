@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
+  _blood: {fileID: 5771434075984092719}
   _speed: 15
   _maxForce: 1.2
 --- !u!1001 &1091635972446770293
@@ -200,5 +201,10 @@ PrefabInstance:
 --- !u!4 &5771434075968886499 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7236006687408486662, guid: 1661dcd3e3520c04bb9e877ea2423c09, type: 3}
+  m_PrefabInstance: {fileID: 3779422821673906149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5771434075984092719 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7236006687394329034, guid: 1661dcd3e3520c04bb9e877ea2423c09, type: 3}
   m_PrefabInstance: {fileID: 3779422821673906149}
   m_PrefabAsset: {fileID: 0}

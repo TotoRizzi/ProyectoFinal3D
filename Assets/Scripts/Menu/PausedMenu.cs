@@ -24,11 +24,13 @@ public class PausedMenu : Menu
     public void PauseGame()
     {
         _gameIsPaused = true;
+        Time.timeScale = 0;
         _pauseGM.SetActive(true);
     }
     public void ResumeGame()
     {
         _gameIsPaused = false;
+        Time.timeScale = 1;
         _pauseGM.SetActive(false);
     }
 }

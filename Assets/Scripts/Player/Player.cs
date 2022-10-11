@@ -30,7 +30,6 @@ public class Player : Entity
 
     [Header("Attack Variables")]
     [SerializeField] float _attackRate = .36f;
-    [SerializeField] float _timeToThrow = .45f;
     [SerializeField] float _boomerangSpearDistance;
 
     [Header("Stamina Variables")]
@@ -46,7 +45,6 @@ public class Player : Entity
 
     [Header("Inspector Variables")]
     [SerializeField] ParticleSystem _doubleJumpPS;
-    [SerializeField] ParticleSystem _pogoPS;
     [SerializeField] BoomerangSpear _boomerangSpearPrefab;
     [SerializeField] Transform _spawnSpear;
     [SerializeField] Image _staminaFill;
@@ -55,6 +53,7 @@ public class Player : Entity
 
     IController _myController;
     PlayerView _playerView;
+    PlayerModel _playerModel;
     PlayerSpear _playerSpear;
     BoomerangSpear _throwedSpear;
     InputManager _inputManager;
@@ -67,10 +66,10 @@ public class Player : Entity
         _inputManager = FindObjectOfType<InputManager>();
         Rigidbody _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<PlayerSpear>();
-        PlayerModel _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
+        _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
-            _attackRate, _timeToThrow, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _knockbackForce, _playerSpear);
-        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _pogoPS, _staminaFill, _hpFill,
+            _attackRate, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _knockbackForce, _playerSpear);
+        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _staminaFill, _hpFill,
             _invulneravilityImg, _invulnerabilityTime, GetComponentInChildren<TrailRenderer>());
         _myController = new PlayerController(_playerModel, this, _inputManager);
 
@@ -88,8 +87,6 @@ public class Player : Entity
 
         _playerModel.throwAnimation += _playerView.ThrowAnimation;
 
-        _playerModel.pogoFeedback += _playerView.PogoFeedback;
-
         _playerModel.updateStamina += _playerView.UpdateStaminaBar;
 
         updateLifeBar += _playerView.UpdateLifeBar;
@@ -106,21 +103,15 @@ public class Player : Entity
     {
         _myController.OnFixedUpdate();
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, Vector3.down * 5);
-    }
     public override void TakeDamage(float dmg)
     {
+        getDamage();
         base.TakeDamage(dmg);
         updateLifeBar(_currentLife / _maxLife);
-        getDamage();
     }
     public override void Die()
     {
-        Debug.Log("Player ha muerto");
-        //SceneManagerScript.instance.ReloadScene();
+        SceneManagerScript.instance.ReloadScene();
     }
     public void InstantiateSpear()
     {

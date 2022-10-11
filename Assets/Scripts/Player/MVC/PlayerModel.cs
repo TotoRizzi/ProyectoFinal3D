@@ -37,7 +37,6 @@ public class PlayerModel
     float _fallGravityMultiplier;
     float _pogoForce;
     float _attackRate;
-    float _boomerangSpearDistance;
     float _maxStamina;
     float _attackStamina;
     float _throwSpearStamina;
@@ -59,7 +58,7 @@ public class PlayerModel
     public Action<float> updateStamina;
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
-        float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackRate, float boomerangSpearDistance,
+        float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackRate,
         float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, float knockbackForce, PlayerSpear playerSpear)
     {
         _transform = transform;
@@ -80,7 +79,6 @@ public class PlayerModel
         _fallGravityMultiplier = fallGravityMultiplier;
         _pogoForce = pogoForce;
         _attackRate = attackRate;
-        _boomerangSpearDistance = boomerangSpearDistance;
         _maxStamina = maxStamina;
         _attackStamina = attackStamina;
         _throwSpearStamina = throwSpearStamina;
@@ -231,13 +229,13 @@ public class PlayerModel
     }
     public void Pogo(float yAxis)
     {
+        if (_gettingHit) return;
         Vector3 pogoDirection = new Vector3(0, yAxis, 0);
         if (_rb != null)
         {
             _rb.velocity = Vector3.zero;
             _rb.AddForce(-pogoDirection * (_pogoForce - _rb.velocity.y), ForceMode.Impulse);
             _poging = true;
-            pogoFeedback();
         }
     }
     public void Falling(bool falling)

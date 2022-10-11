@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7236006687394329034}
   - component: {fileID: 7236006687394353608}
   m_Layer: 0
-  m_Name: PogoPS
+  m_Name: BloodPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,7 +5,7 @@ public class PlayerView
 {
     Animator _anim;
     Material _playerMaterial;
-    ParticleSystem _doubleJumpPS, _pogoPS;
+    ParticleSystem _doubleJumpPS;
     Color _initialColor;
     Image _staminaFill;
     Image _hpFill;
@@ -14,13 +14,12 @@ public class PlayerView
     TrailRenderer _tr;
 
     float _invulnerabilityTimer;
-    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, ParticleSystem pogoPS, Image staminaFill, Image hpFill,
+    public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, Image staminaFill, Image hpFill,
         Image invulneravility, float invulnerabilityTime, TrailRenderer tr)
     {
         _anim = anim;
         _playerMaterial = playerMaterial;
         _doubleJumpPS = doubleJumpPS;
-        _pogoPS = pogoPS;
         _initialColor = _playerMaterial.color;
         _staminaFill = staminaFill;
         _hpFill = hpFill;
@@ -29,6 +28,9 @@ public class PlayerView
         _tr = tr;
 
         _invulnerabily.gameObject.SetActive(false);
+        Physics.IgnoreLayerCollision(9, 8, false);
+        Physics.IgnoreLayerCollision(9, 10, false);
+        Physics.IgnoreLayerCollision(9, 12, false);
     }
 
     #region Animations
@@ -69,10 +71,7 @@ public class PlayerView
     {
         _anim.SetTrigger("Throw");
     }
-    public void PogoFeedback()
-    {
-        _pogoPS.Play();
-    }
+
     #endregion
     public IEnumerator TakeDamageFeedback()
     {
@@ -80,11 +79,11 @@ public class PlayerView
         _invulnerabilityTimer = _invulnerabilityTime;
         _invulnerabily.gameObject.SetActive(true);
         _playerMaterial.color = Color.red;
-        yield return new WaitForSeconds(.1f);
-        _playerMaterial.color = Color.grey;
         Physics.IgnoreLayerCollision(9, 8, true);
         Physics.IgnoreLayerCollision(9, 10, true);
         Physics.IgnoreLayerCollision(9, 12, true);
+        yield return new WaitForSeconds(.1f);
+        _playerMaterial.color = Color.grey;
         yield return new WaitForSeconds(_invulnerabilityTime);
         _invulnerabily.gameObject.SetActive(false);
         Physics.IgnoreLayerCollision(9, 8, false);

@@ -15,14 +15,11 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 targetPos = _player.transform.position + _offset;
-
-        Physics.Raycast(_player.transform.position + Vector3.up, Vector3.down, out RaycastHit hit, Mathf.Infinity, GameManager.instance.GroundLayer);
-        _groundPoint = hit.point;
-
-        targetPos.y = Physics.CheckSphere(_player.transform.position, .1f, GameManager.instance.GroundLayer) ? targetPos.y : (targetPos.y + _groundPoint.y) * .5f;
+        Debug.Log(Physics.CheckSphere(_player.transform.position, .1f, GameManager.instance.GroundLayer));
+        float clampY = Mathf.Clamp(targetPos.y + (_groundPoint.y - targetPos.y) * .9f, targetPos.y - _offset.y * 1.5f, targetPos.y + _offset.y * 1.5f);
+        targetPos.y = Physics.CheckSphere(_player.transform.position, .1f, GameManager.instance.GroundLayer) ? targetPos.y : clampY;
         transform.position = Vector3.Lerp(transform.position, targetPos, _smooth * Time.deltaTime);
     }
-
     IEnumerator Shake(float duration, float magnitude)
     {
         Vector3 originalPos = transform.localPosition;
