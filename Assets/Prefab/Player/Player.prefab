@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &582592786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 582592787}
+  m_Layer: 9
+  m_Name: CameraLookAt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &582592787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582592786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.22, z: 1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1643867816806108604}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125670760766048099
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,6 +766,7 @@ Transform:
   - {fileID: 8801326314328761557}
   - {fileID: 1250461847925570317}
   - {fileID: 1250461846460879006}
+  - {fileID: 582592787}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -818,17 +849,15 @@ MonoBehaviour:
   _fallGravityMultiplier: 1.9
   _pogoForce: 15
   _attackRate: 2.9
-  _timeToThrow: 0.45
   _boomerangSpearDistance: 3.5
   _maxStamina: 30
   _meleeAttackStamina: 1
   _throwSpearStamina: 2
-  _jumpStamina: 2
-  _timeToAddStamina: 3
+  _jumpStamina: 0
+  _timeToAddStamina: 6
   _knockbackForce: 5
   _invulnerabilityTime: 3
   _doubleJumpPS: {fileID: 8801326314313559065}
-  _pogoPS: {fileID: 4702541799557844466}
   _boomerangSpearPrefab: {fileID: -1595099422555029602, guid: d4deb17f46db83549b8591c7eeb7195d, type: 3}
   _spawnSpear: {fileID: 643773571041744287}
   _staminaFill: {fileID: 0}
@@ -2964,11 +2993,6 @@ PrefabInstance:
 --- !u!4 &1997431081946559384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 784405411111379013, guid: fad5062c385efa94098617ed5455cc75, type: 3}
-  m_PrefabInstance: {fileID: 1250461847066219485}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &4702541799557844466 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5771434075984092719, guid: fad5062c385efa94098617ed5455cc75, type: 3}
   m_PrefabInstance: {fileID: 1250461847066219485}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1250461847962324933
