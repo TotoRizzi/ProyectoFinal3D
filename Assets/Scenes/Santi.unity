@@ -5896,8 +5896,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c75d6a1d8011c54abc9ef0aefa839de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 5
-  currentHp: 0
+  _maxLife: 0
+  _currentLife: 0
   attackDmg: 0
   knockBackTime: 0.3
   canMove: 1
@@ -17361,6 +17361,10 @@ PrefabInstance:
       propertyPath: _staminaFill
       value: 
       objectReference: {fileID: 1592665426}
+    - target: {fileID: 1250461846751280252, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}
+      propertyPath: _knockbackForce
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1250461846751280252, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}
       propertyPath: _invulneravilityImg
       value: 

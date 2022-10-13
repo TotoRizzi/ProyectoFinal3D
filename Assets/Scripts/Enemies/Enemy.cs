@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : Entity
 {
-    [Header("Health")]
-    [SerializeField] private float maxHp;
-    [SerializeField] private float currentHp;
-
     public float attackDmg;
 
 
@@ -36,10 +32,6 @@ public class Enemy : MonoBehaviour, IDamageable
         fsm = new StateMachine();
         myRb = GetComponent<Rigidbody>();
         myAnim = GetComponentInChildren<Animator>();
-    }
-    public virtual void Start()
-    {
-        currentHp = maxHp;
     }
     public virtual void Update()
     {
@@ -81,16 +73,16 @@ public class Enemy : MonoBehaviour, IDamageable
         isFacingRight = !isFacingRight;
     }
 
-    public void TakeDamage(float dmg)
+    public override void TakeDamage(float dmg)
     {
-        currentHp -= dmg;
-        if (currentHp <= 0) Die();
+        _currentLife -= dmg;
+        if (_currentLife <= 0) Die();
         else KnockBack();
     }
 
-    public virtual void Die()
+    public override void Die()
     {
-        Destroy(gameObject);
+        base.Die();
     }
     private void KnockBack()
     {

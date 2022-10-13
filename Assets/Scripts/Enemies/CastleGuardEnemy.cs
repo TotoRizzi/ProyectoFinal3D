@@ -11,7 +11,7 @@ public class CastleGuardEnemy : Enemy
     [SerializeField] float _walkingSpeed;
     [SerializeField] float _chasingSpeed;
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
 

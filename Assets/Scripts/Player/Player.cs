@@ -92,7 +92,6 @@ public class Player : Entity
         updateLifeBar += _playerView.UpdateLifeBar;
 
         getDamage += () => StartCoroutine(_playerView.TakeDamageFeedback());
-        getDamage += () => StartCoroutine(_playerModel.HitPlayer());
     }
     void Update()
     {
@@ -112,6 +111,10 @@ public class Player : Entity
     public override void Die()
     {
         SceneManagerScript.instance.ReloadScene();
+    }
+    public void Knockback(float enemyPosX)
+    {
+        StartCoroutine(_playerModel.HitPlayer(enemyPosX));
     }
     public void InstantiateSpear()
     {

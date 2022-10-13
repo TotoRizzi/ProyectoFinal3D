@@ -18,6 +18,6 @@ public abstract class Entity : MonoBehaviour, IDamageable
     }
     public virtual void Die()
     {
-        Debug.Log(name + "ha muerto");
+        Destroy(gameObject);
     }
 }

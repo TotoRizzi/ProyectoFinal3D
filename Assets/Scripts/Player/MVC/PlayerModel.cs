@@ -267,14 +267,15 @@ public class PlayerModel
         throwAnimation();
         SubstactStamina(_throwSpearStamina);
     }
-    public IEnumerator HitPlayer()
+    public IEnumerator HitPlayer(float EnemyPosX)
     {
+        Vector2 forceToAdd = new Vector2(EnemyPosX - _transform.position.x, 0).normalized;
         _gettingHit = true;
         _poging = false;
         _isJumping = false;
         _rb.velocity = Vector3.zero;
-        yield return new WaitForSeconds(.1f);
-        _rb.AddForce((-_transform.forward + Vector3.up) * _knockbackForce, ForceMode.Impulse);
+        _rb.AddForce((-forceToAdd + Vector2.up) * _knockbackForce, ForceMode.Impulse);
+        _transform.forward = forceToAdd;
         yield return new WaitForSeconds(.5f);
         _gettingHit = false;
         _rb.velocity = Vector3.zero;

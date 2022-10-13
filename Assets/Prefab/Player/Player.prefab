@@ -855,7 +855,7 @@ MonoBehaviour:
   _throwSpearStamina: 2
   _jumpStamina: 0
   _timeToAddStamina: 6
-  _knockbackForce: 5
+  _knockbackForce: 1
   _invulnerabilityTime: 3
   _doubleJumpPS: {fileID: 8801326314313559065}
   _boomerangSpearPrefab: {fileID: -1595099422555029602, guid: d4deb17f46db83549b8591c7eeb7195d, type: 3}

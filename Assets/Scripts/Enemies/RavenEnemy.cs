@@ -15,10 +15,10 @@ public class RavenEnemy : Enemy
 
     [SerializeField] Particle _deadParticle;
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
-        
+
         targetMovement = new DirectedMovement(transform, myRb, chargeSpeed, GameManager.instance.Player.transform);
 
         fsm.AddState(StateName.FlyingCharge, new State_FlyingCharge(this));
@@ -29,10 +29,14 @@ public class RavenEnemy : Enemy
     }
     private void OnTriggerEnter(Collider other)
     {
-        var player = other.GetComponent<IDamageable>();
-        if (player != null)
+        var damageable = other.GetComponent<IDamageable>();
+        var player = other.GetComponent<Player>();
+        if (damageable != null)
         {
-            player.TakeDamage(_dmg);
+            damageable.TakeDamage(_dmg);
+            if (player)
+                player.Knockback(transform.position.x);
+
             Die();
         }
     }
