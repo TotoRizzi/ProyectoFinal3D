@@ -1,0 +1,20 @@
+# This file uses centimeters as units for non-parametric coordinates.
+
+mtllib medio-medio-mirroreado.mtl
+g default
+v 12.002226 -2.272608 2.244133
+v 7.513959 -2.272608 2.244133
+v 12.002226 -5.210084 2.244133
+v 7.513959 -5.210084 2.244133
+vt 0.000000 0.000000
+vt 1.000000 0.000000
+vt 1.000000 1.000000
+vt 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+s off
+g pCube10
+usemtl initialShadingGroup
+f 1/1/1 2/2/2 4/3/3 3/4/4
