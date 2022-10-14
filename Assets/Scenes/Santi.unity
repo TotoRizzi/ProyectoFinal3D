@@ -17363,7 +17363,7 @@ PrefabInstance:
       objectReference: {fileID: 1592665426}
     - target: {fileID: 1250461846751280252, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}
       propertyPath: _knockbackForce
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1250461846751280252, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}
       propertyPath: _invulneravilityImg
@@ -17419,7 +17419,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4625229550783109062, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}
       propertyPath: m_WarningMessage
-      value: 
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:LeftArm'\n\tTransform
+        'mixamorig:LeftForeArm'\n\tTransform 'mixamorig:Neck'\n\tTransform 'mixamorig:LeftHand'\n\tTransform
+        'mixamorig:Head'\n\tTransform 'mixamorig:LeftArm'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform
+        'mixamorig:Neck'\n\tTransform 'mixamorig:LeftHand'\n\tand more ..."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a607fbdc4e849214f9f414f588cbb12b, type: 3}

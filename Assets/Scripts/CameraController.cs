@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         _player = FindObjectOfType<Player>();
-        _player.getDamage += () => StartCoroutine(Shake(.1f, .05f));
+        _player.getDamage += () => StartCoroutine(Shake(.1f, .1f));
     }
     private void LateUpdate()
     {
