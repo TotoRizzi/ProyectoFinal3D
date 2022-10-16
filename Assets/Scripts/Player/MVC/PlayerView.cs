@@ -28,9 +28,6 @@ public class PlayerView
         _tr = tr;
 
         _invulnerabily.gameObject.SetActive(false);
-        Physics.IgnoreLayerCollision(9, 8, false);
-        Physics.IgnoreLayerCollision(9, 10, false);
-        Physics.IgnoreLayerCollision(9, 12, false);
     }
 
     #region Animations
@@ -71,7 +68,13 @@ public class PlayerView
     {
         _anim.SetTrigger("Throw");
     }
-
+    public void DieAnimation()
+    {
+        _anim.SetTrigger("Die");
+        Physics.IgnoreLayerCollision(9, 8, true);
+        Physics.IgnoreLayerCollision(9, 10, true);
+        Physics.IgnoreLayerCollision(9, 12, true);
+    }
     #endregion
     public IEnumerator TakeDamageFeedback()
     {

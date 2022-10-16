@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 public class Player : Entity
@@ -92,15 +91,18 @@ public class Player : Entity
         updateLifeBar += _playerView.UpdateLifeBar;
 
         getDamage += () => StartCoroutine(_playerView.TakeDamageFeedback());
+
+        UIManager.Instance.defeatEvent += _playerView.DieAnimation;
+        UIManager.Instance.defeatEvent += _playerModel.Die;
     }
     void Update()
     {
-        _myController.OnUpdate();
+        _myController?.OnUpdate();
         _playerView.OnUpdate();
     }
     private void FixedUpdate()
     {
-        _myController.OnFixedUpdate();
+        _myController?.OnFixedUpdate();
     }
     public override void TakeDamage(float dmg)
     {
@@ -110,7 +112,8 @@ public class Player : Entity
     }
     public override void Die()
     {
-        SceneManagerScript.instance.ReloadScene();
+        _myController = null;
+        UIManager.Instance.defeatEvent();
     }
     public void Knockback(float enemyPosX)
     {

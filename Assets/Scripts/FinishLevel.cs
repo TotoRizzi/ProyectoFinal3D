@@ -6,6 +6,6 @@ public class FinishLevel : MonoBehaviour
         var player = other.GetComponent<Player>();
 
         if (player != null)
-            SceneManagerScript.instance.ReloadScene();
+            UIManager.Instance.victoryEvent();
     }
 }

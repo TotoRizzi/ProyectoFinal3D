@@ -6,9 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] private Player _player;
+    public GameObject defeatCanvas;
+    public GameObject victoryCanvas;
 
+    [SerializeField] private Player _player;
     [SerializeField] LayerMask _wallLayer, _groundLayer, _playerLayer, _enemyLayer;
+
     #region Getters
 
     public Player Player { get { return _player; } }
@@ -25,10 +28,6 @@ public class GameManager : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
-    private void Start()
-    {
-    }
-
     public Vector3 GetDirectionToPlayer(Transform transform)
     {
         return (_player.transform.position + transform.up) - transform.position;

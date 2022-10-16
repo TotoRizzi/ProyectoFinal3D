@@ -7,6 +7,7 @@ public class PausedMenu : Menu
     [SerializeField] GameObject _controlsMenu;
     void Start()
     {
+        ResumeGame();
         _pauseGM.SetActive(false);
     }
     void Update()

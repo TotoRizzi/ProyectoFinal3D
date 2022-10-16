@@ -59,7 +59,8 @@ public class PlayerModel
     public PlayerModel(Transform transform, Rigidbody rb, float groundFriction, float movementSpeed, float acceleration,
         float decceleration, float velPower, float jumpCutMultiplier, float jumpForce, float dashForce, float dashTime, float dashCoolDown,
         float jumpBufferLength, float jumpCoyotaTime, float gravityScale, float fallGravityMultiplier, float pogoForce, float attackRate,
-        float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, float knockbackForce, PlayerSpear playerSpear)
+        float maxStamina, float attackStamina, float throwSpearStamina, float jumpStamina, float timeToAddStamina, float knockbackForce,
+        PlayerSpear playerSpear)
     {
         _transform = transform;
         _rb = rb;
@@ -271,8 +272,6 @@ public class PlayerModel
     {
         Vector2 forceToAdd = new Vector2(EnemyPosX - _transform.position.x, 0).normalized;
         _gettingHit = true;
-        _poging = false;
-        _isJumping = false;
         _rb.velocity = Vector3.zero;
         _rb.AddForce((-forceToAdd + Vector2.up) * _knockbackForce, ForceMode.Impulse);
         _transform.forward = forceToAdd;
@@ -281,6 +280,13 @@ public class PlayerModel
         _rb.velocity = Vector3.zero;
     }
 
+    public void Die()
+    {
+        _rb.velocity = Vector3.zero;
+        Physics.IgnoreLayerCollision(9, 8, true);
+        Physics.IgnoreLayerCollision(9, 10, true);
+        Physics.IgnoreLayerCollision(9, 12, true);
+    }
     #region Stamina
     void AddStamina()
     {

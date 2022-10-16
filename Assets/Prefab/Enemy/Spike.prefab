@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6811352906245089767}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2791958320819245317, guid: 26e7186576a4dd8439f20e5e33939aa4, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3311508985220221887, guid: 26e7186576a4dd8439f20e5e33939aa4, type: 3}
       propertyPath: m_RootOrder
