@@ -16,7 +16,7 @@ public class State_StandingIdle : IState
     public void OnEnter()
     {
         currentIdleTime = 0;
-        //play a la animacion
+        _myEnemy.myAnim.Play(_myEnemy.idleAnimationName);
     }
 
     public void OnExit()
@@ -32,6 +32,6 @@ public class State_StandingIdle : IState
     public void OnUpdate()
     {
         currentIdleTime += Time.deltaTime;
-        if (currentIdleTime > _myEnemy._idleTime) _fsm.ChangeState(StateName.Teleport);
+        if (currentIdleTime > _myEnemy.idleTime) _fsm.ChangeState(StateName.Teleport);
     }
 }

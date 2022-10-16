@@ -7,16 +7,27 @@ public class State_Teleport : IState
     Necromancer _myEnemy;
     StateMachine _fsm;
     int _wayPointToTeleport;
+    int _prebWaypoint;
 
     public State_Teleport(Necromancer myEnemy, StateMachine fsm)
     {
         _myEnemy = myEnemy;
-        fsm = _fsm;
+        _fsm = fsm;
     }
 
     public void OnEnter()
     {
-        _wayPointToTeleport = Random.Range(0, _myEnemy._myWaipoints.Length - 1);
+        int newWaypoint = Random.Range(0, _myEnemy.myWaipoints.Length - 1);
+
+        if(newWaypoint == _prebWaypoint)
+        {
+            while (newWaypoint == _prebWaypoint)
+                newWaypoint = Random.Range(0, _myEnemy.myWaipoints.Length - 1);
+        }
+
+        _wayPointToTeleport = newWaypoint;
+        _prebWaypoint = _wayPointToTeleport;
+        _myEnemy.myAnim.Play(_myEnemy.teleportAnimationName);
     }
 
     public void OnExit()
@@ -31,8 +42,9 @@ public class State_Teleport : IState
 
     public void OnUpdate()
     {
-        //Cuando la animacion de tepearse termine
-        _myEnemy.transform.position = _myEnemy._myWaipoints[_wayPointToTeleport].transform.position;
+        if (_myEnemy.myAnim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1) return;
+
+        _myEnemy.transform.position = _myEnemy.myWaipoints[_wayPointToTeleport].transform.position;
         _fsm.ChangeState(StateName.InvokeRavens);
     }
 }

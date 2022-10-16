@@ -14,7 +14,7 @@ public class State_InvokeRavens : IState
     }
     public void OnEnter()
     {
-        //Play la animacion y que dispare por ahi
+        _myEnemy.myAnim.Play(_myEnemy.invokeAnimationName);
     }
 
     public void OnExit()
@@ -29,6 +29,7 @@ public class State_InvokeRavens : IState
 
     public void OnUpdate()
     {
-        //Cuando se termina la animacion, cambie al state Idle
+        if (_myEnemy.myAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+            _fsm.ChangeState(StateName.StandingIdle);
     }
 }

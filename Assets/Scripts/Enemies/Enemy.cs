@@ -74,7 +74,9 @@ public class Enemy : Entity
 
     public override void Die()
     {
-        base.Die();
+        isAlive = false;
+        myRb.isKinematic = true;
+        myCollider.enabled = false;
     }
     private void KnockBack()
     {

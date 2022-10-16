@@ -30,9 +30,7 @@ public class CastleGuardEnemy : Enemy
     }
     public override void Die()
     {
-        isAlive = false;
-        myRb.isKinematic = true;
-        myCollider.enabled = false;
+        base.Die();
 
         myAnim.Play("Die");
     }
