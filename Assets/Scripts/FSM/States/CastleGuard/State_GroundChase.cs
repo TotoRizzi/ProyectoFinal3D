@@ -36,6 +36,8 @@ public class State_GroundChase : IState
 
     public void OnUpdate()
     {
+        Debug.Log("Chasing");
+
         _myEnemy.LookAtPlayer();
         //Debug.Log("Chasing");
 

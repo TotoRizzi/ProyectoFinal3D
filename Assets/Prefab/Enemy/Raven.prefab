@@ -238,18 +238,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c75d6a1d8011c54abc9ef0aefa839de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 5
-  currentHp: 0
+  _maxLife: 0
+  _currentLife: 0
   attackDmg: 0
   knockBackTime: 0.3
   canMove: 1
+  isFacingRight: 1
   myRb: {fileID: 1966978881217973715}
   _myModel: {fileID: 1966978880652278834}
   myCollider: {fileID: 1966978881217973714}
   myAnim: {fileID: 0}
-  viewRange: 10
   _dmg: 0
   evadeTime: 5
+  viewRange: 10
   evadeSpeed: 5
   chargeSpeed: 7
-  maxMovingForce: 0.05
+  maxMovingForce: 0.1
+  _deadParticle: {fileID: 0}

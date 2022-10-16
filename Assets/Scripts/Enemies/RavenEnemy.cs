@@ -8,6 +8,7 @@ public class RavenEnemy : Enemy
     public float evadeTime;
 
     public IMovement targetMovement;
+    public float viewRange;
 
     public float evadeSpeed;
     public float chargeSpeed;

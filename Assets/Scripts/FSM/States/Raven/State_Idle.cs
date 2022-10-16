@@ -5,9 +5,9 @@ using UnityEngine;
 public class State_Idle : IState
 {
     StateMachine _fsm;
-    Enemy _myEnemy;
+    RavenEnemy _myEnemy;
     StateName _stateToGo;
-    public State_Idle(Enemy enemy, StateMachine fsm, StateName stateToGo)
+    public State_Idle(RavenEnemy enemy, StateMachine fsm, StateName stateToGo)
     {
         _myEnemy = enemy;
         _fsm = fsm;
