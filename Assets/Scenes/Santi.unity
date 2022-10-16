@@ -254,11 +254,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.y
-      value: 17.310112
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.y
-      value: 0.49380922
+      value: -0.15363955
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
@@ -735,7 +735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.y
-      value: 14.909478
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.x
@@ -8341,10 +8341,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _smooth: 5
-  _minX: 10
+  _minX: 6
   _minY: 7
-  _maxX: -10
-  _maxY: 0
+  _maxX: -6
+  _maxY: -7
   currentRoom: {fileID: 517419347}
 --- !u!1001 &911695726
 PrefabInstance:
@@ -17967,7 +17967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.y
-      value: 13.39858
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.x
@@ -20072,7 +20072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.y
-      value: 13.253128
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.x
