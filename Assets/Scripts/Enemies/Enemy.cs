@@ -7,25 +7,17 @@ public class Enemy : Entity
 {
     public float attackDmg;
 
-
     [Header("Movement")]
     [SerializeField] private float knockBackTime = .3f;
     public bool canMove = true;
     protected bool isAlive = true;
     [SerializeField] protected bool isFacingRight = true;
 
-    public IMovement slowMovement;
-    public IMovement fastMovement;
-
     protected Action EnemyOnUpdate;
     public StateMachine fsm;
     public Rigidbody myRb;
-    [SerializeField] protected GameObject _myModel;
     [SerializeField] protected Collider myCollider;
     [HideInInspector] public Animator myAnim;
-
-    [Header("Ranges Movement")]
-    public float viewRange;
 
     private void Awake()
     {
@@ -42,18 +34,18 @@ public class Enemy : Entity
         if (canMove && isAlive) fsm.FixedUpdate();
 
     }
-    public void LookAtPlayer()
+    public virtual void LookAtPlayer()
     {
 
         if(GameManager.instance.Player.transform.position.x > transform.position.x)
         {
-            isFacingRight = true;
-            _myModel.transform.rotation = Quaternion.Euler(0, 0, 0);
+            isFacingRight = false;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
-            isFacingRight = false;
-            _myModel.transform.rotation = Quaternion.Euler(0, 180, 0);
+            isFacingRight = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
     }
@@ -67,8 +59,8 @@ public class Enemy : Entity
     }
     public void Flip()
     {
-        if (isFacingRight) _myModel.transform.rotation = Quaternion.Euler(0, 180, 0);
-        else _myModel.transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (isFacingRight) transform.rotation = Quaternion.Euler(0, 0, 0);
+        else transform.rotation = Quaternion.Euler(0, 180, 0);
 
         isFacingRight = !isFacingRight;
     }
@@ -82,7 +74,9 @@ public class Enemy : Entity
 
     public override void Die()
     {
-        base.Die();
+        isAlive = false;
+        myRb.isKinematic = true;
+        myCollider.enabled = false;
     }
     private void KnockBack()
     {

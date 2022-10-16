@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6259204857066472542}
+  - component: {fileID: -8908056627515327882}
   - component: {fileID: 6259204857066472541}
   - component: {fileID: 6259204857066472540}
-  - component: {fileID: 6259204857066472539}
   m_Layer: 12
-  m_Name: Raven
+  m_Name: NecromancerRaven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6259204857066472538}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -56.11025, y: -2.98, z: 0}
   m_LocalScale: {x: 0.56457, y: 0.56457, z: 0.56457}
   m_Children:
@@ -34,6 +34,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8908056627515327882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6259204857066472538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9245388357f8b445a69b67d3139b311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxLife: 1
+  _currentLife: 0
+  attackDmg: 2
+  knockBackTime: 0.3
+  canMove: 1
+  isFacingRight: 1
+  myRb: {fileID: 6259204857066472540}
+  myCollider: {fileID: 6259204857066472541}
+  myAnim: {fileID: 0}
+  _deadParticle: {fileID: -1557221206304410931, guid: 461b81c7be0b3b4438d5b68932b43d96, type: 3}
+  _myModel: {fileID: 6259204857694977448}
+  maxMovingForce: 0.1
+  chargeSpeed: 7
 --- !u!65 &6259204857066472541
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63,34 +88,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 88
   m_CollisionDetection: 0
---- !u!114 &6259204857066472539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6259204857066472538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c75d6a1d8011c54abc9ef0aefa839de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxLife: 0
-  _currentLife: 0
-  attackDmg: 0
-  knockBackTime: 0.3
-  canMove: 1
-  isFacingRight: 1
-  myRb: {fileID: 6259204857066472540}
-  myCollider: {fileID: 6259204857066472541}
-  myAnim: {fileID: 0}
-  _deadParticle: {fileID: -1557221206304410931, guid: 461b81c7be0b3b4438d5b68932b43d96, type: 3}
-  _myModel: {fileID: 6259204857694977448}
-  maxMovingForce: 0.1
-  chargeSpeed: 7
-  evadeTime: 3
-  viewRange: 10
-  evadeSpeed: 5
 --- !u!1 &6259204857694977448
 GameObject:
   m_ObjectHideFlags: 0

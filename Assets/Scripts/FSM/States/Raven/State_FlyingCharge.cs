@@ -7,9 +7,9 @@ public class State_FlyingCharge : IState
     Vector3 _dirToGo;
     Vector3 _velocity;
 
-    RavenEnemy _myEnemy;
+    SimpleRaven _myEnemy;
 
-    public State_FlyingCharge(RavenEnemy enemy)
+    public State_FlyingCharge(SimpleRaven enemy)
     {
         _myEnemy = enemy;
     }

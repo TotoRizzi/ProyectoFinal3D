@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class CastleGuardEnemy : Enemy
 {
+    [Header("Ranges Movement")]
+    public float viewRange;
     public float attackRange;
+
+    public IMovement slowMovement;
+    public IMovement fastMovement;
 
     [Header("Mine")]
     [SerializeField] Transform _wallAndGroundCheckPosition;
@@ -15,19 +20,17 @@ public class CastleGuardEnemy : Enemy
     {
         base.Start();
 
-        slowMovement = new RightMovement(this.transform, _myModel.transform, myRb, _walkingSpeed);
-        fastMovement = new RightMovement(this.transform, _myModel.transform, myRb, _chasingSpeed);
+        slowMovement = new RightMovement(this.transform, myRb, _walkingSpeed);
+        fastMovement = new RightMovement(this.transform, myRb, _chasingSpeed);
 
         fsm.AddState(StateName.GroundWalk, new State_GroundWalk(this, fsm, _wallAndGroundCheckPosition));
         fsm.AddState(StateName.GroundChase, new State_GroundChase(this, fsm, _wallAndGroundCheckPosition));
         fsm.AddState(StateName.GroundAttack, new State_GroundAttack(this, fsm));
-        fsm.ChangeState(StateName.GroundChase);
+        fsm.ChangeState(StateName.GroundWalk);
     }
     public override void Die()
     {
-        isAlive = false;
-        myRb.isKinematic = true;
-        myCollider.enabled = false;
+        base.Die();
 
         myAnim.Play("Die");
     }

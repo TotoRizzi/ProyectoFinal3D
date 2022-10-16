@@ -5,9 +5,9 @@ using UnityEngine;
 public class State_GroundWalk : IState
 {
     StateMachine _fsm;
-    Enemy _myEnemy;
+    CastleGuardEnemy _myEnemy;
     Transform _wallAndGroundCheckPosition;
-    public State_GroundWalk(Enemy enemy, StateMachine fsm, Transform wallAndGroundCheckPosition)
+    public State_GroundWalk(CastleGuardEnemy enemy, StateMachine fsm, Transform wallAndGroundCheckPosition)
     {
         _myEnemy = enemy;
         _fsm = fsm;
@@ -30,6 +30,7 @@ public class State_GroundWalk : IState
 
     public void OnUpdate()
     {
+        Debug.Log("Walking");
         if (Physics.Raycast(_wallAndGroundCheckPosition.position, _myEnemy.transform.right, 0.1f, GameManager.instance.WallLayer)
             ||
             !Physics.Raycast(_myEnemy.transform.position, -_myEnemy.transform.up, 2.0f, GameManager.instance.GroundLayer)
