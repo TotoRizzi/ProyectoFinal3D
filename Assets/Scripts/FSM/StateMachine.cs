@@ -2,7 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StateName{Idle, GroundWalk, GroundChase, FlyingEvade, FlyingCharge, GroundAttack, WayPointWalk }
+public enum StateName
+{
+    /*Raven*/           Idle, FlyingEvade, FlyingCharge,
+    /*CastleGuard*/     GroundWalk, GroundChase, GroundAttack,
+    /*SimpleGround*/    WayPointWalk,
+    /*Necromancer*/     Teleport, InvokeRavens, StandingIdle
+}
 
 public class StateMachine
 {

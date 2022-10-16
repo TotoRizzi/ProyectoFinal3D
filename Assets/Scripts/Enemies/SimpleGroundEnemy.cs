@@ -5,7 +5,8 @@ using UnityEngine;
 public class SimpleGroundEnemy : Enemy
 {
     [SerializeField] float _mySpeed;
-    public Transform[] _myWaypoints;
+    [SerializeField] Transform[] _myWaypoints;
+
     public IMovement _myMovement;
     protected override void Start()
     {

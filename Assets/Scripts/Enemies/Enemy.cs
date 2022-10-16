@@ -16,7 +16,6 @@ public class Enemy : Entity
     protected Action EnemyOnUpdate;
     public StateMachine fsm;
     public Rigidbody myRb;
-    [SerializeField] protected GameObject _myModel;
     [SerializeField] protected Collider myCollider;
     [HideInInspector] public Animator myAnim;
 
@@ -35,7 +34,7 @@ public class Enemy : Entity
         if (canMove && isAlive) fsm.FixedUpdate();
 
     }
-    public void LookAtPlayer()
+    public virtual void LookAtPlayer()
     {
 
         if(GameManager.instance.Player.transform.position.x > transform.position.x)
