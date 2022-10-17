@@ -5,9 +5,11 @@ using UnityEngine;
 public class EnemyDamageOnTrigger : MonoBehaviour
 {
     Enemy _myEnemy;
+    [SerializeField] bool enemyScriptInThisObject;
     private void Start()
     {
-        _myEnemy = GetComponentInParent<Enemy>();
+        if (!enemyScriptInThisObject) _myEnemy = GetComponentInParent<Enemy>();
+        else _myEnemy = GetComponent<Enemy>();
     }
     private void OnTriggerEnter(Collider other)
     {

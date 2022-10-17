@@ -7,7 +7,7 @@ public class Enemy : Entity
 {
     public float attackDmg;
 
-    [SerializeField] float _distanceToFunction = 25f;
+    float _distanceToFunction = 25f;
 
     [Header("Movement")]
     [SerializeField] private float knockBackTime = .3f;
