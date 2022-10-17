@@ -351,13 +351,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7deaf2112e1ee7c4ab9534e8c6378241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 5
-  currentHp: 0
+  _maxLife: 6
+  _currentLife: 0
   attackDmg: 1
   knockBackTime: 0.3
   canMove: 1
+  isFacingRight: 1
   myRb: {fileID: 0}
-  _myModel: {fileID: 7855565702300264547}
   myCollider: {fileID: 7711503829190914367}
   myAnim: {fileID: 0}
   viewRange: 10

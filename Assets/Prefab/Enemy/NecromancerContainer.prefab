@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6af00b2828cad45bb074c837b4ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLife: 2
+  _maxLife: 4
   _currentLife: 0
   attackDmg: 0
   knockBackTime: 0.3
@@ -118,7 +118,7 @@ MonoBehaviour:
   myRb: {fileID: 0}
   myCollider: {fileID: 6476440214609943067}
   myAnim: {fileID: 0}
-  idleTime: 3
+  idleTime: 0.5
   myWaipoints:
   - {fileID: 6476440215655124439}
   - {fileID: 6476440215055386993}
