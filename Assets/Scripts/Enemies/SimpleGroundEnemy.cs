@@ -16,4 +16,8 @@ public class SimpleGroundEnemy : Enemy
         fsm.AddState(StateName.WayPointWalk, new State_WayPointWalk(this));
         fsm.ChangeState(StateName.WayPointWalk);
     }
+    public override void Die()
+    {
+        Destroy(gameObject);
+    }
 }
