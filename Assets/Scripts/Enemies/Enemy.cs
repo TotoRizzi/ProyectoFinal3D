@@ -7,6 +7,8 @@ public class Enemy : Entity
 {
     public float attackDmg;
 
+    [SerializeField] float _distanceToFunction = 25f;
+
     [Header("Movement")]
     [SerializeField] private float knockBackTime = .3f;
     public bool canMove = true;
@@ -27,11 +29,11 @@ public class Enemy : Entity
     }
     public virtual void Update()
     {
-        if (canMove && isAlive) fsm.Update();
+        if (canMove && isAlive && GameManager.instance.GetDirectionToPlayer(this.transform).magnitude < _distanceToFunction) fsm.Update();
     }
     public virtual void FixedUpdate()
     {
-        if (canMove && isAlive) fsm.FixedUpdate();
+        if (canMove && isAlive && GameManager.instance.GetDirectionToPlayer(this.transform).magnitude < _distanceToFunction) fsm.FixedUpdate();
 
     }
     public virtual void LookAtPlayer()
