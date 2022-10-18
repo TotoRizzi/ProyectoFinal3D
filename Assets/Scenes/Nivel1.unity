@@ -643,7 +643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.y
-      value: 12.678041
+      value: 13.753105
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.x
@@ -651,7 +651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.y
-      value: 8.650283
+      value: 9.187815
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
@@ -14333,19 +14333,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.x
-      value: 82.82442
+      value: 81.385254
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.y
-      value: 13.845879
+      value: 12.792147
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.x
-      value: -6.7107315
+      value: -5.99115
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.y
-      value: 10.816513
+      value: 11.343379
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
@@ -19465,6 +19465,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1544160191}
     m_Modifications:
+    - target: {fileID: 4993624564621510055, guid: a323985df6779e649a4bf9a22cbe226a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 661609636}
+    - target: {fileID: 4993624564699615656, guid: a323985df6779e649a4bf9a22cbe226a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 661609636}
     - target: {fileID: 4993624566242211976, guid: a323985df6779e649a4bf9a22cbe226a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -21955,7 +21963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.x
-      value: 33.692318
+      value: 37.180725
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.y
@@ -21963,7 +21971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.x
-      value: -8.564257
+      value: -10.308459
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.y
@@ -25131,7 +25139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.x
-      value: 42.994347
+      value: 39.445374
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Size.y
@@ -25139,7 +25147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.x
-      value: 7.6089096
+      value: 5.83442
       objectReference: {fileID: 0}
     - target: {fileID: 6614335133260887651, guid: a08c351bafd4ac34db71e398824028f3, type: 3}
       propertyPath: m_Center.y
