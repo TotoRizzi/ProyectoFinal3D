@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ public class ParallaxEffect : MonoBehaviour
             transform.Translate(new Vector3(_spriteWidth, 0, 0));
             _startPos += _spriteWidth;
         }
-        else
+        else if(moveAmount < _startPos - _spriteWidth)
         {
             transform.Translate(new Vector3(-_spriteWidth, 0, 0));
             _startPos -= _spriteWidth;
