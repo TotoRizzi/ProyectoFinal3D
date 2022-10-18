@@ -106,8 +106,9 @@ public class Player : Entity
     }
     public override void TakeDamage(float dmg)
     {
-        getDamage();
         base.TakeDamage(dmg);
+        if (_currentLife > 0)
+            getDamage();
         updateLifeBar(_currentLife / _maxLife);
     }
     public override void Die()
@@ -117,7 +118,8 @@ public class Player : Entity
     }
     public void Knockback(float enemyPosX)
     {
-        StartCoroutine(_playerModel.HitPlayer(enemyPosX));
+        if (_currentLife > 0)
+            StartCoroutine(_playerModel.HitPlayer(enemyPosX));
     }
     public void InstantiateSpear()
     {

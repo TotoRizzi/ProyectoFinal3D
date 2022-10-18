@@ -11,11 +11,11 @@ public class PlayerView
     Image _hpFill;
     Image _invulnerabily;
     float _invulnerabilityTime;
-    TrailRenderer _tr;
+    TrailRenderer _dashTr;
 
     float _invulnerabilityTimer;
     public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, Image staminaFill, Image hpFill,
-        Image invulneravility, float invulnerabilityTime, TrailRenderer tr)
+        Image invulneravility, float invulnerabilityTime, TrailRenderer dashTr)
     {
         _anim = anim;
         _playerMaterial = playerMaterial;
@@ -25,9 +25,13 @@ public class PlayerView
         _hpFill = hpFill;
         _invulnerabily = invulneravility;
         _invulnerabilityTime = invulnerabilityTime;
-        _tr = tr;
+        _dashTr = dashTr;
 
         _invulnerabily.gameObject.SetActive(false);
+
+        Physics.IgnoreLayerCollision(9, 8, false);
+        Physics.IgnoreLayerCollision(9, 10, false);
+        Physics.IgnoreLayerCollision(9, 12, false);
     }
 
     #region Animations
@@ -54,10 +58,10 @@ public class PlayerView
         if (dashing)
         {
             _anim.SetTrigger("Dash");
-            _tr.emitting = true;
+            _dashTr.emitting = true;
         }
         else
-            _tr.emitting = false;
+            _dashTr.emitting = false;
     }
     public void AttackAnimation(int yAxis)
     {

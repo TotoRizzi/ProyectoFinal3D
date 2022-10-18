@@ -247,7 +247,7 @@ public class PlayerModel
             _rb.AddForce(Vector3.down * _gravityScale);
     }
 
-    public void Attack(float yAxis)
+    public void Attack(float yAxis = 0)
     {
         if (_currentStamina < _attackStamina || !playerSpear.canUseSpear) return;
 
