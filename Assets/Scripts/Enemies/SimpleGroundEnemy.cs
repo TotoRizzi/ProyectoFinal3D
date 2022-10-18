@@ -20,4 +20,13 @@ public class SimpleGroundEnemy : Enemy
     {
         Destroy(gameObject);
     }
+    private void OnTriggerEnter(Collider collider)
+    {
+        var player = collider.GetComponent<Player>();
+        if (player)
+        {
+            player.TakeDamage(attackDmg);
+            player.Knockback(transform.position.x);
+        }
+    }
 }

@@ -85,6 +85,16 @@ public class Enemy : Entity
         canMove = false;
         StartCoroutine(ResetCanMove(knockBackTime));
     }
+    protected void OnCollisionEnter(Collision collision)
+    {
+        var player = collision.gameObject.GetComponent<Player>();
+        if (player)
+        {
+            player.TakeDamage(attackDmg);
+            player.Knockback(transform.position.x);
+        }
+            
+    }
     IEnumerator ResetCanMove(float time)
     {
         yield return new WaitForSeconds(time);
