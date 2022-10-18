@@ -17,16 +17,21 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         defeatEvent += () => StartCoroutine(DefeatPanel());
-        victoryEvent += () => _victoryPanel.SetActive(true);
+        victoryEvent += VictoryPanel;
     }
     private void OnDisable()
     {
         defeatEvent -= () => StartCoroutine(DefeatPanel());
-        victoryEvent -= () => _victoryPanel.SetActive(true);
+        victoryEvent -= VictoryPanel;
     }
     IEnumerator DefeatPanel()
     {
         yield return new WaitForSeconds(3f);
         _defeatPanel.SetActive(true);
+    }
+    void VictoryPanel()
+    {
+        Time.timeScale = 0;
+        _victoryPanel.SetActive(true);
     }
 }
