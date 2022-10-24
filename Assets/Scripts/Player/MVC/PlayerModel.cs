@@ -52,7 +52,7 @@ public class PlayerModel
     public Action<bool> fallingAction;
     public Action<bool> dashAction;
     public Action<bool> inGroundedAction;
-    public Action pogoFeedback;
+    //public Action pogoFeedback;
     public Action throwAnimation;
     public Action<int> attackAction;
     public Action<float> updateStamina;
@@ -127,7 +127,7 @@ public class PlayerModel
 
         GroundFriction(xAxis);
         Run(xAxis);
-        Falling(!inGrounded);
+        Falling();
 
         if (!_canDash && _rb.velocity.magnitude > _dashForce)
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _dashForce);
@@ -181,8 +181,10 @@ public class PlayerModel
     }
     public void OnJumpUp()
     {
-        if (_rb.velocity.y < 0 || _poging) return;
-        _rb.AddForce(Vector3.down * _rb.velocity.y * (1 - _jumpCutMultiplier), ForceMode.Impulse);
+        if (_poging) return;
+
+        if (_rb.velocity.y > 0 && _isJumping)
+            _rb.AddForce(Vector3.down * _rb.velocity.y * (1 - _jumpCutMultiplier), ForceMode.Impulse);
     }
     public void OnJumpDown()
     {
@@ -239,9 +241,9 @@ public class PlayerModel
             _poging = true;
         }
     }
-    public void Falling(bool falling)
+    public void Falling()
     {
-        if (falling)
+        if (_rb.velocity.y < 0)
             _rb.AddForce(Vector3.down * (_gravityScale * _fallGravityMultiplier));
         else
             _rb.AddForce(Vector3.down * _gravityScale);

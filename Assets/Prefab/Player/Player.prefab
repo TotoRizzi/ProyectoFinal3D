@@ -834,19 +834,19 @@ MonoBehaviour:
   _maxLife: 10
   _currentLife: 0
   _movementSpeed: 8
-  _acceleration: 12
+  _acceleration: 9
   _decceleration: 12
   _groundFriction: 0.1
   _velPower: 1.05
   _jumpForce: 15
   _jumpCutMultiplier: 0.08
   _jumpCoyotaTime: 0.1
-  _jumpBufferLength: 0.1
+  _jumpBufferLength: 0.15
   _dashForce: 20
   _dashTime: 0.15
   _dashCooldown: 1
   _gravityScale: 3
-  _fallGravityMultiplier: 1.9
+  _fallGravityMultiplier: 2.5
   _pogoForce: 15
   _attackRate: 2.9
   _boomerangSpearDistance: 3.5

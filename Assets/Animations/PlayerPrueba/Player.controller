@@ -223,28 +223,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &-4254400618708873924
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -4613041834359775628}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.1
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &-3791990252692596889
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -709,7 +687,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: eefdd42a65d883b4990c31b9401e7126, type: 3}
+    m_Motion: {fileID: 7400000, guid: f3de0ad08ab28f7409e7a86be06b85d2, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -717,7 +695,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 6b9d5b43e0ec5d446a3aca334c82e534, type: 3}
+    m_Motion: {fileID: 7400000, guid: 3fa6e1c05f5cf8a4c8d981582ac3c8ce, type: 2}
     m_Threshold: 0.5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -725,7 +703,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 03208bf78f36c4b4e964bd4e4db3a8f1, type: 3}
+    m_Motion: {fileID: 7400000, guid: c6d7c88e569542e41bf8d44b3f22f0c7, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1014,7 +992,6 @@ AnimatorState:
   m_Transitions:
   - {fileID: -969032714709283695}
   - {fileID: 4434616238909944991}
-  - {fileID: -4254400618708873924}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
