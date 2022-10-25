@@ -15,7 +15,7 @@ public class FallingObject : MonoBehaviour
         transform.position += _direction * _speed * Time.deltaTime;
 
         _currentTimeToDestroy += Time.deltaTime;
-        if (_currentTimeToDestroy >= _timeToDestroy) Destroy(gameObject);
+        if (_currentTimeToDestroy >= _timeToDestroy) ReturnToFactory();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,4 +25,32 @@ public class FallingObject : MonoBehaviour
         if (dealDamage != null) dealDamage.TakeDamage(_damage);
         Destroy(gameObject);
     }
+    #region Factory
+
+    private void Reset()
+    {
+        _currentTimeToDestroy = 0;
+    }
+    public virtual void ReturnToFactory()
+    {
+        Reset();
+        FRY_FallingRock.Instance.ReturnObject(this);
+    }
+
+    public static void TurnOn(FallingObject b)
+    {
+        b.gameObject.SetActive(true);  
+    }
+
+    public static void TurnOff(FallingObject b)
+    {
+        b.gameObject.SetActive(false);
+    }
+
+    public FallingObject SetPosition(Vector3 pos)
+    {
+        transform.position = pos;
+        return this;
+    }
+    #endregion
 }

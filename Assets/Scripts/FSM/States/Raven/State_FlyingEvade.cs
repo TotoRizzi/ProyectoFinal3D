@@ -19,7 +19,7 @@ public class State_FlyingEvade : IState
     }
     public void OnEnter()
     {
-        dirToGo = new Vector3(Random.Range(-10,11), Random.Range(0,11), 0).normalized;
+        dirToGo = new Vector3(Random.Range(-10,11), Random.Range(0,11), _myEnemy.transform.position.z).normalized;
     }
 
     public void OnExit()

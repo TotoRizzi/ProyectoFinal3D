@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8978562231331399045}
   - component: {fileID: 2629678653827840432}
   - component: {fileID: 4356983424774640721}
-  - component: {fileID: -1557221206304410931}
+  - component: {fileID: 3676413566604908817}
   m_Layer: 0
   m_Name: PlumasCuervoPT
   m_TagString: Untagged
@@ -4863,7 +4863,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-1557221206304410931
+--- !u!114 &3676413566604908817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4872,7 +4872,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5139024527034609404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2315db3a5feb1004c88666c4a89f2661, type: 3}
+  m_Script: {fileID: 11500000, guid: 2864eab8de2deb64386d0a70d5107d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToDestroy: 2

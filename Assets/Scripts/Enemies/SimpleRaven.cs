@@ -36,7 +36,8 @@ public class SimpleRaven : Enemy
     }
     public override void Die()
     {
-        Instantiate(_deadParticle, transform.position, Quaternion.identity);
+        //Instantiate(_deadParticle, transform.position, Quaternion.identity);
+        FRY_DeadRavenParticle.Instance.pool.GetObject().SetPosition(transform.position);
         Destroy(gameObject);
     }
 
