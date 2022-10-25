@@ -4,12 +4,12 @@ Shader "Disolve"
 {
 	Properties
 	{
-		_Float0("Float 0", Float) = 5
+		_DissolveScale("DissolveScale", Float) = 2
 		_Cutoff( "Mask Clip Value", Float ) = 1
 		_DisolveAmount("DisolveAmount", Range( 0 , 1)) = 0
 		_Texture0("Texture 0", 2D) = "white" {}
-		[HDR]_DissolveColor("DissolveColor", Color) = (0.0543788,0.5788892,0.8867924,0)
-		_DisolveTime("DisolveTime", Range( -1.2 , 0.2)) = 0
+		[HDR]_DissolveColor("DissolveColor", Color) = (0.9622642,0,0.037677,0)
+		_DisolveTime("DisolveTime", Range( -1.2 , 0.2)) = -1.2
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
 	}
@@ -32,7 +32,7 @@ Shader "Disolve"
 		uniform float4 _Texture0_ST;
 		uniform float4 _DissolveColor;
 		uniform float _DisolveAmount;
-		uniform float _Float0;
+		uniform float _DissolveScale;
 		uniform float _DisolveTime;
 		uniform float _Cutoff = 1;
 
@@ -94,7 +94,7 @@ Shader "Disolve"
 			float2 uv_Texture0 = i.uv_texcoord * _Texture0_ST.xy + _Texture0_ST.zw;
 			o.Albedo = tex2D( _Texture0, uv_Texture0 ).rgb;
 			float3 ase_worldPos = i.worldPos;
-			float simplePerlin3D1 = snoise( ase_worldPos*_Float0 );
+			float simplePerlin3D1 = snoise( ase_worldPos*_DissolveScale );
 			simplePerlin3D1 = simplePerlin3D1*0.5 + 0.5;
 			float temp_output_116_0 = ( ( _DisolveAmount + simplePerlin3D1 ) + (0.0 + (_DisolveTime - 0.0) * (1.0 - 0.0) / (1.0 - 0.0)) );
 			float clampResult95 = clamp( temp_output_116_0 , 0.0 , 1.0 );
@@ -185,21 +185,21 @@ Shader "Disolve"
 }
 /*ASEBEGIN
 Version=18900
-282;333;1906;1173;998.9709;50.85606;1.346235;True;False
+7;79;1906;940;1211.779;28.76376;1;True;False
 Node;AmplifyShaderEditor.WorldPosInputsNode;2;-680.7114,117.4278;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
-Node;AmplifyShaderEditor.RangedFloatNode;3;-684.8972,292.9556;Inherit;False;Property;_Float0;Float 0;0;0;Create;True;0;0;0;False;0;False;5;5;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;134;-547.8908,461.7932;Inherit;False;Property;_DisolveTime;DisolveTime;5;0;Create;True;0;0;0;False;0;False;0;-1.2;-1.2;0.2;0;1;FLOAT;0
-Node;AmplifyShaderEditor.NoiseGeneratorNode;1;-445.3512,178.6615;Inherit;True;Simplex3D;True;False;2;0;FLOAT3;0,0,0;False;1;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;3;-684.8972,292.9556;Inherit;False;Property;_DissolveScale;DissolveScale;0;0;Create;True;0;0;0;False;0;False;2;5;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;94;-389.0948,81.91681;Inherit;False;Property;_DisolveAmount;DisolveAmount;2;0;Create;True;0;0;0;False;0;False;0;1;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;134;-818.0472,457.0393;Inherit;False;Property;_DisolveTime;DisolveTime;5;0;Create;True;0;0;0;False;0;False;-1.2;-1.2;-1.2;0.2;0;1;FLOAT;0
+Node;AmplifyShaderEditor.NoiseGeneratorNode;1;-445.3512,178.6615;Inherit;True;Simplex3D;True;False;2;0;FLOAT3;0,0,0;False;1;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;93;-84.431,176.2236;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TFHCRemapNode;118;-132.8429,449.6894;Inherit;False;5;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;4;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;116;68.20389,181.1616;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.ClampOpNode;95;272.8089,109.0413;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TFHCRemapNode;92;498.9637,108.4433;Inherit;True;5;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;-10;False;4;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.TexturePropertyNode;102;768.0556,-280.9551;Inherit;True;Property;_Texture0;Texture 0;3;0;Create;True;0;0;0;False;0;False;None;None;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.ClampOpNode;96;794.502,110.7055;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;100;802.2708,-62.67896;Inherit;False;Property;_DissolveColor;DissolveColor;4;1;[HDR];Create;True;0;0;0;False;0;False;0.0543788,0.5788892,0.8867924,0;0,7.152942,0.7115492,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.StepOpNode;97;527.217,338.0329;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TexturePropertyNode;102;768.0556,-280.9551;Inherit;True;Property;_Texture0;Texture 0;3;0;Create;True;0;0;0;False;0;False;None;None;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
+Node;AmplifyShaderEditor.ColorNode;100;802.2708,-62.67896;Inherit;False;Property;_DissolveColor;DissolveColor;4;1;[HDR];Create;True;0;0;0;False;0;False;0.9622642,0,0.037677,0;0,7.152942,0.7115492,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;106;1066.843,172.7255;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;2;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;119;941.5078,360.386;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;101;1020.876,-250.9919;Inherit;True;Property;_TextureSample0;Texture Sample 0;3;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -226,4 +226,4 @@ WireConnection;0;2;109;0
 WireConnection;0;9;119;0
 WireConnection;0;10;119;0
 ASEEND*/
-//CHKSM=8815B601CB559CE211860AF3774F4B737606276B
+//CHKSM=9725C96163A54B161E02DB5C6576ACEBFA5717A3

@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Texture0:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7f49df67450c2fc4aad4325a2c5aad92, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -29,9 +29,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 1
-    - _DisolveAmount: 0.69
+    - _DisolveAmount: 1
+    - _DisolveTime: -1.2
+    - _DissolveScale: 5
     - _Float0: 5
+    - _Float1: -1
+    - _Keyword0: 0
     - __dirty: 0
     m_Colors:
-    - _DissolveColor: {r: 0.0543788, g: 0.5788892, b: 0.8867924, a: 0}
+    - _DissolveColor: {r: 4.5947933, g: 0.96938735, b: 0, a: 1}
   m_BuildTextureStacks: []
