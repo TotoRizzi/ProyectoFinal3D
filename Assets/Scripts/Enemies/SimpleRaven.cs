@@ -51,6 +51,4 @@ public class SimpleRaven : Enemy
             _myModel.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
-
-
 }
