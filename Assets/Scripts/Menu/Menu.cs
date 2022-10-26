@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
+    public void RestartGame()
+    {
+        PlayerPrefs.DeleteAll();
+    }
     public void ChangeScene(int indexScene)
     {
         PausedMenu._gameIsPaused = false;
