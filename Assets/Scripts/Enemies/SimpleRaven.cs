@@ -36,9 +36,8 @@ public class SimpleRaven : Enemy
     }
     public override void Die()
     {
-        //Instantiate(_deadParticle, transform.position, Quaternion.identity);
         FRY_DeadRavenParticle.Instance.pool.GetObject().SetPosition(transform.position);
-        Destroy(gameObject);
+        ReturnToFactory();
     }
 
     public override void LookAtPlayer()
@@ -54,4 +53,27 @@ public class SimpleRaven : Enemy
             _myModel.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
+
+    #region Factory
+    public virtual void ReturnToFactory()
+    {
+        FRY_NecromancerRaven.Instance.ReturnObject(this);
+    }
+
+    public static void TurnOn(SimpleRaven b)
+    {
+        b.gameObject.SetActive(true);
+    }
+
+    public static void TurnOff(SimpleRaven b)
+    {
+        b.gameObject.SetActive(false);
+    }
+
+    public SimpleRaven SetPosition(Vector3 pos)
+    {
+        transform.position = pos;
+        return this;
+    }
+    #endregion
 }
