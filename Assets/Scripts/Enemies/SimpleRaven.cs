@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SimpleRaven : Enemy
 {
-    [SerializeField] Particle _deadParticle;
     [SerializeField] GameObject _myModel;
 
     public float maxMovingForce;
@@ -53,26 +52,5 @@ public class SimpleRaven : Enemy
         }
     }
 
-    #region Factory
-    public virtual void ReturnToFactory()
-    {
-        FRY_NecromancerRaven.Instance.ReturnObject(this);
-    }
 
-    public static void TurnOn(SimpleRaven b)
-    {
-        b.gameObject.SetActive(true);
-    }
-
-    public static void TurnOff(SimpleRaven b)
-    {
-        b.gameObject.SetActive(false);
-    }
-
-    public SimpleRaven SetPosition(Vector3 pos)
-    {
-        transform.position = pos;
-        return this;
-    }
-    #endregion
 }

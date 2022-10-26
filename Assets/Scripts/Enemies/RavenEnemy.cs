@@ -18,5 +18,9 @@ public class RavenEnemy : SimpleRaven
 
         fsm.ChangeState(StateName.Idle);
     }
-
+    public override void Die()
+    {
+        base.Die();
+        Destroy(gameObject);
+    }
 }

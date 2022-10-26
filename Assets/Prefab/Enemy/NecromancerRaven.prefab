@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6259204857066472542}
-  - component: {fileID: -8908056627515327882}
+  - component: {fileID: 4748893157636527687}
   - component: {fileID: 6259204857066472541}
   - component: {fileID: 6259204857066472540}
   m_Layer: 12
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-8908056627515327882
+--- !u!114 &4748893157636527687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6259204857066472538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9245388357f8b445a69b67d3139b311, type: 3}
+  m_Script: {fileID: 11500000, guid: 760f72784251ef54fba8823eba574a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLife: 1
@@ -55,7 +55,7 @@ MonoBehaviour:
   myRb: {fileID: 6259204857066472540}
   myCollider: {fileID: 6259204857066472541}
   myAnim: {fileID: 0}
-  _deadParticle: {fileID: -1557221206304410931, guid: 461b81c7be0b3b4438d5b68932b43d96, type: 3}
+  _deadParticle: {fileID: 0}
   _myModel: {fileID: 6259204857694977448}
   maxMovingForce: 0.1
   chargeSpeed: 7
