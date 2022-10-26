@@ -37,7 +37,6 @@ public class SimpleRaven : Enemy
     public override void Die()
     {
         FRY_DeadRavenParticle.Instance.pool.GetObject().SetPosition(transform.position);
-        ReturnToFactory();
     }
 
     public override void LookAtPlayer()

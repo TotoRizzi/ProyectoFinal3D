@@ -13,23 +13,23 @@ public class FRY_NecromancerDisappearParticle : MonoBehaviour
     }
     static FRY_NecromancerDisappearParticle _instance;
 
-    public Particle particlePrefab;
+    public PT_NecromancerDisappearParticle particlePrefab;
     public int objectStock = 2;
 
-    public ObjectPool<Particle> pool;
+    public ObjectPool<PT_NecromancerDisappearParticle> pool;
 
     void Start()
     {
         _instance = this;
-        pool = new ObjectPool<Particle>(ObjectCreator, Particle.TurnOn, Particle.TurnOff, objectStock);
+        pool = new ObjectPool<PT_NecromancerDisappearParticle>(ObjectCreator, PT_NecromancerDisappearParticle.TurnOn, PT_NecromancerDisappearParticle.TurnOff, objectStock);
     }
 
-    public Particle ObjectCreator()
+    public PT_NecromancerDisappearParticle ObjectCreator()
     {
         return Instantiate(particlePrefab);
     }
 
-    public void ReturnObject(Particle b)
+    public void ReturnObject(PT_NecromancerDisappearParticle b)
     {
         pool.ReturnObject(b);
     }

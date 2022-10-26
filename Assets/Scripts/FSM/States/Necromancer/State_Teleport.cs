@@ -44,6 +44,7 @@ public class State_Teleport : IState
     {
         if (_myEnemy.myAnim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1) return;
 
+        FRY_NecromancerDisappearParticle.Instance.pool.GetObject().SetPosition(_myEnemy.transform.position);
         _myEnemy.transform.position = _myEnemy.myWaipoints[_wayPointToTeleport].transform.position;
         _fsm.ChangeState(StateName.InvokeRavens);
     }
