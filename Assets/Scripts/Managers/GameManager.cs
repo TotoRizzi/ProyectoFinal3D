@@ -6,9 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public GameObject defeatCanvas;
-    public GameObject victoryCanvas;
-
     [SerializeField] private Player _player;
     [SerializeField] LayerMask _wallLayer, _groundLayer, _playerLayer, _enemyLayer;
 

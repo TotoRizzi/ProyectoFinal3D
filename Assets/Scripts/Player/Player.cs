@@ -63,6 +63,7 @@ public class Player : Entity
     {
         base.Start();
         _inputManager = FindObjectOfType<InputManager>();
+        transform.position = new Vector3(PlayerPrefs.GetFloat("PosX", transform.position.x), PlayerPrefs.GetFloat("PosY", transform.position.y));
         Rigidbody _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<PlayerSpear>();
         _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,

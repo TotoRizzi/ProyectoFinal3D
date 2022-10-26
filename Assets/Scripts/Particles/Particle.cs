@@ -17,7 +17,21 @@ public class Particle : MonoBehaviour
             _timeToDestroy -= Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        Destroy(gameObject);
+        ReturnToFactory();
         yield return null;
     }
+    #region Factory
+
+    public virtual void ReturnToFactory() { }
+
+    public static void TurnOn(Particle b)
+    {
+        b.gameObject.SetActive(true);
+    }
+
+    public static void TurnOff(Particle b)
+    {
+        b.gameObject.SetActive(false);
+    }
+    #endregion
 }

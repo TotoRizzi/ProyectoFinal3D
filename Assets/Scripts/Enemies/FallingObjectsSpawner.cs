@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FallingObjectsSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject _objectToFall;
-
     [SerializeField] float _spawnCd;
     float _currentSpawnCd;
 
@@ -15,7 +13,7 @@ public class FallingObjectsSpawner : MonoBehaviour
 
         if (_currentSpawnCd > _spawnCd)
         {
-            Instantiate(_objectToFall, transform.position, Quaternion.identity);
+            FRY_FallingRock.Instance.pool.GetObject().SetPosition(transform.position);
             _currentSpawnCd = 0;
         }
     }
