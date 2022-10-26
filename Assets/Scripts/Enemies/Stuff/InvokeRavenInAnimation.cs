@@ -13,6 +13,6 @@ public class InvokeRavenInAnimation : MonoBehaviour
 
     public void InvokeRaven()
     {
-        Instantiate(_myEnemy.ravenPrefab, _myEnemy.shootingPoint.position, Quaternion.identity);      
+        FRY_NecromancerRaven.Instance.pool.GetObject().SetPosition(_myEnemy.shootingPoint.position);
     }
 }

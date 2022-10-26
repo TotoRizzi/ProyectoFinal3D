@@ -14,7 +14,7 @@ public class FRY_NecromancerRaven : MonoBehaviour
     static FRY_NecromancerRaven _instance;
 
 
-    public SimpleRaven fallingRockPrefab;
+    public SimpleRaven necromancerRavenPrefab;
     public int objectStock = 2;
 
     public ObjectPool<SimpleRaven> pool;
@@ -28,7 +28,7 @@ public class FRY_NecromancerRaven : MonoBehaviour
 
     public SimpleRaven ObjectCreator()
     {
-        return Instantiate(fallingRockPrefab);
+        return Instantiate(necromancerRavenPrefab);
     }
 
     public void ReturnObject(SimpleRaven b)

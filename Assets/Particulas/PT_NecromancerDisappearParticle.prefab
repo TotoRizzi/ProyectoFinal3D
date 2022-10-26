@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2610844301089423492}
   - component: {fileID: 2610844301089423515}
   - component: {fileID: 2610844301089423514}
+  - component: {fileID: -5917040683014227666}
   m_Layer: 0
-  m_Name: NecromancerSmoke
+  m_Name: PT_NecromancerDisappearParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4862,3 +4863,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-5917040683014227666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610844301089423513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc607e078fd2f0443a05f463525de339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeToDestroy: 2

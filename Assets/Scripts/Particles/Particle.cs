@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Particle : MonoBehaviour
 {
-    [SerializeField] float _timeToDestroy;
+    [SerializeField] float _timeToDestroy = 2;
 
     private void Start()
     {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4356983424774640721}
   - component: {fileID: 3676413566604908817}
   m_Layer: 0
-  m_Name: PlumasCuervoPT
+  m_Name: PT_PlumasCuervo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
