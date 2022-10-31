@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6976979774103286764}
+  - component: {fileID: 2201120676885141834}
   m_Layer: 0
   m_Name: PlataformaAlta (2)
   m_TagString: Untagged
@@ -42,6 +43,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2201120676885141834
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2317069362258239842}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 13.304812, y: 14.944904, z: 10.685347}
+  m_Center: {x: 4.3927026, y: -2.7294712, z: 0.10175419}
 --- !u!1001 &693357659230792975
 PrefabInstance:
   m_ObjectHideFlags: 0
