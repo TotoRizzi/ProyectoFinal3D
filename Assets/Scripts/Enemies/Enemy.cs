@@ -8,24 +8,26 @@ public class Enemy : Entity
     public float attackDmg;
 
     float _distanceToFunction = 25f;
-
+    protected float _currentDisolveAmount;
     [Header("Movement")]
     [SerializeField] private float knockBackTime = .3f;
     public bool canMove = true;
     protected bool isAlive = true;
     [SerializeField] protected bool isFacingRight = true;
+    [SerializeField] Material _disolveMaterial = null;
+    SkinnedMeshRenderer _skinnedMeshRender;
 
     protected Action EnemyOnUpdate;
     public StateMachine fsm;
     public Rigidbody myRb;
     [SerializeField] protected Collider myCollider;
     [HideInInspector] public Animator myAnim;
-
     private void Awake()
     {
         fsm = new StateMachine();
         myRb = GetComponent<Rigidbody>();
         myAnim = GetComponentInChildren<Animator>();
+        _skinnedMeshRender = GetComponentInChildren<SkinnedMeshRenderer>();
     }
     public virtual void Update()
     {
@@ -35,6 +37,11 @@ public class Enemy : Entity
     {
         if (canMove && isAlive && GameManager.instance.GetDirectionToPlayer(this.transform).magnitude < _distanceToFunction) fsm.FixedUpdate();
 
+        if (!isAlive)
+        {
+            _currentDisolveAmount = Mathf.MoveTowards(_currentDisolveAmount, 1f, .5f * Time.deltaTime);
+            _skinnedMeshRender.material.SetFloat("_DisolveAmount", _currentDisolveAmount);
+        }
     }
     public virtual void LookAtPlayer()
     {
@@ -79,6 +86,12 @@ public class Enemy : Entity
         isAlive = false;
         myRb.isKinematic = true;
         myCollider.enabled = false;
+        ChangeMaterial();
+    }
+    protected virtual void ChangeMaterial()
+    {
+        _disolveMaterial.shader = Shader.Find("Disolve");
+        _skinnedMeshRender.material = _disolveMaterial;
     }
     private void KnockBack()
     {

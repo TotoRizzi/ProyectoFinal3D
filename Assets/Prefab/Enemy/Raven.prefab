@@ -81,6 +81,7 @@ MonoBehaviour:
   knockBackTime: 0.3
   canMove: 1
   isFacingRight: 1
+  _disolveMaterial: {fileID: 2100000, guid: dda24a7faa6fbaa4ea6e3090e1decfe1, type: 2}
   myRb: {fileID: 6259204857066472540}
   myCollider: {fileID: 6259204857066472541}
   myAnim: {fileID: 0}

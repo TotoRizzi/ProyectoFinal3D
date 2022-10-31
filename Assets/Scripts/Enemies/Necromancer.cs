@@ -22,7 +22,6 @@ public class Necromancer : Enemy
 
         fsm.ChangeState(StateName.InvokeRavens);
     }
-
     public override void Die()
     {
         base.Die();

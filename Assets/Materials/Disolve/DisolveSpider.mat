@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DisolveMat
-  m_Shader: {fileID: 4800000, guid: 6b45c2da28d988942a7ea036635590fb, type: 3}
+  m_Name: DisolveSpider
+  m_Shader: {fileID: 4800000, guid: 5130220bc671ef848a6f83f05f4f03b4, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -19,8 +19,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Texture0:
-        m_Texture: {fileID: 2800000, guid: 7f49df67450c2fc4aad4325a2c5aad92, type: 3}
+    - _AlbedoTexture:
+        m_Texture: {fileID: 2800000, guid: b1b247bc5d5a0b04bb2d005452b3efcd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -29,13 +29,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 1
-    - _DisolveAmount: 1
+    - _DisolveAmount: 0
     - _DisolveTime: -1.2
-    - _DissolveScale: 5
-    - _Float0: 5
-    - _Float1: -1
-    - _Keyword0: 0
+    - _DissolveScale: 2
     - __dirty: 0
     m_Colors:
-    - _DissolveColor: {r: 4.5947933, g: 0.9104322, b: 0, a: 1}
+    - _DissolveColor: {r: 0.9622642, g: 0, b: 0.037677, a: 0}
   m_BuildTextureStacks: []
