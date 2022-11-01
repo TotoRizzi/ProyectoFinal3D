@@ -183,7 +183,7 @@ public class PlayerModel
     {
         if (_poging) return;
 
-        if (_rb.velocity.y > 0 && _isJumping)
+        if (_rb.velocity.y > -1 && _isJumping)
             _rb.AddForce(Vector3.down * _rb.velocity.y * (1 - _jumpCutMultiplier), ForceMode.Impulse);
     }
     public void OnJumpDown()
