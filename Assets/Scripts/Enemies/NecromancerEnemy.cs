@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Necromancer : Enemy
+public class NecromancerEnemy : Enemy
 {
     public float idleTime;
     public Transform[] myWaipoints;
     public Transform shootingPoint;
-    public SimpleRaven ravenPrefab;
+    public SimpleRavenEnemy ravenPrefab;
 
     public string invokeAnimationName;
     public string deathAnimationName;

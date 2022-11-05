@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class State_InvokeRavens : IState
 { 
-    Necromancer _myEnemy;
+    NecromancerEnemy _myEnemy;
     StateMachine _fsm;
 
-    public State_InvokeRavens(Necromancer myEnemy, StateMachine fsm)
+    public State_InvokeRavens(NecromancerEnemy myEnemy, StateMachine fsm)
     {
         _myEnemy = myEnemy;
         _fsm = fsm;

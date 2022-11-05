@@ -14,24 +14,24 @@ public class FRY_NecromancerRaven : MonoBehaviour
     static FRY_NecromancerRaven _instance;
 
 
-    public NecromancerRaven necromancerRavenPrefab;
+    public NecromancerRavenEnemy necromancerRavenPrefab;
     public int objectStock = 2;
 
-    public ObjectPool<NecromancerRaven> pool;
+    public ObjectPool<NecromancerRavenEnemy> pool;
 
 
     void Start()
     {
         _instance = this;
-        pool = new ObjectPool<NecromancerRaven>(ObjectCreator, NecromancerRaven.TurnOn, NecromancerRaven.TurnOff, objectStock);
+        pool = new ObjectPool<NecromancerRavenEnemy>(ObjectCreator, NecromancerRavenEnemy.TurnOn, NecromancerRavenEnemy.TurnOff, objectStock);
     }
 
-    public NecromancerRaven ObjectCreator()
+    public NecromancerRavenEnemy ObjectCreator()
     {
         return Instantiate(necromancerRavenPrefab);
     }
 
-    public void ReturnObject(NecromancerRaven b)
+    public void ReturnObject(NecromancerRavenEnemy b)
     {
         pool.ReturnObject(b);
     }

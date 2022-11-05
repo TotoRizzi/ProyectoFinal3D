@@ -22,6 +22,7 @@ public class Enemy : Entity
     public Rigidbody myRb;
     [SerializeField] protected Collider myCollider;
     [HideInInspector] public Animator myAnim;
+
     private void Awake()
     {
         fsm = new StateMachine();

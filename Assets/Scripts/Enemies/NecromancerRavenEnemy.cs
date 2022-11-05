@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NecromancerRaven : SimpleRaven
+public class NecromancerRavenEnemy : SimpleRavenEnemy
 {
     public override void Die()
     {
@@ -15,17 +15,17 @@ public class NecromancerRaven : SimpleRaven
         FRY_NecromancerRaven.Instance.ReturnObject(this);
     }
 
-    public static void TurnOn(SimpleRaven b)
+    public static void TurnOn(SimpleRavenEnemy b)
     {
         b.gameObject.SetActive(true);
     }
 
-    public static void TurnOff(SimpleRaven b)
+    public static void TurnOff(SimpleRavenEnemy b)
     {
         b.gameObject.SetActive(false);
     }
 
-    public SimpleRaven SetPosition(Vector3 pos)
+    public SimpleRavenEnemy SetPosition(Vector3 pos)
     {
         transform.position = pos;
         return this;

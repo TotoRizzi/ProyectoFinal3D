@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleRaven : Enemy
+public class SimpleRavenEnemy : Enemy
 {
     [SerializeField] GameObject _myModel;
 

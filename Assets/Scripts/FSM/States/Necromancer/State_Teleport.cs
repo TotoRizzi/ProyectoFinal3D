@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class State_Teleport : IState
 {
-    Necromancer _myEnemy;
+    NecromancerEnemy _myEnemy;
     StateMachine _fsm;
     int _wayPointToTeleport;
     int _prebWaypoint;
 
-    public State_Teleport(Necromancer myEnemy, StateMachine fsm)
+    public State_Teleport(NecromancerEnemy myEnemy, StateMachine fsm)
     {
         _myEnemy = myEnemy;
         _fsm = fsm;

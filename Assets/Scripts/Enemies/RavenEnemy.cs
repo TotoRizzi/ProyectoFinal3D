@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RavenEnemy : SimpleRaven
+public class RavenEnemy : SimpleRavenEnemy
 {
     public float evadeTime;
     public float viewRange;

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class InvokeRavenInAnimation : MonoBehaviour
 {
-    Necromancer _myEnemy;
+    NecromancerEnemy _myEnemy;
 
     private void Start()
     {
-        _myEnemy = GetComponentInParent<Necromancer>();
+        _myEnemy = GetComponentInParent<NecromancerEnemy>();
     }
 
     public void InvokeRaven()

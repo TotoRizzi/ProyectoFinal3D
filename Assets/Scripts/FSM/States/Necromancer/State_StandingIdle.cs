@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class State_StandingIdle : IState
 {
-    Necromancer _myEnemy;
+    NecromancerEnemy _myEnemy;
     StateMachine _fsm;
     float currentIdleTime;
 
-    public State_StandingIdle(Necromancer myEnemy, StateMachine fsm)
+    public State_StandingIdle(NecromancerEnemy myEnemy, StateMachine fsm)
     {
         _myEnemy = myEnemy;
         _fsm = fsm;
