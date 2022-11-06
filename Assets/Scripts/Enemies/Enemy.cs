@@ -9,11 +9,17 @@ public class Enemy : Entity
 
     float _distanceToFunction = 25f;
     protected float _currentDisolveAmount;
+
     [Header("Movement")]
+
     [SerializeField] private float knockBackTime = .3f;
     public bool canMove = true;
     protected bool isAlive = true;
+
     [SerializeField] protected bool isFacingRight = true;
+
+    [Header("Stuff")]
+
     [SerializeField] Material _disolveMaterial = null;
     SkinnedMeshRenderer _skinnedMeshRender;
 

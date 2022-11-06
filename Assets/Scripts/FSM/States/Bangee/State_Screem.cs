@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State_Screem : MonoBehaviour
+public class State_Screem : IState
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnEnter()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnExit()
     {
-        
+
+    }
+
+    public void OnFixedUpdate()
+    {
+
+    }
+
+    public void OnUpdate()
+    {
+
     }
 }

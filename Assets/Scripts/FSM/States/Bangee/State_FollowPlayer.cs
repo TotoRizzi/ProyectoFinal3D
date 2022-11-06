@@ -5,10 +5,12 @@ using UnityEngine;
 public class State_FollowPlayer : IState
 {
     BangeeEnemy _myEnemy;
+    StateMachine _fsm;
 
-    public State_FollowPlayer(BangeeEnemy myEnemy)
+    public State_FollowPlayer(BangeeEnemy myEnemy, StateMachine fsm)
     {
         _myEnemy = myEnemy;
+        _fsm = fsm;
     }
     public void OnEnter()
     {
@@ -22,11 +24,13 @@ public class State_FollowPlayer : IState
 
     public void OnFixedUpdate()
     {
-
+        _myEnemy.directionalMovement.Move();
     }
 
     public void OnUpdate()
-    {
-        _myEnemy.transform.position += (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform) * _myEnemy.speed * Time.deltaTime);
+    { 
+        Debug.Log("Following Player");
+       
+        if (GameManager.instance.GetDirectionToPlayer(_myEnemy.transform).magnitude <= _myEnemy.circleRange) _fsm.ChangeState(StateName.CirclePlayer);
     }
 }

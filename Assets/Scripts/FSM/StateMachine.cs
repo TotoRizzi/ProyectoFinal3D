@@ -7,7 +7,8 @@ public enum StateName
     /*Raven*/           Idle, FlyingEvade, FlyingCharge,
     /*CastleGuard*/     GroundWalk, GroundChase, GroundAttack,
     /*SimpleGround*/    WayPointWalk,
-    /*Necromancer*/     Teleport, InvokeRavens, StandingIdle
+    /*Necromancer*/     Teleport, InvokeRavens, StandingIdle,
+    /*Bangee*/          FollowPlayer, CirclePlayer
 }
 
 public class StateMachine
