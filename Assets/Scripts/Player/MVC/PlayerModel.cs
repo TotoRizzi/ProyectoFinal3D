@@ -258,6 +258,7 @@ public class PlayerModel
             _attacking = true;
             _timeToAttack = Time.time + 1 / _attackRate;
             attackAction((int)yAxis);
+            AudioManager.Instance.PlaySFX("Slash");
             SubstactStamina(_attackStamina);
         }
         _attacking = false;

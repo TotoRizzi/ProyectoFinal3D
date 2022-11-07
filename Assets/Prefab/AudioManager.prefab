@@ -173,7 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSounds: []
-  sfxSounds: []
+  sfxSounds:
+  - name: Slash
+    clip: {fileID: 8300000, guid: 4246255dd2da8d04894752f09b48fc1f, type: 3}
   musicSource: {fileID: 882405036544227054}
   sfxSource: {fileID: 882405037607797102}
 --- !u!1 &882405037607797097
