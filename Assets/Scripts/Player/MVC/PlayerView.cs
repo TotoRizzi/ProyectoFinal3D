@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public class PlayerView
 {
     Animator _anim;
@@ -28,6 +29,7 @@ public class PlayerView
         _dashTr = dashTr;
 
         _invulnerabily.gameObject.SetActive(false);
+        _hpFill.color = Color.green;
 
         Physics.IgnoreLayerCollision(9, 8, false);
         Physics.IgnoreLayerCollision(9, 10, false);
@@ -105,10 +107,13 @@ public class PlayerView
     }
     public void UpdateStaminaBar(float amount)
     {
-        _staminaFill.fillAmount = amount;
+        _staminaFill.DOFillAmount(amount, .2f);
     }
     public void UpdateLifeBar(float amount)
     {
-        _hpFill.fillAmount = amount;
+        _hpFill.DOFillAmount(amount, amount);
+        Color newColor = amount < 0.25f ? Color.red : amount < 0.75f ? new Color(1f, .64f, 0f, 1f) : Color.green;
+
+        _hpFill.DOColor(newColor, amount);
     }
 }

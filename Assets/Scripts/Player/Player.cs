@@ -55,14 +55,12 @@ public class Player : Entity
     PlayerModel _playerModel;
     PlayerSpear _playerSpear;
     BoomerangSpear _throwedSpear;
-    InputManager _inputManager;
 
     System.Action<float> updateLifeBar;
     public System.Action getDamage;
     override protected void Start()
     {
         base.Start();
-        _inputManager = FindObjectOfType<InputManager>();
         transform.position = new Vector3(PlayerPrefs.GetFloat("PosX", transform.position.x), PlayerPrefs.GetFloat("PosY", transform.position.y));
         Rigidbody _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<PlayerSpear>();
@@ -71,7 +69,7 @@ public class Player : Entity
             _attackRate, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _knockbackForce, _playerSpear);
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _staminaFill, _hpFill,
             _invulneravilityImg, _invulnerabilityTime, GetComponentInChildren<TrailRenderer>());
-        _myController = new PlayerController(_playerModel, this, _inputManager);
+        _myController = new PlayerController(_playerModel, this);
 
         _playerModel.runAction += _playerView.RunAnimation;
 

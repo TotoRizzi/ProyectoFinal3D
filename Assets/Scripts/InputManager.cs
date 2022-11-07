@@ -4,7 +4,17 @@ using UnityEngine;
 using System.Linq;
 public class InputManager : MonoBehaviour
 {
+    public static InputManager Instance;
     Dictionary<string, KeyCode> _buttonKeys;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
+    }
     private void OnEnable()
     {
         _buttonKeys = new Dictionary<string, KeyCode>();
