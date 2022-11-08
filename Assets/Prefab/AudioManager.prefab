@@ -175,7 +175,21 @@ MonoBehaviour:
   musicSounds: []
   sfxSounds:
   - name: Slash
-    clip: {fileID: 8300000, guid: 4246255dd2da8d04894752f09b48fc1f, type: 3}
+    clip: {fileID: 8300000, guid: 5876197bc6d110b478b187655f3d2714, type: 3}
+  - name: PlayerHurt
+    clip: {fileID: 8300000, guid: 7d68284d96a2441448539c44674b3099, type: 3}
+  - name: FootStep00
+    clip: {fileID: 8300000, guid: ef70c4658bb76124a9ca7767eea5cad6, type: 3}
+  - name: FootStep01
+    clip: {fileID: 8300000, guid: 2502636285e2507418eeb7c0e9aee086, type: 3}
+  - name: FootStep02
+    clip: {fileID: 8300000, guid: 357e50c3d1cea2c4eb95a8415d4a4553, type: 3}
+  - name: FootStep03
+    clip: {fileID: 8300000, guid: 9e1edaed6740e9c428dd15ff8c744c00, type: 3}
+  - name: FootStep04
+    clip: {fileID: 8300000, guid: 4a45414d2badb1446ba151f874fac886, type: 3}
+  - name: ThrowSpear
+    clip: {fileID: 8300000, guid: 8cb183724b3a50b40b37d4cee86be364, type: 3}
   musicSource: {fileID: 882405036544227054}
   sfxSource: {fileID: 882405037607797102}
 --- !u!1 &882405037607797097

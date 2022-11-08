@@ -15,6 +15,7 @@ public class PlayerView
     TrailRenderer _dashTr;
 
     float _invulnerabilityTimer;
+    public string[] _footSteps = { "FootStep00", "FootStep01", "FootStep02", "FootStep03", "FootStep04" };
     public PlayerView(Animator anim, Material playerMaterial, ParticleSystem doubleJumpPS, Image staminaFill, Image hpFill,
         Image invulneravility, float invulnerabilityTime, TrailRenderer dashTr)
     {
@@ -67,6 +68,7 @@ public class PlayerView
     }
     public void AttackAnimation(int yAxis)
     {
+        AudioManager.Instance.PlaySFX("Slash");
         _anim.SetInteger("yAxis", yAxis);
         _anim.SetTrigger("Attack");
     }
@@ -85,6 +87,7 @@ public class PlayerView
     public IEnumerator TakeDamageFeedback()
     {
         _anim.SetTrigger("GetHit");
+        AudioManager.Instance.PlaySFX("PlayerHurt");
         _invulnerabilityTimer = _invulnerabilityTime;
         _invulnerabily.gameObject.SetActive(true);
         _playerMaterial.color = Color.red;
@@ -99,6 +102,10 @@ public class PlayerView
         Physics.IgnoreLayerCollision(9, 10, false);
         Physics.IgnoreLayerCollision(9, 12, false);
         _playerMaterial.color = _initialColor;
+    }
+    public void PlayFootSteps()
+    {
+        AudioManager.Instance.PlaySFX(_footSteps[Random.Range(0, 5)]);
     }
     public void OnUpdate()
     {

@@ -10,6 +10,10 @@ public class UIAudioController : MonoBehaviour
     private void Start()
     {
         _audioManager = AudioManager.Instance;
+        _audioManager.ChangeMasterVolume(_globalSlider.value);
+        _globalSlider.onValueChanged.AddListener(val => _audioManager.ChangeMasterVolume(val));
+        _musicSlider.onValueChanged.AddListener(val => _audioManager.MusicVolume(val));
+        _sfxSlider.onValueChanged.AddListener(val => _audioManager.SFXVolume(val));
     }
 
     public void ToggleMusic()

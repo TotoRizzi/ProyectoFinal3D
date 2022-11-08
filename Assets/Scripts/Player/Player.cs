@@ -126,6 +126,8 @@ public class Player : Entity
         _throwedSpear = Instantiate(_boomerangSpearPrefab).SetPosition(_spawnSpear)
                                                           .SetDirection(_spawnSpear.position + transform.forward * _boomerangSpearDistance);
         _throwedSpear.playerSpear = _playerSpear;
+
+        AudioManager.Instance.PlaySFX("ThrowSpear");
     }
     public void MoveToSpear()
     {
@@ -134,5 +136,9 @@ public class Player : Entity
             transform.position = new Vector3(_throwedSpear.transform.position.x, _throwedSpear.transform.position.y, transform.position.z) - Vector3.up;
             _playerSpear.ActiveSpear(_throwedSpear);
         }
+    }
+    public void PlayFootSteps()
+    {
+        _playerView.PlayFootSteps();
     }
 }

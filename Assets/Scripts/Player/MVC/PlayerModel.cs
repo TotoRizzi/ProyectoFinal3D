@@ -230,17 +230,17 @@ public class PlayerModel
             _canDash = true;
         }
     }
-    public void Pogo(float yAxis)
-    {
-        if (_gettingHit) return;
-        Vector3 pogoDirection = new Vector3(0, yAxis, 0);
-        if (_rb != null)
-        {
-            _rb.velocity = Vector3.zero;
-            _rb.AddForce(-pogoDirection * (_pogoForce - _rb.velocity.y), ForceMode.Impulse);
-            _poging = true;
-        }
-    }
+    //public void Pogo(float yAxis)
+    //{
+    //    if (_gettingHit) return;
+    //    Vector3 pogoDirection = new Vector3(0, yAxis, 0);
+    //    if (_rb != null)
+    //    {
+    //        _rb.velocity = Vector3.zero;
+    //        _rb.AddForce(-pogoDirection * (_pogoForce - _rb.velocity.y), ForceMode.Impulse);
+    //        _poging = true;
+    //    }
+    //}
     public void Falling()
     {
         if (_rb.velocity.y < 0)
@@ -258,7 +258,6 @@ public class PlayerModel
             _attacking = true;
             _timeToAttack = Time.time + 1 / _attackRate;
             attackAction((int)yAxis);
-            AudioManager.Instance.PlaySFX("Slash");
             SubstactStamina(_attackStamina);
         }
         _attacking = false;

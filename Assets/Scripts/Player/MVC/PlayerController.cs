@@ -7,14 +7,13 @@ public class PlayerController : IController
 
     float _xAxis;
     float _yAxis;
-    float f;
     bool _startDash;
     public PlayerController(PlayerModel playerModel, Player player)
     {
         _playerModel = playerModel;
         _player = player;
 
-        _playerModel.playerSpear.pogoAction += () => _playerModel.Pogo(_yAxis);
+        //_playerModel.playerSpear.pogoAction += () => _playerModel.Pogo(_yAxis);
 
         _inputManager = InputManager.Instance;
     }

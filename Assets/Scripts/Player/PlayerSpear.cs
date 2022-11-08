@@ -15,7 +15,7 @@ public class PlayerSpear : Spear
 
         if (damageable != null)
         {
-            pogoAction();
+            pogoAction?.Invoke();
             _blood.Play();
             damageable.TakeDamage(_damage);
         }
