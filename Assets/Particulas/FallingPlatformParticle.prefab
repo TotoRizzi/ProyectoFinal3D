@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 72299749921004085}
   - component: {fileID: 3700167757452168345}
   - component: {fileID: 2282351504938933995}
+  - component: {fileID: 1732951296325199189}
   m_Layer: 0
   m_Name: FallingPlatformParticle
   m_TagString: Untagged
@@ -4862,3 +4863,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1732951296325199189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154221139735248986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7514d2ebdbd95f49908d71aa6a0a402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeToDestroy: 1

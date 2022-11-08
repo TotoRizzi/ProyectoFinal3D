@@ -29,7 +29,9 @@ public class DisappearingPlatform : Platform
     }
     IEnumerator DisappearPlatform()
     {
-        while(_currentTimeToDestroy < _timeToDestroy)
+        FRY_DisappearingPlatformParticle.Instance.pool.GetObject().SetPosition(transform.position);
+
+        while (_currentTimeToDestroy < _timeToDestroy)
         {
             _currentTimeToDestroy += Time.deltaTime;
             yield return new WaitForEndOfFrame();
