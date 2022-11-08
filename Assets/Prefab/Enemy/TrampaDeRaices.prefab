@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6231530312083296875}
-  m_Layer: 0
+  - component: {fileID: 1903605433}
+  - component: {fileID: 7052869956854881604}
+  - component: {fileID: 2397601636574925584}
+  m_Layer: 10
   m_Name: TrampaDeRaices
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6338722813376236628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.65, y: -3.86, z: 0.88}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.6, z: 0.5}
   m_Children:
   - {fileID: 8568819631027982289}
   - {fileID: 968550624616512707}
@@ -37,6 +40,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &1903605433
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6338722813376236628}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 8f6036bebe4d47b4c8c29bfd6200862f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 8f6036bebe4d47b4c8c29bfd6200862f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!65 &7052869956854881604
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6338722813376236628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 5.5202637, y: 2.8052015, z: 2.2369165}
+  m_Center: {x: 0.4641819, y: -0.49996793, z: -0.6184583}
+--- !u!114 &2397601636574925584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6338722813376236628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d57749062be43d45bcf50113cd06954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 1
 --- !u!1001 &791018163553868584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88,13 +133,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7646739597698752262, guid: 276449c0ab6243b45b855eccdaeeda20, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d3697744d021414888b6194497608c6, type: 2}
     - target: {fileID: 919132149155446097, guid: 276449c0ab6243b45b855eccdaeeda20, type: 3}
       propertyPath: m_Name
       value: RaizChica2
       objectReference: {fileID: 0}
     - target: {fileID: 7531589271200273849, guid: 276449c0ab6243b45b855eccdaeeda20, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.307
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 276449c0ab6243b45b855eccdaeeda20, type: 3}
@@ -116,6 +165,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4580519752063575856, guid: a7c4534d4fc08d743b9520e3e5131f68, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580519752063575857, guid: a7c4534d4fc08d743b9520e3e5131f68, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4580519752063575868, guid: a7c4534d4fc08d743b9520e3e5131f68, type: 3}
@@ -123,16 +176,20 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4580519752063575868, guid: a7c4534d4fc08d743b9520e3e5131f68, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.2677875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580519752063575868, guid: a7c4534d4fc08d743b9520e3e5131f68, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.0299997
+      value: 0.82
       objectReference: {fileID: 0}
     - target: {fileID: 4580519752063575868, guid: a7c4534d4fc08d743b9520e3e5131f68, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.38
+      value: 4.17
       objectReference: {fileID: 0}
     - target: {fileID: 4580519752063575868, guid: a7c4534d4fc08d743b9520e3e5131f68, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4580519752063575868, guid: a7c4534d4fc08d743b9520e3e5131f68, type: 3}
       propertyPath: m_LocalRotation.w
@@ -220,9 +277,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2502215695886173905, guid: 74901c06a1876c745b058e4ad32ebd3e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d3697744d021414888b6194497608c6, type: 2}
     - target: {fileID: 919132149155446097, guid: 74901c06a1876c745b058e4ad32ebd3e, type: 3}
       propertyPath: m_Name
       value: RaizMediana2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510089802060981170, guid: 74901c06a1876c745b058e4ad32ebd3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74901c06a1876c745b058e4ad32ebd3e, type: 3}
@@ -284,16 +349,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3528924868390877936, guid: 2dd080c7ef39e2e4693906f9adf211f2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3699999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3528924868390877936, guid: 2dd080c7ef39e2e4693906f9adf211f2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.03000021
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3528924868390877936, guid: 2dd080c7ef39e2e4693906f9adf211f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3528924868390877936, guid: 2dd080c7ef39e2e4693906f9adf211f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2dd080c7ef39e2e4693906f9adf211f2, type: 3}
       propertyPath: m_Name
       value: RaizMediana1
       objectReference: {fileID: 0}
+    - target: {fileID: 3590086638062959488, guid: 2dd080c7ef39e2e4693906f9adf211f2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d3697744d021414888b6194497608c6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dd080c7ef39e2e4693906f9adf211f2, type: 3}
 --- !u!4 &1775644665334036571 stripped
@@ -354,16 +431,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3184405679374425560, guid: e6d110420c254184e9f79aee902ab8ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3699999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3184405679374425560, guid: e6d110420c254184e9f79aee902ab8ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.03000021
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3184405679374425560, guid: e6d110420c254184e9f79aee902ab8ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3184405679374425560, guid: e6d110420c254184e9f79aee902ab8ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e6d110420c254184e9f79aee902ab8ad, type: 3}
       propertyPath: m_Name
       value: RaizGrande1
       objectReference: {fileID: 0}
+    - target: {fileID: 4466820600567981931, guid: e6d110420c254184e9f79aee902ab8ad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d3697744d021414888b6194497608c6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6d110420c254184e9f79aee902ab8ad, type: 3}
 --- !u!4 &5481775931900810577 stripped
@@ -420,6 +509,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 21b17128e47207247961a4915067d875, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -926717388304072829, guid: 21b17128e47207247961a4915067d875, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d3697744d021414888b6194497608c6, type: 2}
+    - target: {fileID: -689118653899347004, guid: 21b17128e47207247961a4915067d875, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 21b17128e47207247961a4915067d875, type: 3}
@@ -484,17 +581,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 718193921643153591, guid: 1e63c9b9ad45ab64ca0f35efab7f9a53, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d3697744d021414888b6194497608c6, type: 2}
     - target: {fileID: 919132149155446097, guid: 1e63c9b9ad45ab64ca0f35efab7f9a53, type: 3}
       propertyPath: m_Name
       value: RaizChica1
       objectReference: {fileID: 0}
     - target: {fileID: 6632745795944210091, guid: 1e63c9b9ad45ab64ca0f35efab7f9a53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6632745795944210091, guid: 1e63c9b9ad45ab64ca0f35efab7f9a53, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.03
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632745795944210091, guid: 1e63c9b9ad45ab64ca0f35efab7f9a53, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632745795944210091, guid: 1e63c9b9ad45ab64ca0f35efab7f9a53, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e63c9b9ad45ab64ca0f35efab7f9a53, type: 3}

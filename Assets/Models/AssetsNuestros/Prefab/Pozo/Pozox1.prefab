@@ -421,6 +421,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: medio-superior
       objectReference: {fileID: 0}
+    - target: {fileID: 3757918011250580801, guid: 751c29c6909cfa74f96c717ef1122621, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4570342361532614651, guid: 751c29c6909cfa74f96c717ef1122621, type: 3}
       propertyPath: m_RootOrder
       value: 0

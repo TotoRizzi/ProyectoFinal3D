@@ -2607,50 +2607,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6a2e73884c2a0854fbebdaea6310ca83, type: 3}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: f699418d01391a746ba00fb9b11b2b29, type: 3}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[4].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: dea67519e3c8c044e900cb93d267b92f, type: 3}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[4].name
-      value: FootStep02
-      objectReference: {fileID: 0}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[5].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4afb2c7c9604bf04aae6171b9fb7ad0d, type: 3}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[5].name
-      value: FootStep03
-      objectReference: {fileID: 0}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[6].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 8cb183724b3a50b40b37d4cee86be364, type: 3}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[6].name
-      value: ThrowSpear
-      objectReference: {fileID: 0}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[7].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 230a3471c1c72934f9c1e617ff44407c, type: 3}
-    - target: {fileID: 882405037259704669, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
-      propertyPath: sfxSounds.Array.data[7].name
-      value: PlayerJump
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c88fa8cc53fe5ef43aa8b00b32ef24ba, type: 3}
 --- !u!1 &2047416615 stripped
