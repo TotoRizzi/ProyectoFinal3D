@@ -5,6 +5,8 @@ using UnityEngine;
 public class BangeeEnemy : Enemy
 {
     [SerializeField] Transform _myModel;
+    [SerializeField] GameObject _screamModel;
+
     [Header("Speeds")]
     [SerializeField] float _directionalSpeed = .1f;
     [SerializeField] float _circleSpeed = .5f;
@@ -42,7 +44,7 @@ public class BangeeEnemy : Enemy
         LookAtPlayer();
         _currentAttackSpeed += Time.deltaTime;
 
-        if (_currentAttackSpeed >= attackSpeed) Scream();
+        if (_currentAttackSpeed >= attackSpeed) Attack();
     }
     public override void LookAtPlayer()
     {
@@ -57,13 +59,20 @@ public class BangeeEnemy : Enemy
             _myModel.rotation = Quaternion.Euler(0, fixedRotationPositionLeft, 0);
         }
     }
-    void Scream()
+    void Attack()
     {
+        StartCoroutine(Scream());
+    }
+    IEnumerator Scream()
+    {
+        canMove = false;
+        _screamModel.SetActive(true);
+        
+        yield return new WaitForSeconds(1f);
+
         _currentAttackSpeed = 0;
-
-        var player = Physics.OverlapSphere(transform.position, _screamRange, GameManager.instance.PlayerLayer);
-
-        if (player.Length > 0) player[0].gameObject.GetComponent<IDamageable>().TakeDamage(attackDmg); 
+        _screamModel.SetActive(false);
+        canMove = true;
     }
 
     private void OnDrawGizmos()
