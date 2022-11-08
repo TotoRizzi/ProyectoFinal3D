@@ -55,6 +55,7 @@ public class Player : Entity
     PlayerModel _playerModel;
     PlayerSpear _playerSpear;
     BoomerangSpear _throwedSpear;
+    AudioManager _audioManager;
 
     System.Action<float> updateLifeBar;
     public System.Action getDamage;
@@ -64,11 +65,12 @@ public class Player : Entity
         transform.position = new Vector3(PlayerPrefs.GetFloat("PosX", transform.position.x), PlayerPrefs.GetFloat("PosY", transform.position.y));
         Rigidbody _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<PlayerSpear>();
+        _audioManager = AudioManager.Instance;
         _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
             _attackRate, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _knockbackForce, _playerSpear);
         _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _staminaFill, _hpFill,
-            _invulneravilityImg, _invulnerabilityTime, GetComponentInChildren<TrailRenderer>());
+            _invulneravilityImg, _invulnerabilityTime, GetComponentInChildren<TrailRenderer>(), _audioManager);
         _myController = new PlayerController(_playerModel, this);
 
         _playerModel.runAction += _playerView.RunAnimation;
@@ -127,7 +129,7 @@ public class Player : Entity
                                                           .SetDirection(_spawnSpear.position + transform.forward * _boomerangSpearDistance);
         _throwedSpear.playerSpear = _playerSpear;
 
-        AudioManager.Instance.PlaySFX("ThrowSpear");
+        _audioManager.PlaySFX("ThrowSpear");
     }
     public void MoveToSpear()
     {

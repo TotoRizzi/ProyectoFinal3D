@@ -11825,6 +11825,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FogParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 6152528695996578148, guid: 79f2c13b5f01d914d80ae01f4001113d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6152528695996578150, guid: 79f2c13b5f01d914d80ae01f4001113d, type: 3}
       propertyPath: lengthInSec
       value: 20
