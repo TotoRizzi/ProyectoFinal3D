@@ -119,6 +119,9 @@ MonoBehaviour:
   myRb: {fileID: 0}
   myCollider: {fileID: 6476440214609943067}
   myAnim: {fileID: 0}
+  myModels:
+  - {fileID: 277334464145863809}
+  - {fileID: 7615559588091187355}
   idleTime: 0.5
   myWaipoints:
   - {fileID: 6476440215655124439}
@@ -561,6 +564,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3481026425206713023, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3744234120647064257, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -789,6 +796,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6501432279496937125, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6629174864392106086, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -804,6 +815,10 @@ PrefabInstance:
     - target: {fileID: 6879624177062364058, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879624177062364058, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6880647821706089164, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
       propertyPath: m_Layer
@@ -915,6 +930,16 @@ GameObject:
 --- !u!4 &995987239890772740 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6067057958889298208, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
+  m_PrefabInstance: {fileID: 6476440213618915876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &277334464145863809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6501432279496937125, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
+  m_PrefabInstance: {fileID: 6476440213618915876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7615559588091187355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3481026425206713023, guid: 99abcb48423e8394e9788754a14a26c6, type: 3}
   m_PrefabInstance: {fileID: 6476440213618915876}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6476440214580776928

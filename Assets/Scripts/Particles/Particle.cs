@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class Particle : MonoBehaviour
 {
-    [SerializeField] float _timeToDestroy = 2;
+    [SerializeField] float _timeToDestroy = 1;
+    float _currentTimeToDestroy;
 
-    private void Start()
+    void Update()
     {
-        StartCoroutine(DestroyTimer());
-    }
-    IEnumerator DestroyTimer()
-    {
-        while (_timeToDestroy > 0)
+        _currentTimeToDestroy += Time.deltaTime;
+
+        if (_currentTimeToDestroy >= _timeToDestroy)
         {
-            _timeToDestroy -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            ResetParticle();
+            ReturnToFactory();
         }
-        ReturnToFactory();
-        yield return null;
     }
+
     #region Factory
 
     public virtual void ReturnToFactory() { }
-
+    private void ResetParticle()
+    {
+        _currentTimeToDestroy = 0;
+    }
     public static void TurnOn(Particle b)
     {
         b.gameObject.SetActive(true);
