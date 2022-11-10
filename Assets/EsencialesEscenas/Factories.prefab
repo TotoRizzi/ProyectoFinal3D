@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4740514655473753997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4740514655473753992}
+  - component: {fileID: 4740514655473753993}
+  - component: {fileID: 4740514655473753994}
+  - component: {fileID: 4740514655473753995}
+  - component: {fileID: 4740514655473753996}
+  - component: {fileID: 4740514655473754007}
+  - component: {fileID: 7301413102143676467}
+  m_Layer: 0
+  m_Name: Factories
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4740514655473753992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740514655473753997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.8, y: 2.6139789, z: 9.996089}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4740514655473753993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740514655473753997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ea89f53b18ce144a97270bf6f894cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadRavenParticlePrefab: {fileID: 3676413566604908817, guid: 461b81c7be0b3b4438d5b68932b43d96, type: 3}
+  particleStock: 5
+--- !u!114 &4740514655473753994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740514655473753997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8474f69b8b8c843ace653986818655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallingRockPrefab: {fileID: 8982672627274785844, guid: 0ed9989151f8fd54ba5e0089211fad87, type: 3}
+  objectStock: 2
+--- !u!114 &4740514655473753995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740514655473753997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34082ccea5ecbf4388ccf5d0a6deb6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  necromancerRavenPrefab: {fileID: 4748893157636527687, guid: e97d15f1b298fe448a46e82a55e5a143, type: 3}
+  objectStock: 20
+--- !u!114 &4740514655473753996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740514655473753997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359fb7944babece488ff235cb7ffb15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: -5917040683014227666, guid: 4d008caac35729242b0007803d25583c, type: 3}
+  objectStock: 2
+--- !u!114 &4740514655473754007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740514655473753997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3090b4891b5d34f429f71d01f9cb7f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadRavenParticlePrefab: {fileID: 1732951296325199189, guid: fe85bcef6d323b6409099f5f1cc18310, type: 3}
+  particleStock: 4
+--- !u!114 &7301413102143676467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740514655473753997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2349e96d2792b4a469d4a9f8c99bf832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  necromancerTpPrefab: {fileID: -619779424921882129, guid: 374e5939ae48d91418190806d4bee2a8, type: 3}
+  particleStock: 2
