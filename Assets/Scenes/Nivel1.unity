@@ -10302,6 +10302,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 923431618201849397, guid: 419052ae8bfcae744984b9937970030c, type: 3}
+      propertyPath: _maxLife
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 923431618201849398, guid: 419052ae8bfcae744984b9937970030c, type: 3}
       propertyPath: m_Name
       value: BangeeEnemy
