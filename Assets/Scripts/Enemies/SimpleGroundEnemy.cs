@@ -11,7 +11,7 @@ public class SimpleGroundEnemy : Enemy
     public IMovement _myMovement;
     protected override void Start()
     {
-        _myMovement = new WayPointMovement(transform, myRb, _mySpeed, _myWaypoints, _myGroundCheck);
+        _myMovement = new WayPointMovement(transform, myRb, _mySpeed, _myWaypoints, _myGroundCheck, true);
 
         fsm.AddState(StateName.WayPointWalk, new State_WayPointWalk(this));
         fsm.ChangeState(StateName.WayPointWalk);

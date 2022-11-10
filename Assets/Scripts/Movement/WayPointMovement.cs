@@ -14,7 +14,7 @@ public class WayPointMovement : IMovement
     int _index = -1;
     Vector3 _dir;
 
-    public WayPointMovement(Transform transform, Rigidbody rigidbody, float speed, Transform[] myWaypoints ,Transform groundCheck, bool adjustToGround = false)
+    public WayPointMovement(Transform transform, Rigidbody rigidbody, float speed, Transform[] myWaypoints ,Transform groundCheck = null, bool adjustToGround = false)
     {
         _myRb = rigidbody;
         _myTransform = transform;
@@ -40,9 +40,9 @@ public class WayPointMovement : IMovement
 
         _dir = (_myWaypoints[_index].transform.position - _myTransform.position).normalized;
         
-        _myTransform.right = _dir;
-
         if (!_adjustToGround) return;
+
+        _myTransform.right = _dir;
         if (Physics.Raycast(_myGroundCheck.position, _myGroundCheck.up, 0.2f, GameManager.instance.GroundLayer))
             _myTransform.localScale = new Vector3(_myTransform.localScale.x, _myTransform.localScale.y * -1 , _myTransform.localScale.z);
     }
