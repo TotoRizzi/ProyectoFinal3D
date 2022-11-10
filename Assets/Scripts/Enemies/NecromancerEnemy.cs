@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class NecromancerEnemy : Enemy
 {
-    public float idleTime;
+    [Header("TurnOff while Tping")]
+    public GameObject[] myModels;
+
+    [Header("To Tp")]
     public Transform[] myWaipoints;
+    public float tpShaderOffSetY = .7f;
+    public float idleTime;
     public Transform shootingPoint;
     public SimpleRavenEnemy ravenPrefab;
 
+    [Header("Animation Names")]
     public string invokeAnimationName;
     public string deathAnimationName;
     public string idleAnimationName;
@@ -20,7 +26,7 @@ public class NecromancerEnemy : Enemy
         fsm.AddState(StateName.InvokeRavens, new State_InvokeRavens(this, fsm));
         fsm.AddState(StateName.StandingIdle, new State_StandingIdle(this, fsm));
 
-        fsm.ChangeState(StateName.InvokeRavens);
+        fsm.ChangeState(StateName.Teleport);
     }
     public override void Die()
     {
