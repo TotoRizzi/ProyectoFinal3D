@@ -23,6 +23,7 @@ public class DisappearingPlatform : Platform
         Debug.Log("Colisione");
         if (!_isInCoroutine)
         {
+            Debug.Log(" estoy en corrutina");
             StartCoroutine(DisappearPlatform());
             _isInCoroutine = true;
         }
