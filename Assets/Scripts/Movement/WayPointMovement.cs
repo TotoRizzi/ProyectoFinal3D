@@ -27,8 +27,8 @@ public class WayPointMovement : IMovement
 
     public void Move()
     {
-        _myRb.MovePosition(_myTransform.position + _dir * _mySpeed * Time.fixedDeltaTime);
-
+        //_myRb.MovePosition(_myTransform.position + _dir * _mySpeed * Time.fixedDeltaTime);
+        _myTransform.position = Vector3.MoveTowards(_myTransform.position, _myWaypoints[_index].position, _mySpeed * Time.deltaTime);
         if ((_myWaypoints[_index].transform.position - _myTransform.position).magnitude < .1f) CalculateDir();
 
     }

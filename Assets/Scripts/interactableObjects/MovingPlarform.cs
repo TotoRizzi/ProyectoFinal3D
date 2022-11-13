@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class MovingPlarform : MonoBehaviour
 {
     [SerializeField] Transform[] _wayPoints;
@@ -18,7 +15,7 @@ public class MovingPlarform : MonoBehaviour
         _myMovement = new WayPointMovement(transform, _myRb, _speed, _wayPoints);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _myMovement.Move();
     }
@@ -26,12 +23,11 @@ public class MovingPlarform : MonoBehaviour
     {
         Debug.Log("Entro");
         if(other.gameObject == GameManager.instance.Player.gameObject)
-            _player.transform.parent = this.transform;
-
+            _player.transform.SetParent(transform);
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == GameManager.instance.Player.gameObject)
-            _player.transform.parent = null;
+            _player.transform.SetParent(null);
     }
 }

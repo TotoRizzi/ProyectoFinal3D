@@ -19,7 +19,7 @@ public class BoomerangSpear : Spear
         transform.forward = _velocity;
 
         if (Vector3.Distance(transform.position, _dir) < .1f && !_backing ||
-            Physics.Raycast(transform.position, transform.forward, 1f, GameManager.instance.GroundLayer) && !_backing)
+            Physics.Raycast(transform.position, transform.forward, 2f, GameManager.instance.GroundLayer) && !_backing)
         {
             _backing = true;
             _maxForce *= .25f;
@@ -27,6 +27,11 @@ public class BoomerangSpear : Spear
 
         if (Vector3.Distance(transform.position, _initialPos.position) < 1f && _backing)
             playerSpear.ActiveSpear(this);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, transform.forward * 2);
     }
     void Seek()
     {

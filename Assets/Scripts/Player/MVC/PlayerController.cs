@@ -26,7 +26,6 @@ public class PlayerController : IController
         _xAxis = _inputManager.GetAxisRaw("Horizontal");
         _yAxis = _inputManager.GetAxisRaw("Vertical");
 
-
         if (_inputManager.GetButtonDown("Jump"))
             _playerModel.OnJumpDown();
 

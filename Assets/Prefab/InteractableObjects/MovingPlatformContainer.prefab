@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 6185434492394160705}
   - component: {fileID: 6185434492394160704}
   - component: {fileID: 6185434492394160707}
-  - component: {fileID: 6185434492394160706}
+  - component: {fileID: 2432144748533744107}
   m_Layer: 6
   m_Name: MovingPlatform
   m_TagString: Untagged
@@ -171,7 +171,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &6185434492394160706
+--- !u!54 &2432144748533744107
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

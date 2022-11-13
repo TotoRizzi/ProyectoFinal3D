@@ -59,6 +59,8 @@ public class Player : Entity
 
     System.Action<float> updateLifeBar;
     public System.Action getDamage;
+
+    public float CurrentLife { get { return _currentLife; } }
     override protected void Start()
     {
         base.Start();
@@ -104,6 +106,12 @@ public class Player : Entity
     private void FixedUpdate()
     {
         _myController?.OnFixedUpdate();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + Vector3.up, transform.forward);
     }
     public override void TakeDamage(float dmg)
     {
