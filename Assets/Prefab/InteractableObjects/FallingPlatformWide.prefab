@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 6895907551390567711}
   - component: {fileID: 1053188637720275001}
   - component: {fileID: 6774954147233289954}
+  - component: {fileID: 6289052759563035335}
   m_Layer: 6
   m_Name: FallingPlatformWide
   m_TagString: Untagged
@@ -142,3 +143,16 @@ MonoBehaviour:
   _timeToDestroy: 1
   _timeToAppear: 1
   _myPlatform: {fileID: 5900748517075390375}
+--- !u!65 &6289052759563035335
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6122924950922844069}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.0930176, y: 0.13, z: 1}
+  m_Center: {x: 0.05168152, y: 0.57, z: 0}
