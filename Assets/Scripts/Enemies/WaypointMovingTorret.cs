@@ -6,6 +6,7 @@ public class WaypointMovingTorret : WaypointGroundEnemy
 {
     [SerializeField] float _bulletDmg;
     [SerializeField] Transform _myArm;
+    [SerializeField] Transform _shootingPoint;
     [SerializeField] float attackSpeed = 1;
     float _currentAttackSpeed;
 
@@ -16,7 +17,7 @@ public class WaypointMovingTorret : WaypointGroundEnemy
     public override void Update()
     {
         base.Update();
-        if(CanSeePlayer()) ArmLookAtPlayer();
+        ArmLookAtPlayer();
 
         _currentAttackSpeed += Time.deltaTime;
         if (_currentAttackSpeed > attackSpeed)
@@ -28,6 +29,7 @@ public class WaypointMovingTorret : WaypointGroundEnemy
     void Shoot()
     {
         FRY_EnemyBullet.Instance.pool.GetObject().SetDirection(_myArm.right)
+                                                 .SetPosition(_shootingPoint.position)
                                                  .SetDmg(_bulletDmg);
 
     }
@@ -37,6 +39,10 @@ public class WaypointMovingTorret : WaypointGroundEnemy
         float angle = Mathf.Atan2(dirToLookAt.y, dirToLookAt.x) * Mathf.Rad2Deg;
 
         _myArm.transform.eulerAngles = new Vector3(0, 0, angle);
+    }
+    public override void Die()
+    {
+        Destroy(gameObject);
     }
     Vector3 GetDirToPlayer()
     {

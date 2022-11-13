@@ -29,16 +29,25 @@ public class EnemyBullet : MonoBehaviour
         _dir = dir;
         return this;
     }
-
-    private void OnCollisionEnter(Collision collision)
+    
+    public EnemyBullet SetPosition(Vector3 pos)
     {
-        var player = collision.gameObject.GetComponent<IDamageable>();
-        if (player != null) player.TakeDamage(_dmg);
+        transform.position = pos;
+        return this;
+    }
+    private void Reset()
+    {
+        _currentTimeToDestroy = 0;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        other.gameObject.GetComponent<IDamageable>().TakeDamage(_dmg);
 
-        ReturnToFactory();
+        ReturnToFactory();        
     }
     public virtual void ReturnToFactory() 
     {
+        Reset();
         FRY_EnemyBullet.Instance.ReturnObject(this);
     }
 

@@ -7625,6 +7625,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d11d7dc02c62e54e930a6ab1e93cef9, type: 3}
+--- !u!1 &1224969650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4740514655473753997, guid: a84a30727357a3a4da46195919d9e684, type: 3}
+  m_PrefabInstance: {fileID: 171144479}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1224969658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224969650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4971bd9d52a0aba4588bee4121fe7f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyBulletPrefab: {fileID: 6053211676096232210, guid: 3faf4d15b4ede874cb9e757a7d5c6438, type: 3}
+  sctock: 2
 --- !u!1001 &1228464861
 PrefabInstance:
   m_ObjectHideFlags: 0
