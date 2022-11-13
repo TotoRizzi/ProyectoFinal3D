@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleGroundEnemy : Enemy
+public class WaypointGroundEnemy : Enemy
 {
     [SerializeField] float _mySpeed;
     [SerializeField] Transform[] _myWaypoints;

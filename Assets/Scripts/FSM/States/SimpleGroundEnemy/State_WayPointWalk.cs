@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class State_WayPointWalk : IState    
 {
-    SimpleGroundEnemy _myEnemy;
-    public State_WayPointWalk(SimpleGroundEnemy myEnemy)
+    WaypointGroundEnemy _myEnemy;
+    public State_WayPointWalk(WaypointGroundEnemy myEnemy)
     {
         _myEnemy = myEnemy;
     }

@@ -20,8 +20,8 @@ public class CastleGuardEnemy : Enemy
     {
         base.Start();
 
-        slowMovement = new RightMovement(this.transform, myRb, _walkingSpeed);
-        fastMovement = new RightMovement(this.transform, myRb, _chasingSpeed);
+        slowMovement = new StraightMovement(this.transform, _walkingSpeed, transform.right, true, myRb);
+        fastMovement = new StraightMovement(this.transform, _chasingSpeed, transform.right, true, myRb);
 
         fsm.AddState(StateName.GroundWalk, new State_GroundWalk(this, fsm, _wallAndGroundCheckPosition));
         fsm.AddState(StateName.GroundChase, new State_GroundChase(this, fsm, _wallAndGroundCheckPosition));
