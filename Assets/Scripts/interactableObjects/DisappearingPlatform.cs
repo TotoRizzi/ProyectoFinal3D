@@ -18,12 +18,11 @@ public class DisappearingPlatform : Platform
     {
         _myCollider = GetComponent<BoxCollider>();
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Colisione");
         if (!_isInCoroutine)
         {
-            Debug.Log(" estoy en corrutina");
             StartCoroutine(DisappearPlatform());
             _isInCoroutine = true;
         }

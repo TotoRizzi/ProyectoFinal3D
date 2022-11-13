@@ -7,7 +7,7 @@ public class Enemy : Entity
 {
     public float attackDmg;
 
-    float _distanceToFunction = 25f;
+    float _distanceToFunction = 53f;
     protected float _currentDisolveAmount;
 
     [Header("Movement")]
