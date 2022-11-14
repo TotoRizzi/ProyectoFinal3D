@@ -5,6 +5,7 @@ public class SceneManagerScript : MonoBehaviour
 {
     [SerializeField] GameObject _leavingScene;
 
+    public bool changingScene;
     public static SceneManagerScript instance;
     public int currentScene => SceneManager.GetActiveScene().buildIndex;
     public int previousScene => SceneManager.GetActiveScene().buildIndex - 1;
@@ -24,6 +25,7 @@ public class SceneManagerScript : MonoBehaviour
     }
     public IEnumerator ChangeScene(float timeToFadeOut, int scene)
     {
+        changingScene = true;
         yield return new WaitForSeconds(timeToFadeOut);
         _leavingScene.SetActive(true);
         yield return new WaitForSeconds(1);

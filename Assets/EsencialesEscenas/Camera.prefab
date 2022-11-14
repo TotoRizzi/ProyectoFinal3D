@@ -195,10 +195,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _smooth: 5
-  _minX: 3
-  _minY: 7
-  _maxX: -3
-  _maxY: -7
+  _minX: 15
+  _minY: 8.5
+  _maxX: -15
+  _maxY: -8.5
   currentRoom: {fileID: 0}
 --- !u!1001 &8938334412431217184
 PrefabInstance:
