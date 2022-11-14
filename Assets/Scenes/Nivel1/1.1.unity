@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6045,6 +6045,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8938334412459352504, guid: 342f0abf689471f48aa11b2d662d569b, type: 3}
+      propertyPath: currentRoom
+      value: 
+      objectReference: {fileID: 1160840965}
     - target: {fileID: 8938334412459352507, guid: 342f0abf689471f48aa11b2d662d569b, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -7279,11 +7283,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0d11d7dc02c62e54e930a6ab1e93cef9, type: 3}
   m_PrefabInstance: {fileID: 47336107}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1076831394 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5963998289584365236, guid: bb967662092eae545acccf775afdbc01, type: 3}
-  m_PrefabInstance: {fileID: 2270666119825594449}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1077998732 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8238866746753934751, guid: ef329a8535aa212488b0da114106f21d, type: 3}
@@ -7786,6 +7785,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca818dfc7faf71f4dbce95ec02603863, type: 3}
+--- !u!4 &1160840965 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1038756595548890468, guid: ca818dfc7faf71f4dbce95ec02603863, type: 3}
+  m_PrefabInstance: {fileID: 1160840964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1163543351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9007356291994995327, guid: fd078c77fe4920f40bfc295fe22a7b88, type: 3}
@@ -10234,7 +10238,7 @@ PrefabInstance:
     - target: {fileID: 2957638684922980500, guid: 8b24286860c2b24419d78affb0c519c8, type: 3}
       propertyPath: _leavingScene
       value: 
-      objectReference: {fileID: 1076831394}
+      objectReference: {fileID: 0}
     - target: {fileID: 4171249507182170546, guid: 8b24286860c2b24419d78affb0c519c8, type: 3}
       propertyPath: m_RootOrder
       value: 17

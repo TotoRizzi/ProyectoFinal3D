@@ -65,6 +65,7 @@ public class Player : Entity
     {
         base.Start();
         transform.position = new Vector3(PlayerPrefs.GetFloat("PosX", transform.position.x), PlayerPrefs.GetFloat("PosY", transform.position.y));
+        PlayerPrefs.DeleteAll();
         Rigidbody _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<PlayerSpear>();
         _audioManager = AudioManager.Instance;
@@ -122,6 +123,7 @@ public class Player : Entity
     }
     public override void Die()
     {
+        SceneManagerScript sceneManager = SceneManagerScript.instance;
         _myController = null;
         UIManager.Instance.defeatEvent();
     }

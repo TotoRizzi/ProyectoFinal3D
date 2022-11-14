@@ -1,21 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeSceneOnCollision : MonoBehaviour
 {
-    [SerializeField] GameObject _leavingScene;
-
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(ChangeScene());
-    }
-
-    IEnumerator ChangeScene()
-    {
-        _leavingScene.SetActive(true);
-        yield return new WaitForSeconds(1);
-
-        SceneManagerScript.instance.NextScene();
+        if (other.GetComponent<Player>())
+        {
+            SceneManagerScript sceneManager = SceneManagerScript.instance;
+            StartCoroutine(sceneManager.ChangeScene(0, sceneManager.nextScene));
+        }
     }
 }

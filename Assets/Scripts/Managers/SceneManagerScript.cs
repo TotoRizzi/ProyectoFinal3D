@@ -1,25 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneManagerScript : MonoBehaviour
 {
+    [SerializeField] GameObject _leavingScene;
+
     public static SceneManagerScript instance;
+    public int currentScene => SceneManager.GetActiveScene().buildIndex;
+    public int previousScene => SceneManager.GetActiveScene().buildIndex - 1;
+    public int nextScene => SceneManager.GetActiveScene().buildIndex + 1;
     private void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
-    public void ReloadScene()
+    private void Start()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        UIManager.Instance.defeatEvent += PlayerDie;
     }
-    public void NextScene()
+    private void OnDisable()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        UIManager.Instance.defeatEvent -= PlayerDie;
     }
-    public void PreviousScene()
+    public IEnumerator ChangeScene(float timeToFadeOut, int scene)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        yield return new WaitForSeconds(timeToFadeOut);
+        _leavingScene.SetActive(true);
+        yield return new WaitForSeconds(1);
+
+        SceneManager.LoadScene(scene);
     }
+
+    void PlayerDie() => StartCoroutine(ChangeScene(3f, currentScene));
 }

@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _smooth: 5
-  _minX: 6
+  _minX: 3
   _minY: 7
   _maxX: -3
   _maxY: -7
