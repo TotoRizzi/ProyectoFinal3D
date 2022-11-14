@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4298,11 +4298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6259204857066472542, guid: ccb48f786259e5444aae1337c8e2fdce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.79
+      value: -18.42
       objectReference: {fileID: 0}
     - target: {fileID: 6259204857066472542, guid: ccb48f786259e5444aae1337c8e2fdce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.96
+      value: -7.24
       objectReference: {fileID: 0}
     - target: {fileID: 6259204857066472542, guid: ccb48f786259e5444aae1337c8e2fdce, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15186,6 +15186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PinoChiquito
       objectReference: {fileID: 0}
+    - target: {fileID: 6089131704170721037, guid: 74ea18036992f0848a61666a5ce8abbc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6902647865271285175, guid: 74ea18036992f0848a61666a5ce8abbc, type: 3}
       propertyPath: m_RootOrder
       value: 25
@@ -19119,6 +19123,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7372354564387593252, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7855418797891323550, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.29
@@ -19138,6 +19146,10 @@ PrefabInstance:
     - target: {fileID: 8321356006797357111, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660621781025450637, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
@@ -20051,6 +20063,10 @@ PrefabInstance:
     - target: {fileID: 6089131704170721037, guid: 74ea18036992f0848a61666a5ce8abbc, type: 3}
       propertyPath: m_Name
       value: PinoChiquito (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089131704170721037, guid: 74ea18036992f0848a61666a5ce8abbc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6902647865271285175, guid: 74ea18036992f0848a61666a5ce8abbc, type: 3}
       propertyPath: m_RootOrder
@@ -20972,6 +20988,10 @@ PrefabInstance:
     - target: {fileID: 5124315930345275012, guid: 6c068a7e9cc82384190b55a6ec20d4e8, type: 3}
       propertyPath: m_LocalPosition.z
       value: 11.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500841953898177598, guid: 6c068a7e9cc82384190b55a6ec20d4e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6312190016323977607, guid: 6c068a7e9cc82384190b55a6ec20d4e8, type: 3}
       propertyPath: m_RootOrder
@@ -22931,6 +22951,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PinoChiquito (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6089131704170721037, guid: 74ea18036992f0848a61666a5ce8abbc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6902647865271285175, guid: 74ea18036992f0848a61666a5ce8abbc, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -23984,6 +24008,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7372354564387593252, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7855418797891323550, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -32.41
@@ -24150,7 +24178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3042514821728062923, guid: 312df539eafd58843930dcfdbdaa0173, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.72
+      value: 7.28
       objectReference: {fileID: 0}
     - target: {fileID: 3042514821728062923, guid: 312df539eafd58843930dcfdbdaa0173, type: 3}
       propertyPath: m_LocalRotation.w
@@ -27040,8 +27068,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.5075693, y: 7.9033475, z: 0.96835136}
-  m_Center: {x: 0.77397346, y: 3.4516408, z: 0.3801949}
+  m_Size: {x: 8.927068, y: 7.9033475, z: 2.7863035}
+  m_Center: {x: 3.4837165, y: 3.451616, z: -0.52877766}
 --- !u!1001 &651686999813309884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27163,6 +27191,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7372354564387593252, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7855418797891323550, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28.5
@@ -27182,6 +27214,10 @@ PrefabInstance:
     - target: {fileID: 8321356006797357111, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660621781025450637, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b92958ff3b3794d96f57649a9aaac2, type: 3}
@@ -28050,6 +28086,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5743722833878446413, guid: bf53aea018c3eb3448bbd434ce8e0870, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5980268582383053496, guid: bf53aea018c3eb3448bbd434ce8e0870, type: 3}
       propertyPath: m_RootOrder
       value: 17
