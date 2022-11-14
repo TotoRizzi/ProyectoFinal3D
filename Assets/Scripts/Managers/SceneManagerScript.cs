@@ -15,14 +15,6 @@ public class SceneManagerScript : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
-    private void Start()
-    {
-        UIManager.Instance.defeatEvent += PlayerDie;
-    }
-    private void OnDisable()
-    {
-        UIManager.Instance.defeatEvent -= PlayerDie;
-    }
     public IEnumerator ChangeScene(float timeToFadeOut, int scene)
     {
         changingScene = true;
@@ -33,5 +25,5 @@ public class SceneManagerScript : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
-    void PlayerDie() => StartCoroutine(ChangeScene(3f, currentScene));
+    public void PlayerDie() => StartCoroutine(ChangeScene(3f, currentScene));
 }

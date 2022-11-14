@@ -19,12 +19,12 @@ public class PlayerController : IController
     }
     public void OnUpdate()
     {
-        _playerModel.OnUpdate();
-
-        if (PausedMenu._gameIsPaused || SceneManagerScript.instance.changingScene) return;
+        if (PausedMenu._gameIsPaused) return;
 
         _xAxis = _inputManager.GetAxisRaw("Horizontal");
         _yAxis = _inputManager.GetAxisRaw("Vertical");
+
+        _playerModel.OnUpdate();
 
         if (_inputManager.GetButtonDown("Jump"))
             _playerModel.OnJumpDown();
@@ -48,8 +48,6 @@ public class PlayerController : IController
     public void OnFixedUpdate()
     {
         _playerModel.OnFixedUpdate(_xAxis);
-
-        if (PausedMenu._gameIsPaused || SceneManagerScript.instance.changingScene) return;
 
         if (_startDash)
             _player.StartCoroutine(_playerModel.Dash(_xAxis, _yAxis));

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 public class UIManager : MonoBehaviour
 {
@@ -7,7 +6,6 @@ public class UIManager : MonoBehaviour
     public System.Action defeatEvent;
     public System.Action victoryEvent;
 
-    [SerializeField] GameObject _defeatPanel;
     [SerializeField] GameObject _victoryPanel;
     private void Awake()
     {
@@ -24,7 +22,6 @@ public class UIManager : MonoBehaviour
     }
     void VictoryPanel()
     {
-        Time.timeScale = 0;
         _victoryPanel.SetActive(true);
     }
 }

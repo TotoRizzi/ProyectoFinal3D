@@ -56,9 +56,12 @@ public class Player : Entity
     PlayerSpear _playerSpear;
     BoomerangSpear _throwedSpear;
     AudioManager _audioManager;
+    Animator _anim;
+    Rigidbody _rb;
 
     System.Action<float> updateLifeBar;
     public System.Action getDamage;
+    public System.Action changeScene;
 
     public float CurrentLife { get { return _currentLife; } }
     override protected void Start()
@@ -66,13 +69,15 @@ public class Player : Entity
         base.Start();
         transform.position = new Vector3(PlayerPrefs.GetFloat("PosX", transform.position.x), PlayerPrefs.GetFloat("PosY", transform.position.y));
         PlayerPrefs.DeleteAll();
-        Rigidbody _rb = GetComponent<Rigidbody>();
+         _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<PlayerSpear>();
+        _anim = GetComponent<Animator>();
+        UIManager uiManager = UIManager.Instance;
         _audioManager = AudioManager.Instance;
         _playerModel = new PlayerModel(transform, _rb, _groundFriction, _movementSpeed, _acceleration, _decceleration, _velPower,
             _jumpCutMultiplier, _jumpForce, _dashForce, _dashTime, _dashCooldown, _jumpBufferLength, _jumpCoyotaTime, _gravityScale, _fallGravityMultiplier, _pogoForce,
             _attackRate, _maxStamina, _meleeAttackStamina, _throwSpearStamina, _jumpStamina, _timeToAddStamina, _knockbackForce, _playerSpear);
-        _playerView = new PlayerView(GetComponent<Animator>(), GetComponentInChildren<Renderer>().material, _doubleJumpPS, _staminaFill, _hpFill,
+        _playerView = new PlayerView(_anim, GetComponentInChildren<Renderer>().material, _doubleJumpPS, _staminaFill, _hpFill,
             _invulneravilityImg, _invulnerabilityTime, GetComponentInChildren<TrailRenderer>(), _audioManager);
         _myController = new PlayerController(_playerModel, this);
 
@@ -96,8 +101,13 @@ public class Player : Entity
 
         getDamage += () => StartCoroutine(_playerView.TakeDamageFeedback());
 
-        UIManager.Instance.defeatEvent += _playerView.DieAnimation;
-        UIManager.Instance.defeatEvent += _playerModel.Die;
+        changeScene += CancelMovement;
+
+        uiManager.victoryEvent += CancelMovement;
+
+        uiManager.defeatEvent += _playerView.DieAnimation;
+        uiManager.defeatEvent += _playerModel.Die;
+        uiManager.defeatEvent += SceneManagerScript.instance.PlayerDie;
     }
     void Update()
     {
@@ -126,6 +136,12 @@ public class Player : Entity
         SceneManagerScript sceneManager = SceneManagerScript.instance;
         _myController = null;
         UIManager.Instance.defeatEvent();
+    }
+    void CancelMovement()
+    {
+        _myController = null;
+        _rb.velocity = Vector3.zero;
+        _anim.SetFloat("xAxis", 0);
     }
     public void Knockback(float enemyPosX)
     {

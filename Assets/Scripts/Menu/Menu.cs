@@ -1,15 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
-    public void RestartGame()
-    {
-        PlayerPrefs.DeleteAll();
-    }
     public void ChangeScene(int indexScene)
     {
         PausedMenu._gameIsPaused = false;
-        SceneManager.LoadScene(indexScene);
+        StartCoroutine(SceneManagerScript.instance.ChangeScene(0, indexScene));
     }
     public void QuitGame()
     {
