@@ -11,11 +11,13 @@ public class SimpleRavenEnemy : Enemy
 
     public IMovement targetMovement;
 
+    protected Animator _anim;
     protected override void Start()
     {
+        _anim = GetComponent<Animator>();
         targetMovement = new DirectedMovement(transform, myRb, chargeSpeed, GameManager.instance.Player.transform);
 
-        fsm.AddState(StateName.FlyingCharge, new State_FlyingCharge(this));
+        fsm.AddState(StateName.FlyingCharge, new State_FlyingCharge(this, _anim));
 
         fsm.ChangeState(StateName.FlyingCharge);
     }
