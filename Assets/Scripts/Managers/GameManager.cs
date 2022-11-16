@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private Player _player;
+    [SerializeField] private Camera _camera;
     [SerializeField] LayerMask _wallLayer, _groundLayer, _playerLayer, _enemyLayer;
 
     #region Getters
 
     public Player Player { get { return _player; } }
+    public Camera Camera { get { return _camera; } }
     public LayerMask WallLayer { get { return _wallLayer; } }
     public LayerMask GroundLayer { get { return _groundLayer; } }
     public LayerMask PlayerLayer { get { return _playerLayer; } }

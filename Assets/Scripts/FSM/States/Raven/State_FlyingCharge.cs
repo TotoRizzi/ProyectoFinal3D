@@ -8,21 +8,18 @@ public class State_FlyingCharge : IState
     Vector3 _velocity;
 
     SimpleRavenEnemy _myEnemy;
-    Animator _anim;
-    public State_FlyingCharge(SimpleRavenEnemy enemy, Animator anim)
+    public State_FlyingCharge(SimpleRavenEnemy enemy)
     {
         _myEnemy = enemy;
-        _anim = anim;
     }
 
     public void OnEnter()
     {
-        _anim.SetTrigger("Flap");
+        _myEnemy.SetRavenIndicator();
     }
 
     public void OnExit()
     {
-        _anim.ResetTrigger("Flap");
     }
 
     public void OnFixedUpdate()

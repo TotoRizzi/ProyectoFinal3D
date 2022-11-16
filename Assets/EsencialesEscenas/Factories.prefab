@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4740514655473753996}
   - component: {fileID: 4740514655473754007}
   - component: {fileID: 7301413102143676467}
+  - component: {fileID: 687375324}
+  - component: {fileID: 687375326}
   m_Layer: 0
   m_Name: Factories
   m_TagString: Untagged
@@ -120,3 +122,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   necromancerTpPrefab: {fileID: -619779424921882129, guid: 374e5939ae48d91418190806d4bee2a8, type: 3}
   particleStock: 2
+--- !u!114 &687375324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740514655473753997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2349e96d2792b4a469d4a9f8c99bf832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  necromancerTpPrefab: {fileID: -619779424921882129, guid: 374e5939ae48d91418190806d4bee2a8, type: 3}
+  particleStock: 2
+--- !u!114 &687375326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740514655473753997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c996b2342d8214895f4fefc0f3a5b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadRavenParticlePrefab: {fileID: 8141665287581030695, guid: 0da21e6030200ee438b49f41df9fe664, type: 3}
+  particleStock: 5
+  _parent: {fileID: 0}

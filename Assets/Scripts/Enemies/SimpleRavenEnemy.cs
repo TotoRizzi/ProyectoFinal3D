@@ -11,13 +11,12 @@ public class SimpleRavenEnemy : Enemy
 
     public IMovement targetMovement;
 
-    protected Animator _anim;
+    protected RavensUISignal _ravenUISignal;
     protected override void Start()
     {
-        _anim = GetComponent<Animator>();
         targetMovement = new DirectedMovement(transform, myRb, chargeSpeed, GameManager.instance.Player.transform);
 
-        fsm.AddState(StateName.FlyingCharge, new State_FlyingCharge(this, _anim));
+        fsm.AddState(StateName.FlyingCharge, new State_FlyingCharge(this));
 
         fsm.ChangeState(StateName.FlyingCharge);
     }
@@ -38,14 +37,18 @@ public class SimpleRavenEnemy : Enemy
     public override void Die()
     {
         FRY_DeadRavenParticle.Instance.pool.GetObject().SetPosition(transform.position);
+        _ravenUISignal.ReturnToFactory();
     }
-
+    public void SetRavenIndicator()
+    {
+        if (_ravenUISignal == null) _ravenUISignal = FRY_RavensUISignal.Instance.pool.GetObject().SetRaven(this);
+    }
     public override void LookAtPlayer()
     {
         if (GameManager.instance.Player.transform.position.x > transform.position.x)
         {
             isFacingRight = false;
-             _myModel.transform.rotation = Quaternion.Euler(0, 0, 0);
+            _myModel.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {

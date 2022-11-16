@@ -8657,25 +8657,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ae998fec84f01e4f8d53809cbbf477c, type: 3}
---- !u!1 &687375317 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4740514655473753997, guid: a84a30727357a3a4da46195919d9e684, type: 3}
-  m_PrefabInstance: {fileID: 4740514654353491559}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &687375324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687375317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2349e96d2792b4a469d4a9f8c99bf832, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  necromancerTpPrefab: {fileID: -619779424921882129, guid: 374e5939ae48d91418190806d4bee2a8, type: 3}
-  particleStock: 2
 --- !u!1001 &688238909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15549,6 +15530,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8212149015532649708, guid: 98d6734ac0e1d1f468e87017b288dc6e, type: 3}
   m_PrefabInstance: {fileID: 1155607853}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1193294474 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8938334412459352506, guid: 342f0abf689471f48aa11b2d662d569b, type: 3}
+  m_PrefabInstance: {fileID: 8938334412133284508}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1197768622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16848,6 +16834,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1332241960 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3392683288689580856, guid: 442ff4d50be69bf4fb5e7331ce01dd3d, type: 3}
+  m_PrefabInstance: {fileID: 3392683289309158613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1332780194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6259204857066472542, guid: ccb48f786259e5444aae1337c8e2fdce, type: 3}
@@ -27693,6 +27684,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 687375326, guid: a84a30727357a3a4da46195919d9e684, type: 3}
+      propertyPath: _parent
+      value: 
+      objectReference: {fileID: 1332241960}
     - target: {fileID: 4740514655473753992, guid: a84a30727357a3a4da46195919d9e684, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -28003,6 +27998,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6023950915530298008, guid: c489fa91b1e47334a8c117980adf9b0b, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 1193294474}
     - target: {fileID: 6023950915530298008, guid: c489fa91b1e47334a8c117980adf9b0b, type: 3}
       propertyPath: _player
       value: 
