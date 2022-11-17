@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class RavensUISignal : MonoBehaviour
 {
-    [SerializeField] Camera _mainCamera;
+    Camera _mainCamera;
 
     SimpleRavenEnemy _raven;
     RectTransform _rectTransform;
+
+    [SerializeField] RectTransform _ravenRectTransform;
+
+    int localScaleX;
+    int localScaleY;
     private void Start()
     {
         _rectTransform = GetComponent<RectTransform>();
@@ -19,11 +24,16 @@ public class RavensUISignal : MonoBehaviour
         Vector3 ravenPos = _mainCamera.WorldToScreenPoint(_raven.transform.position);
         Vector3 newPosition = new Vector3(ravenPos.x, ravenPos.y, 0);
 
-        if(ravenPos.z < 0)
+        if (ravenPos.z < 0)
         {
             ravenPos.x = -ravenPos.x;
             ravenPos.y = -ravenPos.y;
         }
+
+        localScaleX = ravenPos.x < _rectTransform.rect.width / 2 ? -1 : 1;
+        localScaleY = ravenPos.y < _rectTransform.rect.height / 2 ? -1 : 1;
+
+        _ravenRectTransform.localScale = new Vector3(localScaleX, localScaleY, 1);
 
         ravenPos.x = Mathf.Clamp(ravenPos.x, _rectTransform.rect.width / 2, Screen.width - _rectTransform.rect.width / 2);
         ravenPos.y = Mathf.Clamp(ravenPos.y, _rectTransform.rect.height / 2, Screen.height - _rectTransform.rect.height / 2);

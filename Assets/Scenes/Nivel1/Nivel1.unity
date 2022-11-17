@@ -7,7 +7,7 @@ OcclusionCullingSettings:
   m_OcclusionBakeSettings:
     smallestOccluder: 5
     smallestHole: 0.25
-    backfaceThreshold: 100
+    backfaceThreshold: 50
   m_SceneGUID: 00000000000000000000000000000000
   m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
@@ -10833,6 +10833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 6 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075512310099505521, guid: b7911cdf3e0efae43b973b6b8c7d479a, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7911cdf3e0efae43b973b6b8c7d479a, type: 3}
 --- !u!1001 &830786782
@@ -14975,6 +14979,10 @@ PrefabInstance:
     - target: {fileID: 9075512310099505521, guid: b7911cdf3e0efae43b973b6b8c7d479a, type: 3}
       propertyPath: m_Name
       value: 6 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9075512310099505521, guid: b7911cdf3e0efae43b973b6b8c7d479a, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7911cdf3e0efae43b973b6b8c7d479a, type: 3}
@@ -28483,6 +28491,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2984052061078367044, guid: 342f0abf689471f48aa11b2d662d569b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984052061078367044, guid: 342f0abf689471f48aa11b2d662d569b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8938334412459352504, guid: 342f0abf689471f48aa11b2d662d569b, type: 3}
       propertyPath: currentRoom
       value: 

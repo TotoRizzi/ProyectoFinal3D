@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6259204857066472541}
   - component: {fileID: 6259204857066472540}
   - component: {fileID: 6259204857066472539}
+  - component: {fileID: 8672197935517458844}
   m_Layer: 12
   m_Name: Raven
   m_TagString: Untagged
@@ -91,6 +92,25 @@ MonoBehaviour:
   evadeTime: 3
   viewRange: 10
   evadeSpeed: 5
+--- !u!95 &8672197935517458844
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6259204857066472538}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae0fab5b028981140a01842c66682a60, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6259204857694977448
 GameObject:
   m_ObjectHideFlags: 0

@@ -148,6 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c996b2342d8214895f4fefc0f3a5b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadRavenParticlePrefab: {fileID: 8141665287581030695, guid: 0da21e6030200ee438b49f41df9fe664, type: 3}
+  deadRavenParticlePrefab: {fileID: 4623763909684088295, guid: 0da21e6030200ee438b49f41df9fe664, type: 3}
   particleStock: 5
   _parent: {fileID: 0}
