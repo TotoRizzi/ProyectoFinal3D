@@ -13,6 +13,7 @@ public class ControlsMenu : MonoBehaviour
     Dictionary<string, TextMeshProUGUI> _buttonToLabel;
 
     string _keyToRebind = null;
+    Color _originalColor;
     void Start()
     {
         _inputManager = FindObjectOfType<InputManager>();
@@ -33,12 +34,18 @@ public class ControlsMenu : MonoBehaviour
             _buttonToLabel[bn] = keyNameText;
 
             Button keyBindButton = go.transform.Find("Button").GetComponent<Button>();
-            keyBindButton.onClick.AddListener(() => StartRebindFor(bn));
+            keyBindButton.onClick.AddListener(() =>
+            {
+                keyBindButton.GetComponent<Image>().color = Color.gray;
+                StartRebindFor(bn);
+            });
+
+            _originalColor = keyBindButton.GetComponent<Image>().color;
         }
     }
     private void Update()
     {
-        if(_keyToRebind != null)
+        if (_keyToRebind != null)
         {
             if (Input.anyKey)
             {
@@ -48,6 +55,7 @@ public class ControlsMenu : MonoBehaviour
                     {
                         _inputManager.SetButtonForKey(_keyToRebind, kc);
                         _buttonToLabel[_keyToRebind].text = kc.ToString();
+                        _buttonToLabel[_keyToRebind].GetComponentInParent<Image>().color = _originalColor;
                         _keyToRebind = null;
                         break;
                     }
