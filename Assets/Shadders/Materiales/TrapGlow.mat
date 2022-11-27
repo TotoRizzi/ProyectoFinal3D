@@ -68,11 +68,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TrapTexture:
-        m_Texture: {fileID: 2800000, guid: 4dfdc23589a91d2498a67129684cb8ff, type: 3}
+        m_Texture: {fileID: 2800000, guid: c8458751e0e8bc746ac540717b7e7f9f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _flowmap:
         m_Texture: {fileID: 2800000, guid: 5f97deaa83eb2fb40a25e1d603d4c23a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _gradiente_Opcion1:
+        m_Texture: {fileID: 2800000, guid: 76eb9dfad101cf74fa5b4f16fdd69386, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _tex3coord:
@@ -87,8 +91,13 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _texcoord2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _ChromaticAberration: 0.1
     - _Cutoff: 0.2
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -100,7 +109,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Size: 10
+    - _Size: 4
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
