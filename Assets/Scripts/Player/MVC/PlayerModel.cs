@@ -289,6 +289,7 @@ public class PlayerModel
         Physics.IgnoreLayerCollision(9, 10, true);
         Physics.IgnoreLayerCollision(9, 12, true);
     }
+
     #region Stamina
     void AddStamina()
     {

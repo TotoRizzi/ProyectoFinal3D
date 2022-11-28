@@ -172,7 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f205dfc0973843d4bae019c4d78efc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSounds: []
+  musicSounds:
+  - name: Music
+    clip: {fileID: 8300000, guid: f77a3a291c724f24e911501aad97c7f2, type: 3}
   sfxSounds:
   - name: Slash
     clip: {fileID: 8300000, guid: 5876197bc6d110b478b187655f3d2714, type: 3}
@@ -188,6 +190,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4afb2c7c9604bf04aae6171b9fb7ad0d, type: 3}
   - name: ThrowSpear
     clip: {fileID: 8300000, guid: 8cb183724b3a50b40b37d4cee86be364, type: 3}
+  - name: Jump
+    clip: {fileID: 8300000, guid: f5aacf9f2246b7b46a7a3779e53b3f10, type: 3}
+  - name: Fall
+    clip: {fileID: 8300000, guid: f66d0cb89c1ffcc489123bcc1cbd67e7, type: 3}
   musicSource: {fileID: 7713426830571666449}
   sfxSource: {fileID: 7713426831636679569}
 --- !u!1 &7713426831636679574

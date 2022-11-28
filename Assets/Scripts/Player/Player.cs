@@ -4,16 +4,16 @@ public class Player : Entity
 {
     [Header("Movement Variables")]
     [SerializeField] float _movementSpeed = 8;
-    [SerializeField] float _acceleration = 12;
+    [SerializeField] float _acceleration = 9;
     [SerializeField] float _decceleration = 12;
     [SerializeField] float _groundFriction = .1f;
     [SerializeField] float _velPower = 1.05f;
 
     [Header("Jump Variables")]
-    [SerializeField] float _jumpForce = 12;
+    [SerializeField] float _jumpForce = 15;
     [SerializeField] float _jumpCutMultiplier = .1f;
-    [SerializeField] float _jumpCoyotaTime = .1f;
-    [SerializeField] float _jumpBufferLength = .1f;
+    [SerializeField] float _jumpCoyotaTime = .15f;
+    [SerializeField] float _jumpBufferLength = .15f;
 
     [Header("Dash Variables")]
     [SerializeField] float _dashForce = 20;
@@ -21,26 +21,26 @@ public class Player : Entity
     [SerializeField] float _dashCooldown = 1;
 
     [Header("Gravity")]
-    [SerializeField] float _gravityScale = 1.4f;
-    [SerializeField] float _fallGravityMultiplier = 1.9f;
+    [SerializeField] float _gravityScale = 5f;
+    [SerializeField] float _fallGravityMultiplier = 2.5f;
 
     [Header("Pogo Variables")]
     [SerializeField] float _pogoForce = 15;
 
     [Header("Attack Variables")]
-    [SerializeField] float _attackRate = .36f;
-    [SerializeField] float _boomerangSpearDistance;
+    [SerializeField] float _attackRate = 2.9f;
+    [SerializeField] float _boomerangSpearDistance = 8;
 
     [Header("Stamina Variables")]
-    [SerializeField] float _maxStamina;
-    [SerializeField] float _meleeAttackStamina;
-    [SerializeField] float _throwSpearStamina;
+    [SerializeField] float _maxStamina = 20;
+    [SerializeField] float _meleeAttackStamina = 1;
+    [SerializeField] float _throwSpearStamina = 2;
     [SerializeField] float _jumpStamina;
-    [SerializeField] float _timeToAddStamina;
+    [SerializeField] float _timeToAddStamina = 6;
 
     [Header("Knockback Variables")]
-    [SerializeField] float _knockbackForce;
-    [SerializeField] float _invulnerabilityTime;
+    [SerializeField] float _knockbackForce = 4;
+    [SerializeField] float _invulnerabilityTime = 3;
 
     [Header("Inspector Variables")]
     [SerializeField] ParticleSystem _doubleJumpPS;
@@ -69,7 +69,7 @@ public class Player : Entity
         base.Start();
         transform.position = new Vector3(PlayerPrefs.GetFloat("PosX", transform.position.x), PlayerPrefs.GetFloat("PosY", transform.position.y));
         PlayerPrefs.DeleteAll();
-         _rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<PlayerSpear>();
         _anim = GetComponent<Animator>();
         UIManager uiManager = UIManager.Instance;
@@ -165,8 +165,15 @@ public class Player : Entity
             _playerSpear.ActiveSpear(_throwedSpear);
         }
     }
+
+    #region Sonidos
     public void PlayFootSteps()
     {
         _playerView.PlayFootSteps();
     }
+    public void PlayGrassSound()
+    {
+        _playerView.PlayGrassSound();
+    }
+    #endregion
 }

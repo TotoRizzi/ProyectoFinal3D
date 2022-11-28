@@ -51,7 +51,7 @@ public class PlayerView
     public void JumpAnimation(bool doubleJump)
     {
         _anim.SetTrigger("Jumping");
-        //_audioManager.PlaySFX("PlayerJump");
+        _audioManager.PlaySFX("Jump");
         if (!doubleJump)
             _doubleJumpPS.Play();
     }
@@ -109,6 +109,10 @@ public class PlayerView
     public void PlayFootSteps()
     {
         _audioManager.PlaySFX(_footSteps[Random.Range(0, 4)]);
+    }
+    public void PlayGrassSound()
+    {
+        _audioManager.PlaySFX("Fall");
     }
     public void OnUpdate()
     {
