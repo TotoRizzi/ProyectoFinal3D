@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 766244198904224857}
   - component: {fileID: 7651814593857986639}
   - component: {fileID: 8355462588734366613}
+  - component: {fileID: 5547893587686071604}
   m_Layer: 6
   m_Name: pCube1
   m_TagString: Untagged
@@ -81,6 +82,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &5547893587686071604
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5900748517075390375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b2b4cf7d1542b84db533a7880f9cb21, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6122924950922844069
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeToDestroy: 1
   _timeToAppear: 1
+  myAnim: {fileID: 5547893587686071604}
   _myPlatform: {fileID: 5900748517075390375}
 --- !u!65 &6289052759563035335
 BoxCollider:

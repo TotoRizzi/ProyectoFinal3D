@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeToDestroy: 1
   _timeToAppear: 2.5
+  myAnim: {fileID: 1269907801743016269}
   _myPlatform: {fileID: 6895119729580348677}
 --- !u!65 &2683244800589917546
 BoxCollider:
@@ -143,3 +144,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8212149015532649708, guid: 98d6734ac0e1d1f468e87017b288dc6e, type: 3}
   m_PrefabInstance: {fileID: 2669746677198975827}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1901129057593042230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4570857557215204965, guid: 98d6734ac0e1d1f468e87017b288dc6e, type: 3}
+  m_PrefabInstance: {fileID: 2669746677198975827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1269907801743016269
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901129057593042230}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3bfb4970731ec984fac729857610e3d2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

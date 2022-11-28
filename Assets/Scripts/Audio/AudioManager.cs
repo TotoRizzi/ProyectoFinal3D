@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+        PlayMusic("Music");
     }
 
     public void PlayMusic(string name)

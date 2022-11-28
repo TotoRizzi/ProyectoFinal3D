@@ -8,14 +8,15 @@ public class DisappearingPlatform : Platform
     [SerializeField] float _timeToAppear = 1;
     float _currentTimeToDestroy = 0;
     float _currentTimeToAppear = 0;
-
     bool _isInCoroutine = false;
+    [SerializeField] Animator myAnim;
 
     [SerializeField] GameObject _myPlatform;
     Collider _myCollider;
 
     private void Start()
-    {
+    {   
+        //myAnim = GetComponentInChildren<Animator>();
         _myCollider = GetComponent<BoxCollider>();
     }
 
@@ -30,7 +31,7 @@ public class DisappearingPlatform : Platform
     IEnumerator DisappearPlatform()
     {
         FRY_DisappearingPlatformParticle.Instance.pool.GetObject().SetPosition(transform.position);
-
+        myAnim.SetBool("Shake",true);
         while (_currentTimeToDestroy < _timeToDestroy)
         {
             _currentTimeToDestroy += Time.deltaTime;
@@ -56,6 +57,7 @@ public class DisappearingPlatform : Platform
          _isInCoroutine = false;
         _myPlatform.SetActive(true);
         _myCollider.enabled = true;
+        myAnim.SetBool("Shake",false);
         
         yield return null;
     }
