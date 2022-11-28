@@ -840,7 +840,7 @@ MonoBehaviour:
   _velPower: 1.05
   _jumpForce: 15
   _jumpCutMultiplier: 0.1
-  _jumpCoyotaTime: 0.1
+  _jumpCoyotaTime: 0.15
   _jumpBufferLength: 0.15
   _dashForce: 20
   _dashTime: 0.15
@@ -849,7 +849,7 @@ MonoBehaviour:
   _fallGravityMultiplier: 2.5
   _pogoForce: 15
   _attackRate: 2.9
-  _boomerangSpearDistance: 3.5
+  _boomerangSpearDistance: 8
   _maxStamina: 20
   _meleeAttackStamina: 1
   _throwSpearStamina: 2
@@ -3020,7 +3020,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a0cec58fc32f482418596ffdf7c0d693, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

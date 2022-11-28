@@ -3,6 +3,7 @@ public class BoomerangSpear : Spear
 {
     [SerializeField] float _speed;
     [SerializeField] float _maxForce;
+    [SerializeField] float _groundCheckerDistance;
 
     Vector3 _dir;
     Vector3 _velocity;
@@ -19,7 +20,7 @@ public class BoomerangSpear : Spear
         transform.forward = _velocity;
 
         if (Vector3.Distance(transform.position, _dir) < .1f && !_backing ||
-            Physics.Raycast(transform.position, transform.forward, 2f, GameManager.instance.GroundLayer) && !_backing)
+            Physics.Raycast(transform.position, transform.forward, _groundCheckerDistance, GameManager.instance.GroundLayer) && !_backing)
         {
             _backing = true;
             _maxForce *= .25f;
@@ -31,7 +32,7 @@ public class BoomerangSpear : Spear
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.forward * 2);
+        Gizmos.DrawRay(transform.position, transform.forward * _groundCheckerDistance);
     }
     void Seek()
     {

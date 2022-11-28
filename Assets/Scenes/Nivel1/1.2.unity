@@ -3150,6 +3150,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6543710310665750063, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1653610573}
+    - target: {fileID: 6543710310665750063, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543710312229031932, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1653610573}
+    - target: {fileID: 6543710312229031932, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543710312640748531, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1653610573}
+    - target: {fileID: 6543710312640748531, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525237827877419414, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1653610573}
+    - target: {fileID: 7525237827877419414, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1653610573}
+    - target: {fileID: 7525237827877419414, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525237827877419414, guid: bb967662092eae545acccf775afdbc01, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ResumeGame
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb967662092eae545acccf775afdbc01, type: 3}
 --- !u!1 &764570748 stripped
@@ -6278,7 +6318,7 @@ Transform:
   - {fileID: 857586464}
   - {fileID: 258766601}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1570329502
 PrefabInstance:
@@ -6663,6 +6703,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c489fa91b1e47334a8c117980adf9b0b, type: 3}
+--- !u!114 &1653610573 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6023950915530298010, guid: c489fa91b1e47334a8c117980adf9b0b, type: 3}
+  m_PrefabInstance: {fileID: 1653610572}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5989faac07e8748a6f1e8f7ae832a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1680673947
 PrefabInstance:
   m_ObjectHideFlags: 0
