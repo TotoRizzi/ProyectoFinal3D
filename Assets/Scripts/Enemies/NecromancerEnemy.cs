@@ -13,6 +13,7 @@ public class NecromancerEnemy : Enemy
     public float idleTime;
     public Transform shootingPoint;
     public SimpleRavenEnemy ravenPrefab;
+    AudioManager _audioManager;
 
     [Header("Animation Names")]
     public string invokeAnimationName;
@@ -31,6 +32,7 @@ public class NecromancerEnemy : Enemy
     public override void Die()
     {
         base.Die();
+        _audioManager.PlaySFX("NecroDeath");
         myAnim.Play(deathAnimationName);
     }
 }

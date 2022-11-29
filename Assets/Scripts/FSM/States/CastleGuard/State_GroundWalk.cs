@@ -30,7 +30,7 @@ public class State_GroundWalk : IState
 
     public void OnUpdate()
     {
-        Debug.Log("Walking");
+        //Debug.Log("Walking");
         if (Physics.Raycast(_wallAndGroundCheckPosition.position, _myEnemy.transform.right, 0.1f, GameManager.instance.WallLayer)
             ||
             !Physics.Raycast(_myEnemy.transform.position, -_myEnemy.transform.up, 2.0f, GameManager.instance.GroundLayer)

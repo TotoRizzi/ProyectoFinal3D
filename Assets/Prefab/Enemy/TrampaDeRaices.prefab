@@ -428,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1053114938493184576, guid: 81c985822a6630b498612226d0bd05ab, type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
-      value: -0.1
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 1053114938493184576, guid: 81c985822a6630b498612226d0bd05ab, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount

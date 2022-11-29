@@ -59,6 +59,7 @@ MonoBehaviour:
   _myModel: {fileID: 6259204857694977448}
   maxMovingForce: 0.1
   chargeSpeed: 7
+  _audioManager: {fileID: 7713426831355560866, guid: 039f5e1059eddd942ba97dbc6afcfc50, type: 3}
 --- !u!65 &6259204857066472541
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class SimpleRavenEnemy : Enemy
 
     public float maxMovingForce;
     public float chargeSpeed;
-
+    AudioManager _audioManager;
     public IMovement targetMovement;
 
     protected RavensUISignal _ravenUISignal;
@@ -29,8 +29,9 @@ public class SimpleRavenEnemy : Enemy
         {
             damageable.TakeDamage(attackDmg);
             if (player)
+                _audioManager.PlaySFX("CrowDeath");
                 player.Knockback(transform.position.x);
-
+                
             Die();
         }
     }
@@ -42,6 +43,7 @@ public class SimpleRavenEnemy : Enemy
     public void SetRavenIndicator()
     {
         if (_ravenUISignal == null) _ravenUISignal = FRY_RavensUISignal.Instance.pool.GetObject().SetRaven(this);
+        _audioManager.PlaySFX("CrowCall");   
     }
     public override void LookAtPlayer()
     {

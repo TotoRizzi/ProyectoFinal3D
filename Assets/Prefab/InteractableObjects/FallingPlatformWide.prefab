@@ -163,6 +163,7 @@ MonoBehaviour:
   _timeToDestroy: 1
   _timeToAppear: 1
   myAnim: {fileID: 5547893587686071604}
+  _audioManager: {fileID: 7713426831355560866, guid: 039f5e1059eddd942ba97dbc6afcfc50, type: 3}
   _myPlatform: {fileID: 5900748517075390375}
 --- !u!65 &6289052759563035335
 BoxCollider:

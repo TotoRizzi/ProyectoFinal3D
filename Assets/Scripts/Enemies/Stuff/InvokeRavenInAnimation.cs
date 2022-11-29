@@ -5,6 +5,7 @@ using UnityEngine;
 public class InvokeRavenInAnimation : MonoBehaviour
 {
     NecromancerEnemy _myEnemy;
+    AudioManager _audioManager;
 
     private void Start()
     {
@@ -13,6 +14,8 @@ public class InvokeRavenInAnimation : MonoBehaviour
 
     public void InvokeRaven()
     {
+        _audioManager.PlaySFX("NecromancerCast");
         FRY_NecromancerRaven.Instance.pool.GetObject().SetPosition(_myEnemy.shootingPoint.position);
+        
     }
 }
