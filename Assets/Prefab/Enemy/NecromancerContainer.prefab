@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxLife: 4
   _currentLife: 0
-  attackDmg: 0
+  attackDmg: 1
   knockBackTime: 0.3
   canMove: 1
   isFacingRight: 1
@@ -122,11 +122,12 @@ MonoBehaviour:
   myModels:
   - {fileID: 277334464145863809}
   - {fileID: 7615559588091187355}
-  idleTime: 0.5
   myWaipoints:
   - {fileID: 6476440215655124439}
   - {fileID: 6476440215055386993}
   - {fileID: 6476440215331324631}
+  tpShaderOffSetY: 0.7
+  idleTime: 0.5
   shootingPoint: {fileID: 6476440214505765782}
   ravenPrefab: {fileID: -8908056627515327882, guid: e97d15f1b298fe448a46e82a55e5a143, type: 3}
   invokeAnimationName: Invoke

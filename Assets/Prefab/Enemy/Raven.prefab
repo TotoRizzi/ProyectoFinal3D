@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxLife: 0
   _currentLife: 0
-  attackDmg: 0
+  attackDmg: 1
   knockBackTime: 0.3
   canMove: 1
   isFacingRight: 1

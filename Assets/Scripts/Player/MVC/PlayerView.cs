@@ -125,7 +125,7 @@ public class PlayerView
     }
     public void UpdateLifeBar(float amount)
     {
-        _hpFill.DOFillAmount(amount, amount);
+        _hpFill.DOFillAmount(amount, amount / 2);
         Color newColor = amount < 0.25f ? Color.red : amount < 0.75f ? new Color(1f, .64f, 0f, 1f) : Color.green;
 
         _hpFill.DOColor(newColor, amount);
