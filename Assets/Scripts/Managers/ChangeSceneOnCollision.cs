@@ -9,6 +9,7 @@ public class ChangeSceneOnCollision : MonoBehaviour
         {
             SceneManagerScript sceneManager = SceneManagerScript.instance;
             player.changeScene();
+            PlayerPrefs.SetFloat("CurrentLife", player.CurrentLife);
             StartCoroutine(sceneManager.ChangeScene(0, sceneManager.nextScene));
         }
     }

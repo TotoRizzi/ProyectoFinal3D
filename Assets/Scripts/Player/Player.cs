@@ -68,6 +68,7 @@ public class Player : Entity
     {
         base.Start();
         transform.position = new Vector3(PlayerPrefs.GetFloat("PosX", transform.position.x), PlayerPrefs.GetFloat("PosY", transform.position.y));
+        _currentLife = PlayerPrefs.GetFloat("CurrentLife", _maxLife);
         PlayerPrefs.DeleteAll();
         _rb = GetComponent<Rigidbody>();
         _playerSpear = GetComponentInChildren<PlayerSpear>();
@@ -108,6 +109,8 @@ public class Player : Entity
         uiManager.defeatEvent += _playerView.DieAnimation;
         uiManager.defeatEvent += _playerModel.Die;
         uiManager.defeatEvent += SceneManagerScript.instance.PlayerDie;
+
+        _playerView.UpdateLifeBar(_currentLife / _maxLife);
     }
     void Update()
     {
