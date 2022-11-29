@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d435f7c3240274bbe47abb1e1f33d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
+  _player: {fileID: 109303365792016031, guid: ba6bcebdd1de6cf47abc668887ac7877, type: 3}
+  _camera: {fileID: 0}
   _wallLayer:
     serializedVersion: 2
     m_Bits: 128
