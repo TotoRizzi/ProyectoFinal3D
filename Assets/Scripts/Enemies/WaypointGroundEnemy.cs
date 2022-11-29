@@ -7,7 +7,6 @@ public class WaypointGroundEnemy : Enemy
     [SerializeField] float _mySpeed;
     [SerializeField] Transform[] _myWaypoints;
     [SerializeField] Transform _myGroundCheck;
-    AudioManager _audioManager;
     public IMovement _myMovement;
     protected override void Start()
     {
@@ -18,7 +17,7 @@ public class WaypointGroundEnemy : Enemy
     }
     public override void Die()
     {
-        _audioManager.PlaySFX("SpiderDeath");
+        AudioManager.Instance.PlaySFX("SpiderDeath");
         Destroy(gameObject);
     }
     private void OnTriggerEnter(Collider collider)

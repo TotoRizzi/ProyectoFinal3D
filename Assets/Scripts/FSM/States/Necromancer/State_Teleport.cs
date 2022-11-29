@@ -63,6 +63,7 @@ public class State_Teleport : IState
             {
                 item.SetActive(true);
             }
+            AudioManager.Instance.PlaySFX("NecromancerTp");
             _fsm.ChangeState(StateName.InvokeRavens);
         }
     }

@@ -1793,7 +1793,7 @@ MonoBehaviour:
   _minY: 5
   _maxX: -3
   _maxY: 7
-  currentRoom: {fileID: 0}
+  currentRoom: {fileID: 1913953824}
 --- !u!81 &318596327
 AudioListener:
   m_ObjectHideFlags: 0

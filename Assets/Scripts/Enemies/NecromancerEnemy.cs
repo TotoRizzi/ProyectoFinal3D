@@ -32,7 +32,7 @@ public class NecromancerEnemy : Enemy
     public override void Die()
     {
         base.Die();
-        _audioManager.PlaySFX("NecroDeath");
+        AudioManager.Instance.PlaySFX("NecroDeath");
         myAnim.Play(deathAnimationName);
     }
 }

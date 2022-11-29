@@ -10,7 +10,6 @@ public class DisappearingPlatform : Platform
     float _currentTimeToAppear = 0;
     bool _isInCoroutine = false;
     [SerializeField] Animator myAnim;
-    [SerializeField] AudioManager _audioManager;
     [SerializeField] GameObject _myPlatform;
     Collider _myCollider;
 
@@ -22,7 +21,8 @@ public class DisappearingPlatform : Platform
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isInCoroutine)
+        var player = other.GetComponent<Player>();
+        if (!_isInCoroutine && player)
         {
             StartCoroutine(DisappearPlatform());
             _isInCoroutine = true;
@@ -32,8 +32,7 @@ public class DisappearingPlatform : Platform
     {
         FRY_DisappearingPlatformParticle.Instance.pool.GetObject().SetPosition(transform.position);
         myAnim.SetBool("Shake",true);
-        _audioManager.PlaySFX("FallingPlat");
-
+        AudioManager.Instance.PlaySFX("FallingPlat");
         while (_currentTimeToDestroy < _timeToDestroy)
         {
             _currentTimeToDestroy += Time.deltaTime;
@@ -42,8 +41,8 @@ public class DisappearingPlatform : Platform
 
         _currentTimeToDestroy = 0;
         _myCollider.enabled = false;
-        _myPlatform.SetActive(false);
         StartCoroutine(AppearPlatform());
+        _myPlatform.SetActive(false);
         
         yield return null;
     }
